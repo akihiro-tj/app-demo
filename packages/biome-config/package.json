@@ -1,0 +1,11 @@
+{
+  "name": "@contents-playground/biome-config",
+  "version": "0.0.0",
+  "private": true,
+  "exports": {
+    "./base": "./base.jsonc"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
