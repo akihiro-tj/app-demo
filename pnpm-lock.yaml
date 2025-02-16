@@ -20,6 +20,12 @@ importers:
 
   apps/world-history-place-quiz:
     devDependencies:
+      '@contents-playground/biome-config':
+        specifier: workspace:*
+        version: link:../../packages/biome-config
+      '@contents-playground/typescript-config':
+        specifier: workspace:*
+        version: link:../../packages/typescript-config
       '@sveltejs/adapter-auto':
         specifier: ^4.0.0
         version: 4.0.0(@sveltejs/kit@2.17.2(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.20.1)(vite@6.1.0(@types/node@22.13.0)))(svelte@5.20.1)(vite@6.1.0(@types/node@22.13.0)))
