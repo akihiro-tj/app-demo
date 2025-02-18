@@ -9,7 +9,7 @@
 		"preview": "vite preview",
 		"prepare": "svelte-kit sync || echo ''",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json && biome check src",
-    "check:write": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json && biome check --write src",
+		"check:write": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json && biome check --write src",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
 	},
 	"dependencies": {
