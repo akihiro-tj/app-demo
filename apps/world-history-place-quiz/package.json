@@ -20,6 +20,7 @@
 	"devDependencies": {
 		"@contents-playground/biome-config": "workspace:*",
 		"@contents-playground/typescript-config": "workspace:*",
+		"@pandacss/dev": "^0.53.0",
 		"@sveltejs/vite-plugin-svelte": "^5.0.0",
 		"svelte-check": "^4.0.0",
 		"typescript": "^5.0.0",
