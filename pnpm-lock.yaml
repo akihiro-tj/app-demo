@@ -19,6 +19,16 @@ importers:
         version: 5.7.3
 
   apps/world-history-place-quiz:
+    dependencies:
+      '@sveltejs/adapter-auto':
+        specifier: ^4.0.0
+        version: 4.0.0(@sveltejs/kit@2.17.2(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.20.1)(vite@6.1.0(@types/node@22.13.0)))(svelte@5.20.1)(vite@6.1.0(@types/node@22.13.0)))
+      '@sveltejs/kit':
+        specifier: ^2.16.0
+        version: 2.17.2(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.20.1)(vite@6.1.0(@types/node@22.13.0)))(svelte@5.20.1)(vite@6.1.0(@types/node@22.13.0))
+      svelte:
+        specifier: ^5.0.0
+        version: 5.20.1
     devDependencies:
       '@contents-playground/biome-config':
         specifier: workspace:*
@@ -26,18 +36,9 @@ importers:
       '@contents-playground/typescript-config':
         specifier: workspace:*
         version: link:../../packages/typescript-config
-      '@sveltejs/adapter-auto':
-        specifier: ^4.0.0
-        version: 4.0.0(@sveltejs/kit@2.17.2(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.20.1)(vite@6.1.0(@types/node@22.13.0)))(svelte@5.20.1)(vite@6.1.0(@types/node@22.13.0)))
-      '@sveltejs/kit':
-        specifier: ^2.16.0
-        version: 2.17.2(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.20.1)(vite@6.1.0(@types/node@22.13.0)))(svelte@5.20.1)(vite@6.1.0(@types/node@22.13.0))
       '@sveltejs/vite-plugin-svelte':
         specifier: ^5.0.0
         version: 5.0.3(svelte@5.20.1)(vite@6.1.0(@types/node@22.13.0))
-      svelte:
-        specifier: ^5.0.0
-        version: 5.20.1
       svelte-check:
         specifier: ^4.0.0
         version: 4.1.4(picomatch@2.3.1)(svelte@5.20.1)(typescript@5.7.3)
