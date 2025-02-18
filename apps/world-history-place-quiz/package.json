@@ -7,18 +7,21 @@
 		"dev": "vite dev",
 		"build": "vite build",
 		"preview": "vite preview",
-		"prepare": "svelte-kit sync || echo ''",
+		"prepare": "svelte-kit sync || echo '' && panda codegen",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json && biome check src",
-    "check:write": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json && biome check --write src",
+		"check:write": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json && biome check --write src",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
 	},
-	"devDependencies": {
-    "@contents-playground/biome-config": "workspace:*",
-    "@contents-playground/typescript-config": "workspace:*",
+	"dependencies": {
 		"@sveltejs/adapter-auto": "^4.0.0",
 		"@sveltejs/kit": "^2.16.0",
+		"svelte": "^5.0.0"
+	},
+	"devDependencies": {
+		"@contents-playground/biome-config": "workspace:*",
+		"@contents-playground/typescript-config": "workspace:*",
+		"@pandacss/dev": "^0.53.0",
 		"@sveltejs/vite-plugin-svelte": "^5.0.0",
-		"svelte": "^5.0.0",
 		"svelte-check": "^4.0.0",
 		"typescript": "^5.0.0",
 		"vite": "^6.0.0"
