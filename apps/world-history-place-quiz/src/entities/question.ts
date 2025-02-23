@@ -1,0 +1,39 @@
+export interface IQuestion {
+	statement: string;
+	image: string;
+	choices: string[];
+	correctChoice: CorrectChoice;
+	explanation: string;
+}
+
+export type RawQuestion = {
+	statement: string;
+	image: string;
+	choices: string[];
+	correctChoice: number;
+	explanation: string;
+};
+
+export type CorrectChoice = {
+	value: number;
+	text: string;
+};
+
+export class Question implements IQuestion {
+	statement: string;
+	image: string;
+	choices: string[];
+	correctChoice: CorrectChoice;
+	explanation: string;
+
+	constructor(rawQuestion: RawQuestion) {
+		this.statement = rawQuestion.statement;
+		this.image = rawQuestion.image;
+		this.choices = rawQuestion.choices;
+		this.correctChoice = {
+			value: rawQuestion.correctChoice,
+			text: rawQuestion.choices[rawQuestion.correctChoice] ?? "",
+		};
+		this.explanation = rawQuestion.explanation;
+	}
+}
