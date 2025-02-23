@@ -1,4 +1,4 @@
-import type { ChoiceProps } from "../../../../components/choice/choice.svelte";
+import type { ChoiceProps } from "@/components/choice/choice.svelte";
 
 export const isCorrectChoice = (
 	choiceIndex: number,

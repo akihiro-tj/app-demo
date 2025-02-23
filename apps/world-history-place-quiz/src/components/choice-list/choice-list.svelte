@@ -1,7 +1,6 @@
 <script lang="ts">
 import type { MouseEventHandler } from "svelte/elements";
-import type { ChoiceProps } from "../choice/choice.svelte";
-import Choice from "../choice/choice.svelte";
+import Choice, { type ChoiceProps } from "../choice/choice.svelte";
 import { listStyle } from "./styles";
 
 export interface ChoiceListProps {
