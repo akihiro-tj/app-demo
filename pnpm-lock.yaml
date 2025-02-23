@@ -36,10 +36,10 @@ importers:
         specifier: ^5.0.0
         version: 5.20.1
     devDependencies:
-      '@contents-playground/biome-config':
+      '@app-demo/biome-config':
         specifier: workspace:*
         version: link:../../packages/biome-config
-      '@contents-playground/typescript-config':
+      '@app-demo/typescript-config':
         specifier: workspace:*
         version: link:../../packages/typescript-config
       '@pandacss/dev':

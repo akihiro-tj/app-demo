@@ -1,4 +1,4 @@
 {
 	"$schema": "https://biomejs.dev/schemas/1.9.3/schema.json",
-	"extends": ["./node_modules/@contents-playground/biome-config/base.jsonc"]
+	"extends": ["./node_modules/@app-demo/biome-config/base.jsonc"]
 }
