@@ -1,5 +1,5 @@
 {
-  "name": "@contents-playground/typescript-config",
+  "name": "@app-demo/typescript-config",
   "version": "0.0.0",
   "private": true,
   "publishConfig": {
