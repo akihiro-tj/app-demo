@@ -1,11 +1,10 @@
 <script lang="ts">
 import { fade } from "svelte/transition";
 import { visuallyHidden } from "styled-system/patterns";
-import { isCorrectChoice } from "./helpers/is-correct-choice";
-import type { QuestionResult } from "./types";
 import ChoiceList, {
 	type ChoiceClickEventHandler,
-} from "../../../components/choice-list/choice-list.svelte";
+} from "@/components/choice-list/choice-list.svelte";
+import type { QuestionResult } from "./types";
 import {
 	choiceListContainerStyle,
 	columnStyle,
@@ -17,6 +16,7 @@ import {
 	resultTextStyle,
 	statementContainerStyle,
 } from "./styles";
+import { isCorrectChoice } from "./helpers/is-correct-choice";
 
 const { data } = $props();
 let results = $state<Array<QuestionResult>>([]);
