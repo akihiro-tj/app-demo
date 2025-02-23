@@ -1,6 +1,6 @@
 {
 	"extends": [
-		"@contents-playground/typescript-config/base.json",
+		"@app-demo/typescript-config/base.json",
 		"./.svelte-kit/tsconfig.json"
 	],
 	"compilerOptions": {

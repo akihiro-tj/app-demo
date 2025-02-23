@@ -1,3 +1,3 @@
-# `@contents-playground/biome-config`
+# `@app-demo/biome-config`
 
 Collection of internal biome configurations.

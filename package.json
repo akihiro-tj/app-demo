@@ -1,5 +1,5 @@
 {
-  "name": "contents-playground",
+  "name": "app-demo",
   "private": true,
   "scripts": {
     "build": "turbo run build",
