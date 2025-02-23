@@ -1,4 +1,4 @@
-import { contents } from "../../data";
+import { contents } from "@/routes/data.js";
 import type { EntryGenerator } from "./$types.js";
 
 export function load({ params }) {
