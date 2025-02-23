@@ -1,4 +1,13 @@
-import { defineConfig } from "@pandacss/dev";
+import { defineConfig, defineGlobalStyles } from "@pandacss/dev";
+
+const globalCss = defineGlobalStyles({
+	html: {
+		"--global-font-body": "Inter Variable, Noto Sans JP Variable, sans-serif",
+		// TODO: Add monospace fonts
+		// "--global-font-mono": "",
+		color: "slate.900",
+	},
+});
 
 export default defineConfig({
 	// Whether to use css reset
@@ -17,4 +26,6 @@ export default defineConfig({
 
 	// The output directory for your css system
 	outdir: "styled-system",
+
+	globalCss,
 });

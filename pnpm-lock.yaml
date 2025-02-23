@@ -20,6 +20,12 @@ importers:
 
   apps/world-history-place-quiz:
     dependencies:
+      '@fontsource-variable/inter':
+        specifier: ^5.1.1
+        version: 5.1.1
+      '@fontsource-variable/noto-sans-jp':
+        specifier: ^5.1.1
+        version: 5.1.1
       '@sveltejs/adapter-auto':
         specifier: ^4.0.0
         version: 4.0.0(@sveltejs/kit@2.17.2(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.20.1)(vite@6.1.0(@types/node@22.13.0)(lightningcss@1.25.1)))(svelte@5.20.1)(vite@6.1.0(@types/node@22.13.0)(lightningcss@1.25.1)))
@@ -437,6 +443,12 @@ packages:
     engines: {node: '>=18'}
     cpu: [x64]
     os: [win32]
+
+  '@fontsource-variable/inter@5.1.1':
+    resolution: {integrity: sha512-OpXFTmiH6tHkYijMvQTycFKBLK4X+SRV6tet1m4YOUH7SzIIlMqDja+ocDtiCA72UthBH/vF+3ZtlMr2rN/wIw==}
+
+  '@fontsource-variable/noto-sans-jp@5.1.1':
+    resolution: {integrity: sha512-fOuEtA3b+3M1nJJycPx8JQyKUTz10nTUOQSusC6gBtq6ff22vl59c3NSg3ZM5/QsO3y5AHhn+KKvhpRcDvgyJg==}
 
   '@jridgewell/gen-mapping@0.3.8':
     resolution: {integrity: sha512-imAbBGkb+ebQyxKgzv5Hu2nmROxoDOXHh80evxdoXNOrvAnVx7zimzc1Oo5h9RlfV4vPXaE2iM5pOFbvOCClWA==}
@@ -1597,6 +1609,10 @@ snapshots:
 
   '@esbuild/win32-x64@0.24.2':
     optional: true
+
+  '@fontsource-variable/inter@5.1.1': {}
+
+  '@fontsource-variable/noto-sans-jp@5.1.1': {}
 
   '@jridgewell/gen-mapping@0.3.8':
     dependencies:
