@@ -51,3 +51,18 @@ export const resultTextStyle = cva({
 		},
 	},
 });
+
+export const totalResultStyle = css({
+	mb: "12",
+});
+
+export const totalResultContainerStyle = css({
+	display: "flex",
+	gap: "3",
+	alignItems: "baseline",
+});
+
+export const totalResultValueStyle = css({
+	fontSize: "2xl",
+	fontWeight: "bold",
+});

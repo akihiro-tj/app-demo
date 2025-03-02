@@ -15,6 +15,9 @@ import {
 	resultTextContainerStyle,
 	resultTextStyle,
 	statementContainerStyle,
+	totalResultContainerStyle,
+	totalResultStyle,
+	totalResultValueStyle,
 } from "./styles";
 import { isCorrectChoice } from "./helpers/is-correct-choice";
 
@@ -22,6 +25,9 @@ const { data } = $props();
 let results = $state<Array<QuestionResult>>([]);
 const currentQuestionIndex = $derived(
 	results.filter((result) => result.selectedChoice !== null).length,
+);
+const correctCount = $derived(
+	results.filter((result) => result.isCorrect).length,
 );
 
 if (data.content) {
@@ -93,6 +99,19 @@ const handleClickChoice: ChoiceClickEventHandler = (e) => {
           </section>
         {/if}
       {/each}
+      {#if currentQuestionIndex === data.content.questions.length}
+        <section class={totalResultStyle} in:fade>
+          <div class={headingContainerStyle}>
+            <h2 class={headingStyle}>結果</h2>
+          </div>
+          <p class={totalResultContainerStyle}>
+            <span class={totalResultValueStyle}>
+              {correctCount} / {data.content.questions.length} 問
+            </span>
+            <span>正解</span>
+          </p>
+        </section>
+      {/if}
     </div>
   {/if}
 </main>
