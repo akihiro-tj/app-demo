@@ -20,6 +20,9 @@ import { isCorrectChoice } from "./helpers/is-correct-choice";
 
 const { data } = $props();
 let results = $state<Array<QuestionResult>>([]);
+const currentQuestionIndex = $derived(
+	results.filter((result) => result.selectedChoice !== null).length,
+);
 
 if (data.content) {
 	const { questions } = data.content;
@@ -56,7 +59,7 @@ const handleClickChoice: ChoiceClickEventHandler = (e) => {
     <h1>{data.content.title}</h1>
     <div class={columnStyle}>
       {#each data.content.questions as question, qi (question)}
-        {#if results[qi]}
+        {#if results[qi] && qi <= currentQuestionIndex}
           <section class={questionStyle}>
             <div class={headingContainerStyle}>
               <h2 class={headingStyle}>Q.{qi + 1}</h2>
