@@ -60,7 +60,7 @@ const handleClickChoice: ChoiceClickEventHandler = (e) => {
     <div class={columnStyle}>
       {#each data.content.questions as question, qi (question)}
         {#if results[qi] && qi <= currentQuestionIndex}
-          <section class={questionStyle}>
+          <section class={questionStyle} in:fade>
             <div class={headingContainerStyle}>
               <h2 class={headingStyle}>Q.{qi + 1}</h2>
             </div>
