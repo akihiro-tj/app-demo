@@ -25,6 +25,7 @@ export const statementContainerStyle = css({
 
 export const imageContainerStyle = css({
 	mb: "4",
+	aspectRatio: "4/3",
 });
 
 export const choiceListContainerStyle = css({

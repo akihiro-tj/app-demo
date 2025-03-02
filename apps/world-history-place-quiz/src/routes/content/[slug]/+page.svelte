@@ -64,9 +64,8 @@ const handleClickChoice: ChoiceClickEventHandler = (e) => {
             <div class={statementContainerStyle}>
               <p>{question.statement}</p>
             </div>
-            <!-- TODO: Implement img -->
             <div class={imageContainerStyle}>
-              <img src={question.image} alt="this is alt text." />
+              <img src={question.image} alt="地図の画像" />
             </div>
             <div class={choiceListContainerStyle}>
               <ChoiceList
