@@ -13,7 +13,7 @@ export const contents: Content[] = [
 		questions: [
 			{
 				statement: "Hoge?",
-				image: "hoge.jpg",
+				image: "/contents/hoge/q1.png",
 				choices: ["Hoge", "Fuga", "Piyo"],
 				correctChoice: {
 					value: 1,
@@ -24,7 +24,7 @@ export const contents: Content[] = [
 			{
 				statement:
 					"問題文が入ります問題文が入ります問題文が入ります問題文が入ります問題文が入ります",
-				image: "fuga.jpg",
+				image: "/contents/hoge/q1.png",
 				choices: ["選択肢", "選択肢", "選択肢"],
 				correctChoice: {
 					value: 2,
@@ -40,7 +40,7 @@ export const contents: Content[] = [
 		questions: [
 			{
 				statement: "Hoge?",
-				image: "hoge.jpg",
+				image: "/contents/hoge/q1.png",
 				choices: ["Hoge", "Fuga", "Piyo"],
 				correctChoice: {
 					value: 1,
@@ -50,7 +50,7 @@ export const contents: Content[] = [
 			},
 			{
 				statement: "Fuga?",
-				image: "fuga.jpg",
+				image: "/contents/hoge/q1.png",
 				choices: ["Hoge", "Fuga", "Piyo"],
 				correctChoice: {
 					value: 2,
