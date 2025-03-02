@@ -38,7 +38,7 @@ export const resultTextContainerStyle = css({
 
 export const resultTextStyle = cva({
 	base: {
-		fontSize: "lg",
+		fontSize: "2xl",
 		fontWeight: "bold",
 	},
 	variants: {
