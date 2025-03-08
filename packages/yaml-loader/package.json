@@ -5,5 +5,10 @@
 	"main": "index.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"devDependencies": {
+		"@app-demo/biome-config": "workspace:*",
+		"@app-demo/typescript-config": "workspace:*",
+		"typescript": "^5.8.2"
 	}
 }
