@@ -1,3 +1,3 @@
 export interface IFileLoader {
-	load: (path: string) => unknown;
+	loadYaml: (path: string) => unknown;
 }
