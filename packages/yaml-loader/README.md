@@ -1,1 +1,1 @@
-# `@app-demo/yaml-loader`
+# `@app-demo/file-loader`
