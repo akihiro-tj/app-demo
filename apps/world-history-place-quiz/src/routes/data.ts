@@ -2,6 +2,7 @@ import type { Question } from "@/entities/question";
 
 type Content = {
 	slug: string;
+	path: string;
 	title: string;
 	questions: Question[];
 };
@@ -9,6 +10,7 @@ type Content = {
 export const contents: Content[] = [
 	{
 		slug: "hoge",
+		path: "/content/hoge",
 		title: "Hoge",
 		questions: [
 			{
@@ -36,6 +38,7 @@ export const contents: Content[] = [
 	},
 	{
 		slug: "fuga",
+		path: "/content/fuga",
 		title: "Fuga",
 		questions: [
 			{
