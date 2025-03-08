@@ -4,6 +4,7 @@ import { visuallyHidden } from "styled-system/patterns";
 import ChoiceList, {
 	type ChoiceClickEventHandler,
 } from "@/components/choice-list/choice-list.svelte";
+import { SITE_ORIGIN } from "@/routes/constant";
 import type { QuestionResult } from "./types";
 import {
 	choiceListContainerStyle,
@@ -59,6 +60,14 @@ const handleClickChoice: ChoiceClickEventHandler = (e) => {
 	};
 };
 </script>
+
+<svelte:head>
+  <title>{data.content?.title}</title>
+  <meta property="og:title" content={data.content?.title} />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content={`${SITE_ORIGIN}${data.content?.path}`} />
+  <meta property="og:image" content={`${SITE_ORIGIN}${data.content?.path}/og-image.png`} />
+</svelte:head>
 
 <main>
   {#if data.content}
