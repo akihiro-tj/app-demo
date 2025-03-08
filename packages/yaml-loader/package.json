@@ -1,10 +1,11 @@
 {
-	"name": "yaml-loader",
+	"name": "@app-demo/yaml-loader",
 	"version": "1.0.0",
 	"description": "",
-	"main": "index.js",
+	"main": "dist/index.js",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"build": "tsup src/index.ts --dts",
+		"dev": "tsup src/index.ts --dts --watch"
 	},
 	"devDependencies": {
 		"@app-demo/biome-config": "workspace:*",
@@ -16,5 +17,6 @@
 	},
 	"dependencies": {
 		"js-yaml": "^4.1.0"
-	}
+	},
+	"files": ["dist"]
 }
