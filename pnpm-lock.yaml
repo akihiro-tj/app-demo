@@ -39,6 +39,9 @@ importers:
       '@app-demo/biome-config':
         specifier: workspace:*
         version: link:../../packages/biome-config
+      '@app-demo/file-loader':
+        specifier: workspace:*
+        version: link:../../packages/file-loader
       '@app-demo/typescript-config':
         specifier: workspace:*
         version: link:../../packages/typescript-config
@@ -60,9 +63,7 @@ importers:
 
   packages/biome-config: {}
 
-  packages/typescript-config: {}
-
-  packages/yaml-loader:
+  packages/file-loader:
     dependencies:
       js-yaml:
         specifier: ^4.1.0
@@ -86,6 +87,8 @@ importers:
       typescript:
         specifier: ^5.8.2
         version: 5.8.2
+
+  packages/typescript-config: {}
 
 packages:
 
