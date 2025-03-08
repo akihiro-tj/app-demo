@@ -10,6 +10,7 @@
 		"@app-demo/biome-config": "workspace:*",
 		"@app-demo/typescript-config": "workspace:*",
 		"@types/js-yaml": "^4.0.9",
+		"@types/node": "^22.13.10",
 		"typescript": "^5.8.2"
 	},
 	"dependencies": {
