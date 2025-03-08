@@ -7,4 +7,8 @@ export class FileLoader implements IFileLoader {
 		const textContent = fs.readFileSync(path, "utf-8");
 		return yaml.load(textContent);
 	}
+
+	getFileNames(path: string): string[] {
+		return fs.readdirSync(path);
+	}
 }
