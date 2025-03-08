@@ -1,5 +1,5 @@
 {
-	"name": "@app-demo/yaml-loader",
+	"name": "@app-demo/file-loader",
 	"version": "1.0.0",
 	"description": "",
 	"main": "dist/index.js",
