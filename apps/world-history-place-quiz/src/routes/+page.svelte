@@ -1,5 +1,5 @@
 <script lang="ts">
-import { SITE_ORIGIN, SITE_NAME } from "./constant";
+import { SITE_NAME, SITE_ORIGIN } from "./constant";
 
 const { data } = $props();
 </script>
