@@ -1,2 +1,2 @@
-export { YamlLoader } from "./yaml-loader";
+export { YamlLoader } from "./file-loader";
 export type { IYamlLoader } from "./types";
