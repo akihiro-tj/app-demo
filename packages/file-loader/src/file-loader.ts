@@ -1,6 +1,6 @@
 import fs from "node:fs";
 import yaml from "js-yaml";
-import { IFileLoader } from "./types";
+import type { IFileLoader } from "./types";
 
 export class FileLoader implements IFileLoader {
 	loadYaml(path: string): unknown {
