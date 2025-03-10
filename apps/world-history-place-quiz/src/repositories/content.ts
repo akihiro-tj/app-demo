@@ -1,7 +1,8 @@
 import type { FileLoader } from "@app-demo/file-loader";
-import type { RawQuestion } from "@/entities/question";
-import type { RawMeta } from "@/entities/meta";
 import { Content } from "@/entities/content";
+import { type RawMeta, rawMetaSchema } from "@/schemas/meta";
+import { rawQuestionSchema, type RawQuestion } from "@/schemas/question";
+import { parseRawData } from "@/utils/parse-raw-data";
 
 const CONTENTS_DIR_PATH = "contents";
 
@@ -21,11 +22,14 @@ export class ContentRepository implements IContentRepository {
 		const metaFilePath = `${CONTENTS_DIR_PATH}/${contentId}/meta.yaml`;
 		const questionsFilePath = `${CONTENTS_DIR_PATH}/${contentId}/questions.yaml`;
 
-		// TODO: Add validation
-		const rawMeta = this.fileLoader.loadYaml(metaFilePath) as RawMeta;
-		const rawQuestions = this.fileLoader.loadYaml(
-			questionsFilePath,
-		) as RawQuestion[];
+		const rawMeta = parseRawData<RawMeta>(
+			rawMetaSchema,
+			this.fileLoader.loadYaml(metaFilePath),
+		);
+		const rawQuestions = parseRawData<RawQuestion[]>(
+			rawQuestionSchema.array(),
+			this.fileLoader.loadYaml(questionsFilePath),
+		);
 
 		return new Content(contentId, rawMeta, rawQuestions);
 	}

@@ -1,3 +1,5 @@
+import type { RawQuestion } from "@/schemas/question";
+
 export interface IQuestion {
 	statement: string;
 	image: string;
@@ -5,14 +7,6 @@ export interface IQuestion {
 	correctChoice: CorrectChoice;
 	explanation: string;
 }
-
-export type RawQuestion = {
-	statement: string;
-	image: string;
-	choices: string[];
-	correctChoice: number;
-	explanation: string;
-};
 
 export type CorrectChoice = {
 	value: number;

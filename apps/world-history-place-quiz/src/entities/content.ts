@@ -1,5 +1,6 @@
-import type { RawMeta } from "./meta";
-import { Question, type RawQuestion } from "./question";
+import type { RawMeta } from "@/schemas/meta";
+import type { RawQuestion } from "@/schemas/question";
+import { Question } from "./question";
 
 export interface IContent {
 	slug: string;
