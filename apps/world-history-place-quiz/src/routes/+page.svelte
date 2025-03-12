@@ -13,7 +13,7 @@ const { data } = $props();
 </svelte:head>
 
 <ul>
-  {#each data.contents as content (content.slug)}
+  {#each data.contents as content (content.id)}
     <li>
       <a href={content.path}>
         {content.title}

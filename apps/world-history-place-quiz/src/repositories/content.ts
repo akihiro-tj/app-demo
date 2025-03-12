@@ -4,23 +4,32 @@ import { type RawMeta, rawMetaSchema } from "@/schemas/meta";
 import { rawQuestionSchema, type RawQuestion } from "@/schemas/question";
 import { parseRawData } from "@/utils/parse-raw-data";
 
-const CONTENTS_DIR_PATH = "contents";
-
 export interface IContentRepository {
-	get(contentId: string): Content;
+	get(args: ContentRepositoryGetArgs): Content;
 	getAll(): Content[];
 }
 
-export class ContentRepository implements IContentRepository {
-	readonly fileLoader: FileLoader;
+export type ContentRepositoryArgs = {
+	fileLoader: FileLoader;
+	dataPath: `${string}/`;
+};
 
-	constructor(fileLoader: FileLoader) {
+export type ContentRepositoryGetArgs = {
+	contentId: string;
+};
+
+export class ContentRepository implements IContentRepository {
+	private fileLoader: ContentRepositoryArgs["fileLoader"];
+	private dataPath: ContentRepositoryArgs["dataPath"];
+
+	constructor({ fileLoader, dataPath }: ContentRepositoryArgs) {
 		this.fileLoader = fileLoader;
+		this.dataPath = dataPath;
 	}
 
-	get(contentId: string): Content {
-		const metaFilePath = `${CONTENTS_DIR_PATH}/${contentId}/meta.yaml`;
-		const questionsFilePath = `${CONTENTS_DIR_PATH}/${contentId}/questions.yaml`;
+	get({ contentId }: ContentRepositoryGetArgs): Content {
+		const metaFilePath = `${this.dataPath}${contentId}/meta.yaml`;
+		const questionsFilePath = `${this.dataPath}${contentId}/questions.yaml`;
 
 		const rawMeta = parseRawData<RawMeta>(
 			rawMetaSchema,
@@ -35,8 +44,8 @@ export class ContentRepository implements IContentRepository {
 	}
 
 	getAll(): Content[] {
-		const contentIds = this.fileLoader.getFileNames(CONTENTS_DIR_PATH);
-		const contents = contentIds.map((contentId) => this.get(contentId));
+		const contentIds = this.fileLoader.getFileNames(this.dataPath);
+		const contents = contentIds.map((contentId) => this.get({ contentId }));
 		return contents;
 	}
 }

@@ -3,15 +3,13 @@ import type { RawQuestion } from "@/schemas/question";
 import { Question } from "./question";
 
 export interface IContent {
-	slug: string;
-	path: string;
+	id: string;
 	title: string;
 	questions: Question[];
 }
 
 export class Content implements IContent {
-	readonly slug: string;
-	readonly path: string;
+	readonly id: string;
 	readonly title: string;
 	readonly questions: Question[];
 
@@ -20,8 +18,7 @@ export class Content implements IContent {
 		rawMeta: RawMeta,
 		rawQuestions: RawQuestion[],
 	) {
-		this.slug = contentId;
-		this.path = `/content/${contentId}`;
+		this.id = contentId;
 		this.title = rawMeta.title;
 		this.questions = rawQuestions.map(
 			(rawQuestion) => new Question(rawQuestion),

@@ -2,7 +2,6 @@ import type { RawQuestion } from "@/schemas/question";
 
 export interface IQuestion {
 	statement: string;
-	image: string;
 	choices: string[];
 	correctChoice: CorrectChoice;
 	explanation: string;
@@ -15,14 +14,12 @@ export type CorrectChoice = {
 
 export class Question implements IQuestion {
 	statement: string;
-	image: string;
 	choices: string[];
 	correctChoice: CorrectChoice;
 	explanation: string;
 
 	constructor(rawQuestion: RawQuestion) {
 		this.statement = rawQuestion.statement;
-		this.image = rawQuestion.image;
 		this.choices = rawQuestion.choices;
 		this.correctChoice = {
 			value: rawQuestion.correctChoice,
