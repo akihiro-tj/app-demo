@@ -1,6 +1,6 @@
 import type { CorrectChoice } from "@/entities/question";
 
-export interface QuestionForService {
+export interface Question {
 	statement: string;
 	image: string;
 	choices: string[];

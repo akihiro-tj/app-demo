@@ -1,8 +1,8 @@
 import type { Content } from "@/entities/content";
 import type { Question } from "@/entities/question";
 import { ContentRepository } from "@/repositories/content";
-import type { ContentForService } from "@/routes/types/content";
-import type { QuestionForService } from "@/routes/types/question";
+import type { Content as ContentForService } from "@/routes/types/content";
+import type { Question as QuestionForService } from "@/routes/types/question";
 import { FileLoader } from "@app-demo/file-loader";
 
 const CONTENT_DATA_PATH = "./contents/";

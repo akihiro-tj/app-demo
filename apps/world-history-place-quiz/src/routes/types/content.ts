@@ -1,8 +1,8 @@
-import type { QuestionForService } from "./question";
+import type { Question } from "./question";
 
-export interface ContentForService {
+export interface Content {
 	id: string;
 	path: string;
 	title: string;
-	questions: QuestionForService[];
+	questions: Question[];
 }
