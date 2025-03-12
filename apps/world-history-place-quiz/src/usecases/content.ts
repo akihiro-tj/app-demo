@@ -1,9 +1,9 @@
-import { FileLoader } from "@app-demo/file-loader";
+import type { Content } from "@/entities/content";
+import type { Question } from "@/entities/question";
 import { ContentRepository } from "@/repositories/content";
 import type { ContentForService } from "@/routes/types/content";
 import type { QuestionForService } from "@/routes/types/question";
-import type { Content } from "@/entities/content";
-import type { Question } from "@/entities/question";
+import { FileLoader } from "@app-demo/file-loader";
 
 const CONTENT_DATA_PATH = "./contents/";
 const CONTENT_APP_PATH = "/content/";

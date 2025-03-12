@@ -1,8 +1,8 @@
-import type { FileLoader } from "@app-demo/file-loader";
 import { Content } from "@/entities/content";
 import { type RawMeta, rawMetaSchema } from "@/schemas/meta";
-import { rawQuestionSchema, type RawQuestion } from "@/schemas/question";
+import { type RawQuestion, rawQuestionSchema } from "@/schemas/question";
 import { parseRawData } from "@/utils/parse-raw-data";
+import type { FileLoader } from "@app-demo/file-loader";
 
 export interface IContentRepository {
 	get(args: ContentRepositoryGetArgs): Content;
