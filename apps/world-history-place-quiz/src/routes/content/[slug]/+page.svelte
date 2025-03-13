@@ -23,7 +23,7 @@ import {
 } from "./styles";
 
 const { data } = $props();
-let results = $state<Array<QuestionResult>>([]);
+let results = $state<QuestionResult[]>([]);
 const currentQuestionIndex = $derived(
 	results.filter((result) => result.selectedChoice !== null).length,
 );
