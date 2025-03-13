@@ -7,10 +7,10 @@ export interface IQuestion {
 	explanation: string;
 }
 
-export type CorrectChoice = {
+export interface CorrectChoice {
 	value: number;
 	text: string;
-};
+}
 
 export class Question implements IQuestion {
 	statement: string;
