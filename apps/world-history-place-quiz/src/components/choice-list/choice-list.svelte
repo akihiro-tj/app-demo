@@ -5,10 +5,10 @@ import { listStyle } from "./styles";
 
 export interface ChoiceListProps {
 	id: number;
-	choices: Array<{
+	choices: {
 		text: string;
 		isCorrect: ChoiceProps["isCorrect"];
-	}>;
+	}[];
 	onClickChoice: ChoiceClickEventHandler;
 	isDisabled?: boolean;
 }
