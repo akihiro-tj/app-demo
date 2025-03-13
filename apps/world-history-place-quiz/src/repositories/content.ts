@@ -9,14 +9,14 @@ export interface IContentRepository {
 	getAll(): Content[];
 }
 
-export type ContentRepositoryArgs = {
+export interface ContentRepositoryArgs {
 	fileLoader: FileLoader;
 	dataPath: `${string}/`;
-};
+}
 
-export type ContentRepositoryGetArgs = {
+export interface ContentRepositoryGetArgs {
 	contentId: string;
-};
+}
 
 export class ContentRepository implements IContentRepository {
 	private fileLoader: ContentRepositoryArgs["fileLoader"];

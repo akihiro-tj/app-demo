@@ -13,10 +13,10 @@ export interface ChoiceListProps {
 	isDisabled?: boolean;
 }
 
-export type ChoiceClickEvent = {
+export interface ChoiceClickEvent {
 	choiceListId: number;
 	choiceId: number;
-};
+}
 
 export type ChoiceClickEventHandler = (e: ChoiceClickEvent) => void;
 
