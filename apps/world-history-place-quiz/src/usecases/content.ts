@@ -5,9 +5,6 @@ import type { Content as ContentForService } from "@/routes/types/content";
 import type { Question as QuestionForService } from "@/routes/types/question";
 import { FileLoader } from "@app-demo/file-loader";
 
-const CONTENT_DATA_PATH = "./contents/";
-const CONTENT_APP_PATH = "/content/";
-
 type Entry = {
 	slug: string;
 };
@@ -16,16 +13,17 @@ const getContentRepository = (): ContentRepository => {
 	const fileLoader = new FileLoader();
 	const contentRepository = new ContentRepository({
 		fileLoader,
-		dataPath: CONTENT_DATA_PATH,
+		dataPath: "./contents/",
 	});
 	return contentRepository;
 };
 
 const mapContent = (content: Content): ContentForService => {
+	const path = `/content/${content.id}`;
 	const mappedQuestions: QuestionForService[] = content.questions.map(
 		(question: Question, index: number): QuestionForService => ({
 			statement: question.statement,
-			image: `${CONTENT_APP_PATH}${content.id}/q${index + 1}.png`,
+			image: `${path}/img/q${index + 1}.png`,
 			choices: question.choices,
 			correctChoice: question.correctChoice,
 			explanation: question.explanation,
@@ -33,7 +31,7 @@ const mapContent = (content: Content): ContentForService => {
 	);
 	return {
 		id: content.id,
-		path: `${CONTENT_APP_PATH}${content.id}`,
+		path,
 		title: content.title,
 		questions: mappedQuestions,
 	};
