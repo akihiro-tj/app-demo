@@ -3,6 +3,7 @@ import ChoiceList, {
 	type ChoiceClickEventHandler,
 } from "@/components/choice-list/choice-list.svelte";
 import { SITE_ORIGIN } from "@/routes/constant";
+import type { QuestionResult } from "@/routes/types/question-result";
 import { visuallyHidden } from "styled-system/patterns";
 import { fade } from "svelte/transition";
 import { isCorrectChoice } from "./helpers/is-correct-choice";
@@ -20,7 +21,6 @@ import {
 	totalResultStyle,
 	totalResultValueStyle,
 } from "./styles";
-import type { QuestionResult } from "./types";
 
 const { data } = $props();
 let results = $state<Array<QuestionResult>>([]);

@@ -1,7 +1,6 @@
-import { contents } from "./data";
+import { getAllContents } from "@/usecases/content";
 
-export function load() {
-	return {
-		contents,
-	};
+export async function load() {
+	const contents = getAllContents();
+	return { contents };
 }
