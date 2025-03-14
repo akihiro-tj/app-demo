@@ -23,7 +23,19 @@ import {
 } from "./styles";
 
 const { data } = $props();
-let results = $state<QuestionResult[]>([]);
+const { title, path, questions } = data.content;
+
+let results = $state<QuestionResult[]>(
+	[...Array(questions.length)].map((_, i) => ({
+		choices: (questions[i]?.choices ?? []).map((choice) => ({
+			text: choice,
+			isCorrect: null,
+		})),
+		selectedChoice: null,
+		isCorrect: null,
+	})),
+);
+
 const currentQuestionIndex = $derived(
 	results.filter((result) => result.selectedChoice !== null).length,
 );
@@ -31,22 +43,10 @@ const correctCount = $derived(
 	results.filter((result) => result.isCorrect).length,
 );
 
-if (data.content) {
-	const { questions } = data.content;
-	results = [...Array(questions.length)].map((_, i) => ({
-		choices: (questions[i]?.choices ?? []).map((choice) => ({
-			text: choice,
-			isCorrect: null,
-		})),
-		selectedChoice: null,
-		isCorrect: null,
-	}));
-}
-
 const handleClickChoice: ChoiceClickEventHandler = (e) => {
 	const questionIndex = e.choiceListId;
 	const choiceIndex = e.choiceId;
-	const question = data.content?.questions[questionIndex];
+	const question = questions[questionIndex];
 	if (!question) {
 		return;
 	}
@@ -62,64 +62,62 @@ const handleClickChoice: ChoiceClickEventHandler = (e) => {
 </script>
 
 <svelte:head>
-  <title>{data.content?.title}</title>
-  <meta property="og:title" content={data.content?.title} />
+  <title>{title}</title>
+  <meta property="og:title" content={title} />
   <meta property="og:type" content="article" />
-  <meta property="og:url" content={`${SITE_ORIGIN}${data.content?.path}`} />
-  <meta property="og:image" content={`${SITE_ORIGIN}${data.content?.path}/og-image.png`} />
+  <meta property="og:url" content={`${SITE_ORIGIN}${path}`} />
+  <meta property="og:image" content={`${SITE_ORIGIN}${path}/og-image.png`} />
 </svelte:head>
 
 <main>
-  {#if data.content}
-    <h1>{data.content.title}</h1>
-    <div class={columnStyle}>
-      {#each data.content.questions as question, qi (question)}
-        {#if results[qi] && qi <= currentQuestionIndex}
-          <section class={questionStyle} in:fade>
-            <div class={headingContainerStyle}>
-              <h2 class={headingStyle}>Q.{qi + 1}</h2>
-            </div>
-            <div class={statementContainerStyle}>
-              <p>{question.statement}</p>
-            </div>
-            <div class={imageContainerStyle}>
-              <img src={question.image} alt="地図の画像" />
-            </div>
-            <div class={choiceListContainerStyle}>
-              <ChoiceList
-                id={qi}
-                choices={results[qi].choices}
-                onClickChoice={handleClickChoice}
-                isDisabled={results[qi].selectedChoice !== null}
-              />
-            </div>
-            {#if results[qi].isCorrect !== null}
-              <div in:fade>
-                <div class={resultTextContainerStyle}>
-                  <p class={resultTextStyle({ isCorrect: results[qi].isCorrect })}>
-                    {results[qi].isCorrect ? "正解" : "不正解"}
-                  </p>
-                </div>
-                <p class={visuallyHidden()}>{question.correctChoice.text}が正解です。</p>
-                <p>{question.explanation}</p>
-              </div>
-            {/if}
-          </section>
-        {/if}
-      {/each}
-      {#if currentQuestionIndex === data.content.questions.length}
-        <section class={totalResultStyle} in:fade>
+  <h1>{title}</h1>
+  <div class={columnStyle}>
+    {#each questions as question, qi (question)}
+      {#if results[qi] && qi <= currentQuestionIndex}
+        <section class={questionStyle} in:fade>
           <div class={headingContainerStyle}>
-            <h2 class={headingStyle}>結果</h2>
+            <h2 class={headingStyle}>Q.{qi + 1}</h2>
           </div>
-          <p class={totalResultContainerStyle}>
-            <span class={totalResultValueStyle}>
-              {correctCount} / {data.content.questions.length} 問
-            </span>
-            <span>正解</span>
-          </p>
+          <div class={statementContainerStyle}>
+            <p>{question.statement}</p>
+          </div>
+          <div class={imageContainerStyle}>
+            <img src={question.image} alt="地図の画像" />
+          </div>
+          <div class={choiceListContainerStyle}>
+            <ChoiceList
+              id={qi}
+              choices={results[qi].choices}
+              onClickChoice={handleClickChoice}
+              isDisabled={results[qi].selectedChoice !== null}
+            />
+          </div>
+          {#if results[qi].isCorrect !== null}
+            <div in:fade>
+              <div class={resultTextContainerStyle}>
+                <p class={resultTextStyle({ isCorrect: results[qi].isCorrect })}>
+                  {results[qi].isCorrect ? "正解" : "不正解"}
+                </p>
+              </div>
+              <p class={visuallyHidden()}>{question.correctChoice.text}が正解です。</p>
+              <p>{question.explanation}</p>
+            </div>
+          {/if}
         </section>
       {/if}
-    </div>
-  {/if}
+    {/each}
+    {#if currentQuestionIndex === questions.length}
+      <section class={totalResultStyle} in:fade>
+        <div class={headingContainerStyle}>
+          <h2 class={headingStyle}>結果</h2>
+        </div>
+        <p class={totalResultContainerStyle}>
+          <span class={totalResultValueStyle}>
+            {correctCount} / {questions.length} 問
+          </span>
+          <span>正解</span>
+        </p>
+      </section>
+    {/if}
+  </div>
 </main>
