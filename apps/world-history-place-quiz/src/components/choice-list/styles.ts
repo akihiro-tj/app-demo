@@ -1,7 +1,7 @@
 import { css } from "styled-system/css";
 
 export const listStyle = css({
-	display: "flex",
-	flexDir: "column",
-	rowGap: "3",
+	display: "grid",
+	gridTemplateColumns: "1fr 1fr",
+	gap: "3",
 });
