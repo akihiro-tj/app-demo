@@ -10,6 +10,7 @@ import { getCurrentQuestionIndex } from "./helpers/get-current-question-index";
 import { getMetaContent } from "./helpers/get-meta-content";
 import { getQuestionResult } from "./helpers/get-question-result";
 import { shouldShowQuestion } from "./helpers/should-show-question";
+import { shouldShowQuestionResult } from "./helpers/should-show-question-result";
 import { shouldShowTotalResult } from "./helpers/should-show-total-result";
 import {
 	choiceListContainerStyle,
@@ -79,7 +80,7 @@ const handleClickChoice: ChoiceClickEventHandler = (e) => {
               isDisabled={results[qi].selectedChoice !== null}
             />
           </div>
-          {#if results[qi].isCorrect !== null}
+          {#if shouldShowQuestionResult(results[qi].isCorrect)}
             <div in:fade>
               <div class={resultTextContainerStyle}>
                 <p class={resultTextStyle({ isCorrect: results[qi].isCorrect })}>
