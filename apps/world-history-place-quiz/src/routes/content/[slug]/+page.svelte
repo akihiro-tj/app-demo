@@ -6,6 +6,7 @@ import { SITE_ORIGIN } from "@/routes/constant";
 import type { QuestionResult } from "@/routes/types/question-result";
 import { visuallyHidden } from "styled-system/patterns";
 import { fade } from "svelte/transition";
+import { getCorrectCount } from "./helpers/get-correct-count";
 import { getCurrentQuestionIndex } from "./helpers/get-current-question-index";
 import { getQuestionResult } from "./helpers/get-question-result";
 import {
@@ -30,9 +31,7 @@ let results = $state<QuestionResult[]>(
 	questions.map((question) => getQuestionResult(question, null)),
 );
 const currentQuestionIndex = $derived(getCurrentQuestionIndex(results));
-const correctCount = $derived(
-	results.filter((result) => result.isCorrect).length,
-);
+const correctCount = $derived(getCorrectCount(results));
 
 const handleClickChoice: ChoiceClickEventHandler = (e) => {
 	const questionIndex = e.choiceListId;
