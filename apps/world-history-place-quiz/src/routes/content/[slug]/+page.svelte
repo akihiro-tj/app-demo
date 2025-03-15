@@ -10,6 +10,7 @@ import { getCurrentQuestionIndex } from "./helpers/get-current-question-index";
 import { getMetaContent } from "./helpers/get-meta-content";
 import { getQuestionResult } from "./helpers/get-question-result";
 import { shouldShowQuestion } from "./helpers/should-show-question";
+import { shouldShowTotalResult } from "./helpers/should-show-total-result";
 import {
 	choiceListContainerStyle,
 	columnStyle,
@@ -92,7 +93,7 @@ const handleClickChoice: ChoiceClickEventHandler = (e) => {
         </section>
       {/if}
     {/each}
-    {#if currentQuestionIndex === questions.length}
+    {#if shouldShowTotalResult(questions, currentQuestionIndex)}
       <section class={totalResultStyle} in:fade>
         <div class={headingContainerStyle}>
           <h2 class={headingStyle}>結果</h2>
