@@ -2,11 +2,16 @@
 import ChoiceList, {
 	type ChoiceClickEventHandler,
 } from "@/components/choice-list/choice-list.svelte";
-import { SITE_ORIGIN } from "@/routes/constant";
 import type { QuestionResult } from "@/routes/types/question-result";
 import { visuallyHidden } from "styled-system/patterns";
 import { fade } from "svelte/transition";
-import { isCorrectChoice } from "./helpers/is-correct-choice";
+import { getCorrectCount } from "./helpers/get-correct-count";
+import { getCurrentQuestionIndex } from "./helpers/get-current-question-index";
+import { getMetaContent } from "./helpers/get-meta-content";
+import { getQuestionResult } from "./helpers/get-question-result";
+import { shouldShowQuestion } from "./helpers/should-show-question";
+import { shouldShowQuestionResult } from "./helpers/should-show-question-result";
+import { shouldShowTotalResult } from "./helpers/should-show-total-result";
 import {
 	choiceListContainerStyle,
 	columnStyle,
@@ -23,25 +28,15 @@ import {
 } from "./styles";
 
 const { data } = $props();
-const { title, path, questions } = data.content;
+const { questions } = data.content;
+
+const metaContent = getMetaContent(data.content);
 
 let results = $state<QuestionResult[]>(
-	[...Array(questions.length)].map((_, i) => ({
-		choices: (questions[i]?.choices ?? []).map((choice) => ({
-			text: choice,
-			isCorrect: null,
-		})),
-		selectedChoice: null,
-		isCorrect: null,
-	})),
+	questions.map((question) => getQuestionResult(question, null)),
 );
-
-const currentQuestionIndex = $derived(
-	results.filter((result) => result.selectedChoice !== null).length,
-);
-const correctCount = $derived(
-	results.filter((result) => result.isCorrect).length,
-);
+const currentQuestionIndex = $derived(getCurrentQuestionIndex(results));
+const correctCount = $derived(getCorrectCount(results));
 
 const handleClickChoice: ChoiceClickEventHandler = (e) => {
 	const questionIndex = e.choiceListId;
@@ -50,30 +45,23 @@ const handleClickChoice: ChoiceClickEventHandler = (e) => {
 	if (!question) {
 		return;
 	}
-	results[questionIndex] = {
-		choices: question.choices.map((choice, i) => ({
-			text: choice,
-			isCorrect: isCorrectChoice(i, choiceIndex, question.correctChoice.value),
-		})),
-		selectedChoice: choiceIndex,
-		isCorrect: choiceIndex === question.correctChoice.value,
-	};
+	results[questionIndex] = getQuestionResult(question, choiceIndex);
 };
 </script>
 
 <svelte:head>
-  <title>{title}</title>
-  <meta property="og:title" content={title} />
-  <meta property="og:type" content="article" />
-  <meta property="og:url" content={`${SITE_ORIGIN}${path}`} />
-  <meta property="og:image" content={`${SITE_ORIGIN}${path}/og-image.png`} />
+  <title>{metaContent.title}</title>
+  <meta property="og:title" content={metaContent.title} />
+  <meta property="og:type" content={metaContent.ogType} />
+  <meta property="og:url" content={metaContent.ogURL} />
+  <meta property="og:image" content={metaContent.ogImage} />
 </svelte:head>
 
 <main>
-  <h1>{title}</h1>
+  <h1>{data.content.title}</h1>
   <div class={columnStyle}>
     {#each questions as question, qi (question)}
-      {#if results[qi] && qi <= currentQuestionIndex}
+      {#if shouldShowQuestion(qi, currentQuestionIndex) && results[qi]}
         <section class={questionStyle} in:fade>
           <div class={headingContainerStyle}>
             <h2 class={headingStyle}>Q.{qi + 1}</h2>
@@ -92,7 +80,7 @@ const handleClickChoice: ChoiceClickEventHandler = (e) => {
               isDisabled={results[qi].selectedChoice !== null}
             />
           </div>
-          {#if results[qi].isCorrect !== null}
+          {#if shouldShowQuestionResult(results[qi].isCorrect)}
             <div in:fade>
               <div class={resultTextContainerStyle}>
                 <p class={resultTextStyle({ isCorrect: results[qi].isCorrect })}>
@@ -106,7 +94,7 @@ const handleClickChoice: ChoiceClickEventHandler = (e) => {
         </section>
       {/if}
     {/each}
-    {#if currentQuestionIndex === questions.length}
+    {#if shouldShowTotalResult(questions, currentQuestionIndex)}
       <section class={totalResultStyle} in:fade>
         <div class={headingContainerStyle}>
           <h2 class={headingStyle}>結果</h2>

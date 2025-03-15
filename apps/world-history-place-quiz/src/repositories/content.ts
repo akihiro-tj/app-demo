@@ -1,5 +1,8 @@
 import { Content } from "@/entities/content";
-import { type RawMeta, rawMetaSchema } from "@/schemas/meta";
+import {
+	type RawMetaContent,
+	rawMetaContentSchema,
+} from "@/schemas/meta-content";
 import { type RawQuestion, rawQuestionSchema } from "@/schemas/question";
 import { parseRawData } from "@/utils/parse-raw-data";
 import type { FileLoader } from "@app-demo/file-loader";
@@ -31,8 +34,8 @@ export class ContentRepository implements IContentRepository {
 		const metaFilePath = `${this.dataPath}${contentId}/meta.yaml`;
 		const questionsFilePath = `${this.dataPath}${contentId}/questions.yaml`;
 
-		const rawMeta = parseRawData<RawMeta>(
-			rawMetaSchema,
+		const rawMetaContent = parseRawData<RawMetaContent>(
+			rawMetaContentSchema,
 			this.fileLoader.loadYaml(metaFilePath),
 		);
 		const rawQuestions = parseRawData<RawQuestion[]>(
@@ -40,7 +43,7 @@ export class ContentRepository implements IContentRepository {
 			this.fileLoader.loadYaml(questionsFilePath),
 		);
 
-		return new Content(contentId, rawMeta, rawQuestions);
+		return new Content(contentId, rawMetaContent, rawQuestions);
 	}
 
 	getAll(): Content[] {
