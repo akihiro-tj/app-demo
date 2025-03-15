@@ -9,6 +9,7 @@ import { getCorrectCount } from "./helpers/get-correct-count";
 import { getCurrentQuestionIndex } from "./helpers/get-current-question-index";
 import { getMetaContent } from "./helpers/get-meta-content";
 import { getQuestionResult } from "./helpers/get-question-result";
+import { shouldShowQuestion } from "./helpers/should-show-question";
 import {
 	choiceListContainerStyle,
 	columnStyle,
@@ -58,7 +59,7 @@ const handleClickChoice: ChoiceClickEventHandler = (e) => {
   <h1>{data.content.title}</h1>
   <div class={columnStyle}>
     {#each questions as question, qi (question)}
-      {#if results[qi] && qi <= currentQuestionIndex}
+      {#if shouldShowQuestion(qi, currentQuestionIndex) && results[qi]}
         <section class={questionStyle} in:fade>
           <div class={headingContainerStyle}>
             <h2 class={headingStyle}>Q.{qi + 1}</h2>
