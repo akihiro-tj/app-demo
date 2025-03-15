@@ -6,7 +6,7 @@ import { SITE_ORIGIN } from "@/routes/constant";
 import type { QuestionResult } from "@/routes/types/question-result";
 import { visuallyHidden } from "styled-system/patterns";
 import { fade } from "svelte/transition";
-import { isCorrectChoice } from "./helpers/is-correct-choice";
+import { getQuestionResult } from "./helpers/get-question-result";
 import {
 	choiceListContainerStyle,
 	columnStyle,
@@ -26,16 +26,8 @@ const { data } = $props();
 const { title, path, questions } = data.content;
 
 let results = $state<QuestionResult[]>(
-	[...Array(questions.length)].map((_, i) => ({
-		choices: (questions[i]?.choices ?? []).map((choice) => ({
-			text: choice,
-			isCorrect: null,
-		})),
-		selectedChoice: null,
-		isCorrect: null,
-	})),
+	questions.map((question) => getQuestionResult(question, null)),
 );
-
 const currentQuestionIndex = $derived(
 	results.filter((result) => result.selectedChoice !== null).length,
 );
@@ -50,14 +42,7 @@ const handleClickChoice: ChoiceClickEventHandler = (e) => {
 	if (!question) {
 		return;
 	}
-	results[questionIndex] = {
-		choices: question.choices.map((choice, i) => ({
-			text: choice,
-			isCorrect: isCorrectChoice(i, choiceIndex, question.correctChoice.value),
-		})),
-		selectedChoice: choiceIndex,
-		isCorrect: choiceIndex === question.correctChoice.value,
-	};
+	results[questionIndex] = getQuestionResult(question, choiceIndex);
 };
 </script>
 
