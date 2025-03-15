@@ -1,4 +1,4 @@
-import type { RawMeta } from "@/schemas/meta";
+import type { RawMetaContent } from "@/schemas/meta-content";
 import type { RawQuestion } from "@/schemas/question";
 import { Question } from "./question";
 
@@ -15,11 +15,11 @@ export class Content implements IContent {
 
 	constructor(
 		contentId: string,
-		rawMeta: RawMeta,
+		rawMetaContent: RawMetaContent,
 		rawQuestions: RawQuestion[],
 	) {
 		this.id = contentId;
-		this.title = rawMeta.title;
+		this.title = rawMetaContent.title;
 		this.questions = rawQuestions.map(
 			(rawQuestion) => new Question(rawQuestion),
 		);

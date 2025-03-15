@@ -2,12 +2,12 @@
 import ChoiceList, {
 	type ChoiceClickEventHandler,
 } from "@/components/choice-list/choice-list.svelte";
-import { SITE_ORIGIN } from "@/routes/constant";
 import type { QuestionResult } from "@/routes/types/question-result";
 import { visuallyHidden } from "styled-system/patterns";
 import { fade } from "svelte/transition";
 import { getCorrectCount } from "./helpers/get-correct-count";
 import { getCurrentQuestionIndex } from "./helpers/get-current-question-index";
+import { getMetaContent } from "./helpers/get-meta-content";
 import { getQuestionResult } from "./helpers/get-question-result";
 import {
 	choiceListContainerStyle,
@@ -25,7 +25,9 @@ import {
 } from "./styles";
 
 const { data } = $props();
-const { title, path, questions } = data.content;
+const { questions } = data.content;
+
+const metaContent = getMetaContent(data.content);
 
 let results = $state<QuestionResult[]>(
 	questions.map((question) => getQuestionResult(question, null)),
@@ -45,15 +47,15 @@ const handleClickChoice: ChoiceClickEventHandler = (e) => {
 </script>
 
 <svelte:head>
-  <title>{title}</title>
-  <meta property="og:title" content={title} />
-  <meta property="og:type" content="article" />
-  <meta property="og:url" content={`${SITE_ORIGIN}${path}`} />
-  <meta property="og:image" content={`${SITE_ORIGIN}${path}/og-image.png`} />
+  <title>{metaContent.title}</title>
+  <meta property="og:title" content={metaContent.title} />
+  <meta property="og:type" content={metaContent.ogType} />
+  <meta property="og:url" content={metaContent.ogURL} />
+  <meta property="og:image" content={metaContent.ogImage} />
 </svelte:head>
 
 <main>
-  <h1>{title}</h1>
+  <h1>{data.content.title}</h1>
   <div class={columnStyle}>
     {#each questions as question, qi (question)}
       {#if results[qi] && qi <= currentQuestionIndex}
