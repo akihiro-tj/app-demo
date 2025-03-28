@@ -8,6 +8,6 @@ export const getMetaContent = (content: Content): MetaContent => {
 		ogTitle: content.title,
 		ogType: OGType.Article,
 		ogURL: `${SITE_ORIGIN}${content.path}`,
-		ogImage: `${SITE_ORIGIN}${content.path}/og-image.png`,
+		ogImage: `${SITE_ORIGIN}${content.path}/img/og-image.png`,
 	};
 };

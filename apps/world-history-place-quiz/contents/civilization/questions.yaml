@@ -1,11 +1,3 @@
-- statement: マヤ文明の場所はどこでしょうか
-  choices:
-    - A
-    - B
-    - C
-    - D
-  correctChoice: 2
-  explanation: "A: テオティワカン文明のテオティワカン遺跡。B: オルメカ文明のラ・ベンタ遺跡。C: マヤ文明のチチェン・イッツァ遺跡。D: アンデス文明のマチュピチュ遺跡。"
 - statement: モエンジョ=ダロがあるのはどこでしょうか
   choices:
     - A
@@ -14,6 +6,14 @@
     - D
   correctChoice: 2
   explanation: "A: エジプト文明の都市メンフィス。B: メソポタミア文明の都市ウル。C: インダス文明のモエンジョ＝ダロ遺跡。D: 中華文明の半坡遺跡。"
+- statement: マヤ文明の場所はどこでしょうか
+  choices:
+    - A
+    - B
+    - C
+    - D
+  correctChoice: 2
+  explanation: "A: テオティワカン文明のテオティワカン遺跡。B: オルメカ文明のラ・ベンタ遺跡。C: マヤ文明のチチェン・イッツァ遺跡。D: アンデス文明のマチュピチュ遺跡。"
 - statement: クレタ文明の場所はどこでしょうか
   choices:
     - A
