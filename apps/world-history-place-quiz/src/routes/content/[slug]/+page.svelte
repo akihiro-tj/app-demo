@@ -59,7 +59,8 @@ const handleClickChoice: ChoiceClickEventHandler = (e) => {
 </svelte:head>
 
 <main>
-  <h1>{data.content.title}</h1>
+  <!-- TODO: Implement title -->
+  <h1>&nbsp;</h1>
   <div class={columnStyle}>
     {#each questions as question, qi (question)}
       {#if shouldShowQuestion(qi, currentQuestionIndex) && results[qi]}
