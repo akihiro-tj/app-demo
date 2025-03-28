@@ -1,0 +1,21 @@
+- statement: アナトリア半島はどれでしょうか
+  choices:
+    - A
+    - B
+    - C
+  correctChoice: 1
+  explanation: "A: バルカン半島。B: アナトリア半島。C: アラビア半島。"
+- statement: ユトランド半島はどれでしょうか
+  choices:
+    - A
+    - B
+    - C
+  correctChoice: 0
+  explanation: "A: ユトランド半島。B: クリミア半島。C: イベリア半島。"
+- statement: 遼東半島はどれでしょうか
+  choices:
+    - A
+    - B
+    - C
+  correctChoice: 1
+  explanation: "A: 山東半島。B: 遼東半島。C: 朝鮮半島。"

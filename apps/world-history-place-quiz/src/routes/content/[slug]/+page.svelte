@@ -16,8 +16,9 @@ import {
 	choiceListContainerStyle,
 	columnStyle,
 	headingContainerStyle,
-	headingStyle,
 	imageContainerStyle,
+	questionCountStyle,
+	questionNumberStyle,
 	questionStyle,
 	resultTextContainerStyle,
 	resultTextStyle,
@@ -58,13 +59,17 @@ const handleClickChoice: ChoiceClickEventHandler = (e) => {
 </svelte:head>
 
 <main>
-  <h1>{data.content.title}</h1>
+  <!-- TODO: Implement title -->
+  <h1>&nbsp;</h1>
   <div class={columnStyle}>
     {#each questions as question, qi (question)}
       {#if shouldShowQuestion(qi, currentQuestionIndex) && results[qi]}
         <section class={questionStyle} in:fade>
           <div class={headingContainerStyle}>
-            <h2 class={headingStyle}>Q.{qi + 1}</h2>
+            <h2>
+              <span class={questionNumberStyle}>Q.{qi + 1}</span>
+              <span class={questionCountStyle}>/ {questions.length}</span>
+            </h2>
           </div>
           <div class={statementContainerStyle}>
             <p>{question.statement}</p>
@@ -97,7 +102,7 @@ const handleClickChoice: ChoiceClickEventHandler = (e) => {
     {#if shouldShowTotalResult(questions, currentQuestionIndex)}
       <section class={totalResultStyle} in:fade>
         <div class={headingContainerStyle}>
-          <h2 class={headingStyle}>結果</h2>
+          <h2 class={questionNumberStyle}>結果</h2>
         </div>
         <p class={totalResultContainerStyle}>
           <span class={totalResultValueStyle}>
