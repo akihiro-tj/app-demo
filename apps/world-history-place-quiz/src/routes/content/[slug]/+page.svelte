@@ -16,6 +16,7 @@ import {
 	choiceListContainerStyle,
 	columnStyle,
 	headingContainerStyle,
+	headingStyle,
 	imageContainerStyle,
 	questionCountStyle,
 	questionNumberStyle,
@@ -66,7 +67,7 @@ const handleClickChoice: ChoiceClickEventHandler = (e) => {
       {#if shouldShowQuestion(qi, currentQuestionIndex) && results[qi]}
         <section class={questionStyle} in:fade>
           <div class={headingContainerStyle}>
-            <h2>
+            <h2 class={headingStyle}>
               <span class={questionNumberStyle}>Q.{qi + 1}</span>
               <span class={questionCountStyle}>/ {questions.length}</span>
             </h2>
