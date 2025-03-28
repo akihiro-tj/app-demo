@@ -14,8 +14,15 @@ export const headingContainerStyle = css({
 	mb: "2",
 });
 
-export const headingStyle = css({
+export const questionNumberStyle = css({
 	fontSize: "3xl",
+	fontWeight: "bold",
+});
+
+export const questionCountStyle = css({
+	display: "inline-block",
+	ml: "1",
+	fontSize: "xl",
 	fontWeight: "bold",
 });
 
