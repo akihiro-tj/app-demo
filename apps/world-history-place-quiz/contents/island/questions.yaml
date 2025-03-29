@@ -1,3 +1,26 @@
+- statement: シチリア島はどれでしょうか
+  choices:
+    - A
+    - B
+    - C
+    - D
+  correctChoice: 2
+  explanation: "A: コルシカ島。B: サルデーニャ島。C: シチリア島。D: キプロス島。"
+- statement: ジャワ島はどれでしょうか
+  choices:
+    - A
+    - B
+    - C
+  correctChoice: 1
+  explanation: "A: スマトラ島。B: ジャワ島。C: スラウェシ島。"
+- statement: マルク（モルッカ）諸島はどれでしょうか
+  choices:
+    - A
+    - B
+    - C
+    - D
+  correctChoice: 2
+  explanation: "A: 千島列島。B: マーシャル諸島。C: マルク（モルッカ）諸島。D: ビスマルク諸島。"
 - statement: アナトリア半島はどれでしょうか
   choices:
     - A
