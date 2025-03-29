@@ -23,7 +23,7 @@ const mapContent = (content: Content): ContentForService => {
 	const mappedQuestions: QuestionForService[] = content.questions.map(
 		(question: Question, index: number): QuestionForService => ({
 			statement: question.statement,
-			image: `${path}/img/q${index + 1}.png`,
+			image: `${path}/q${index + 1}.png`,
 			choices: question.choices,
 			correctChoice: question.correctChoice,
 			explanation: question.explanation,
