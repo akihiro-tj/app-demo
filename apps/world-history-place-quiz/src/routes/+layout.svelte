@@ -2,7 +2,9 @@
 import "@fontsource-variable/inter";
 import "@fontsource-variable/noto-sans-jp";
 import "../app.css";
+import Header from "@/components/header/header.svelte";
 import { SITE_NAME } from "./constant";
+import { headerContainerStyle } from "./layout.styles";
 </script>
 
 <svelte:head>
@@ -11,4 +13,8 @@ import { SITE_NAME } from "./constant";
   <meta property="og:locale" content="ja_JP" />
   <meta property="twitter:card" content="summary" />
 </svelte:head>
+
+<header class={headerContainerStyle}>
+  <Header />
+</header>
 <slot />
