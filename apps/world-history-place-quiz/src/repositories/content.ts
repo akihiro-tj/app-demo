@@ -47,7 +47,7 @@ export class ContentRepository implements IContentRepository {
 	}
 
 	getAll(): Content[] {
-		const contentIds = this.fileLoader.getFileNames(this.dataPath);
+		const contentIds = this.fileLoader.getDirNames(this.dataPath);
 		const contents = contentIds.map((contentId) => this.get({ contentId }));
 		return contents;
 	}

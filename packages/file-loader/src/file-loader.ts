@@ -8,7 +8,10 @@ export class FileLoader implements IFileLoader {
 		return yaml.load(textContent);
 	}
 
-	getFileNames(path: string): string[] {
-		return fs.readdirSync(path);
+	getDirNames(path: string): string[] {
+		return fs
+			.readdirSync(path, { withFileTypes: true })
+			.filter((dirent) => dirent.isDirectory())
+			.map((dirent) => dirent.name);
 	}
 }
