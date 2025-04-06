@@ -1,9 +1,10 @@
 <script lang="ts">
+import type { Choice } from "@/application/interfaces/content-service";
 import type { HTMLButtonAttributes } from "svelte/elements";
 import { buttonStyle } from "./styles";
 
 export interface ChoiceProps {
-	isCorrect: boolean | null;
+	isCorrect: Choice["isCorrect"];
 }
 
 const {

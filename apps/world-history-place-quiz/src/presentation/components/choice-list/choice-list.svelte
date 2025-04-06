@@ -1,14 +1,12 @@
 <script lang="ts">
+import type { Choice as IChoice } from "@/application/interfaces/content-service";
 import type { MouseEventHandler } from "svelte/elements";
-import Choice, { type ChoiceProps } from "../choice/choice.svelte";
+import Choice from "../choice/choice.svelte";
 import { listStyle } from "./styles";
 
 export interface ChoiceListProps {
 	id: number;
-	choices: {
-		text: string;
-		isCorrect: ChoiceProps["isCorrect"];
-	}[];
+	choices: IChoice[];
 	onClickChoice: ChoiceClickEventHandler;
 	isDisabled?: boolean;
 }

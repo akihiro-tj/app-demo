@@ -1,5 +1,4 @@
 import type { IQuestion } from "@/domain/entities/question";
-import type { ChoiceListProps } from "@/presentation/components/choice-list/choice-list.svelte";
 import type { OGType } from "../constants/meta";
 
 export interface AppContent {
@@ -18,8 +17,13 @@ export interface AppQuestion {
 }
 
 export interface QuestionResult {
-	choices: ChoiceListProps["choices"];
+	choices: Choice[];
 	selectedChoice: number | null;
+	isCorrect: boolean | null;
+}
+
+export interface Choice {
+	text: string;
 	isCorrect: boolean | null;
 }
 
