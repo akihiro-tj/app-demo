@@ -1,5 +1,7 @@
-import type { Question } from "@/application/interfaces/question";
-import type { QuestionResult } from "@/application/interfaces/question-result";
+import type {
+	AppQuestion,
+	QuestionResult,
+} from "@/application/interfaces/content-service";
 import type { ChoiceProps } from "@/presentation/components/choice/choice.svelte";
 
 const isCorrectChoice = (
@@ -16,7 +18,7 @@ const isCorrectChoice = (
 };
 
 export const getQuestionResult = (
-	question: Question,
+	question: AppQuestion,
 	choiceIndex: number | null,
 ): QuestionResult => {
 	return {

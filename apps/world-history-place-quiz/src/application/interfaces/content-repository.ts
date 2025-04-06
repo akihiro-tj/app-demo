@@ -1,9 +1,9 @@
-import type { Content } from "@/domain/entities/content";
+import type { IContent } from "@/domain/entities/content";
 import type { FileLoader } from "@app-demo/file-loader";
 
 export interface IContentRepository {
-	find(args: ContentRepositoryGetArgs): Content;
-	findAll(): Content[];
+	find(args: ContentRepositoryFindArgs): IContent;
+	findAll(): IContent[];
 }
 
 export interface ContentRepositoryArgs {
@@ -11,6 +11,6 @@ export interface ContentRepositoryArgs {
 	dataPath: `${string}/`;
 }
 
-export interface ContentRepositoryGetArgs {
+export interface ContentRepositoryFindArgs {
 	contentId: string;
 }

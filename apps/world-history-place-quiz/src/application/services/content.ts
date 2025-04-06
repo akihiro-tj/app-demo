@@ -1,11 +1,10 @@
-import type { Content as ContentForService } from "@/application/interfaces/content";
-import type { Question as QuestionForService } from "@/application/interfaces/question";
-import type { Content } from "@/domain/entities/content";
-import type { Question } from "@/domain/entities/question";
+import type { IContent } from "@/domain/entities/content";
+import type { IQuestion } from "@/domain/entities/question";
 import { ContentRepository } from "@/infrastructure/repositories/content";
 import { ContentsOrderRepository } from "@/infrastructure/repositories/contents-order";
 import { FileLoader } from "@app-demo/file-loader";
 import type { IContentRepository } from "../interfaces/content-repository";
+import type { AppContent, AppQuestion } from "../interfaces/content-service";
 import type { IContentsOrderRepository } from "../interfaces/contents-order-repository";
 
 const CONTENTS_PATH = "./contents/";
@@ -32,10 +31,10 @@ const getContentsOrderRepository = (): IContentsOrderRepository => {
 	return contentsOrderRepository;
 };
 
-const mapContent = (content: Content): ContentForService => {
+const mapContent = (content: IContent): AppContent => {
 	const path = `/content/${content.id}`;
-	const mappedQuestions: QuestionForService[] = content.questions.map(
-		(question: Question, index: number): QuestionForService => ({
+	const mappedQuestions: AppQuestion[] = content.questions.map(
+		(question: IQuestion, index: number): AppQuestion => ({
 			statement: question.statement,
 			image: `${path}/q${index + 1}.png`,
 			choices: question.choices,
@@ -51,7 +50,7 @@ const mapContent = (content: Content): ContentForService => {
 	};
 };
 
-const sortContents = (contents: ContentForService[]): ContentForService[] => {
+const sortContents = (contents: AppContent[]): AppContent[] => {
 	const contentsOrderRepository = getContentsOrderRepository();
 	const contentsOrder = contentsOrderRepository.find();
 	const sortedContents = contents.sort((a, b) => {
@@ -65,14 +64,14 @@ const sortContents = (contents: ContentForService[]): ContentForService[] => {
 	return sortedContents;
 };
 
-export const getContent = (contentId: string): ContentForService => {
+export const getContent = (contentId: string): AppContent => {
 	const contentRepository = getContentRepository();
 	const content = contentRepository.find({ contentId });
 	const mappedContent = mapContent(content);
 	return mappedContent;
 };
 
-export const getAllContents = (): ContentForService[] => {
+export const getAllContents = (): AppContent[] => {
 	const contentRepository = getContentRepository();
 	const contents = contentRepository.findAll();
 	const mappedContents = contents.map(mapContent);

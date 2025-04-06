@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { QuestionResult } from "@/application/interfaces/question-result";
+import type { QuestionResult } from "@/application/interfaces/content-service";
 import ChoiceList, {
 	type ChoiceClickEventHandler,
 } from "@/presentation/components/choice-list/choice-list.svelte";

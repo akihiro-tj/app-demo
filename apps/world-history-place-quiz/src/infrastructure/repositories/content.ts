@@ -1,9 +1,9 @@
 import type {
 	ContentRepositoryArgs,
-	ContentRepositoryGetArgs,
+	ContentRepositoryFindArgs,
 	IContentRepository,
 } from "@/application/interfaces/content-repository";
-import { Content } from "@/domain/entities/content";
+import { Content, type IContent } from "@/domain/entities/content";
 import type { RawMeta } from "@/domain/schemas/meta";
 import type { RawQuestion } from "@/domain/schemas/question";
 import { rawMetaSchema } from "@/infrastructure/schemas/meta";
@@ -19,7 +19,7 @@ export class ContentRepository implements IContentRepository {
 		this.dataPath = dataPath;
 	}
 
-	find({ contentId }: ContentRepositoryGetArgs): Content {
+	find({ contentId }: ContentRepositoryFindArgs): IContent {
 		const metaFilePath = `${this.dataPath}${contentId}/meta.yaml`;
 		const questionsFilePath = `${this.dataPath}${contentId}/questions.yaml`;
 
@@ -35,7 +35,7 @@ export class ContentRepository implements IContentRepository {
 		return new Content(contentId, rawMeta, rawQuestions);
 	}
 
-	findAll(): Content[] {
+	findAll(): IContent[] {
 		const contentIds = this.fileLoader.getDirNames(this.dataPath);
 		const contents = contentIds.map((contentId) => this.find({ contentId }));
 		return contents;

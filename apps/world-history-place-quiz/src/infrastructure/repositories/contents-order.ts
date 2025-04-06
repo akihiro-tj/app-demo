@@ -2,7 +2,10 @@ import type {
 	ContentsOrderRepositoryArgs,
 	IContentsOrderRepository,
 } from "@/application/interfaces/contents-order-repository";
-import { ContentsOrder } from "@/domain/entities/contents-order";
+import {
+	ContentsOrder,
+	type IContentsOrder,
+} from "@/domain/entities/contents-order";
 import type { RawContentsOrder } from "@/domain/schemas/contents-order";
 import { rawContentsOrderSchema } from "@/infrastructure/schemas/contents-order";
 import { parseRawData } from "@/utils/parse-raw-data";
@@ -16,7 +19,7 @@ export class ContentsOrderRepository implements IContentsOrderRepository {
 		this.dataPath = dataPath;
 	}
 
-	find(): ContentsOrder {
+	find(): IContentsOrder {
 		const filePath = `${this.dataPath}order.yaml`;
 		const rawContentsOrder = parseRawData<RawContentsOrder>(
 			rawContentsOrderSchema,

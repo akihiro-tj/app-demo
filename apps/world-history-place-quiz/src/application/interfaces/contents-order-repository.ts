@@ -1,8 +1,8 @@
-import type { ContentsOrder } from "@/domain/entities/contents-order";
+import type { IContentsOrder } from "@/domain/entities/contents-order";
 import type { FileLoader } from "@app-demo/file-loader";
 
 export interface IContentsOrderRepository {
-	find(): ContentsOrder;
+	find(): IContentsOrder;
 }
 
 export interface ContentsOrderRepositoryArgs {

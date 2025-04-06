@@ -1,7 +1,7 @@
-import type { Question } from "@/application/interfaces/question";
+import type { AppQuestion } from "@/application/interfaces/content-service";
 
 export const shouldShowTotalResult = (
-	questions: Question[],
+	questions: AppQuestion[],
 	currentQuestionIndex: number,
 ): boolean => {
 	return currentQuestionIndex === questions.length;
