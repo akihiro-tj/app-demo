@@ -16,7 +16,7 @@ export class ContentsOrderRepository implements IContentsOrderRepository {
 		this.dataPath = dataPath;
 	}
 
-	get(): ContentsOrder {
+	find(): ContentsOrder {
 		const filePath = `${this.dataPath}order.yaml`;
 		const rawContentsOrder = parseRawData<RawContentsOrder>(
 			rawContentsOrderSchema,

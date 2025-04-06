@@ -19,7 +19,7 @@ export class ContentRepository implements IContentRepository {
 		this.dataPath = dataPath;
 	}
 
-	get({ contentId }: ContentRepositoryGetArgs): Content {
+	find({ contentId }: ContentRepositoryGetArgs): Content {
 		const metaFilePath = `${this.dataPath}${contentId}/meta.yaml`;
 		const questionsFilePath = `${this.dataPath}${contentId}/questions.yaml`;
 
@@ -35,9 +35,9 @@ export class ContentRepository implements IContentRepository {
 		return new Content(contentId, rawMetaContent, rawQuestions);
 	}
 
-	getAll(): Content[] {
+	findAll(): Content[] {
 		const contentIds = this.fileLoader.getDirNames(this.dataPath);
-		const contents = contentIds.map((contentId) => this.get({ contentId }));
+		const contents = contentIds.map((contentId) => this.find({ contentId }));
 		return contents;
 	}
 }

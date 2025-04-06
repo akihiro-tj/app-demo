@@ -2,8 +2,8 @@ import type { Content } from "@/domain/entities/content";
 import type { FileLoader } from "@app-demo/file-loader";
 
 export interface IContentRepository {
-	get(args: ContentRepositoryGetArgs): Content;
-	getAll(): Content[];
+	find(args: ContentRepositoryGetArgs): Content;
+	findAll(): Content[];
 }
 
 export interface ContentRepositoryArgs {

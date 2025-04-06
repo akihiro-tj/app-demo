@@ -53,7 +53,7 @@ const mapContent = (content: Content): ContentForService => {
 
 const sortContents = (contents: ContentForService[]): ContentForService[] => {
 	const contentsOrderRepository = getContentsOrderRepository();
-	const contentsOrder = contentsOrderRepository.get();
+	const contentsOrder = contentsOrderRepository.find();
 	const sortedContents = contents.sort((a, b) => {
 		const aIndex = contentsOrder.contentIds.indexOf(a.id);
 		const bIndex = contentsOrder.contentIds.indexOf(b.id);
@@ -67,14 +67,14 @@ const sortContents = (contents: ContentForService[]): ContentForService[] => {
 
 export const getContent = (contentId: string): ContentForService => {
 	const contentRepository = getContentRepository();
-	const content = contentRepository.get({ contentId });
+	const content = contentRepository.find({ contentId });
 	const mappedContent = mapContent(content);
 	return mappedContent;
 };
 
 export const getAllContents = (): ContentForService[] => {
 	const contentRepository = getContentRepository();
-	const contents = contentRepository.getAll();
+	const contents = contentRepository.findAll();
 	const mappedContents = contents.map(mapContent);
 	const sortedContents = sortContents(mappedContents);
 	return sortedContents;
