@@ -3,7 +3,7 @@ export interface IContentsOrder {
 }
 
 export class ContentsOrder implements IContentsOrder {
-	readonly contentIds: string[];
+	readonly contentIds: IContentsOrder["contentIds"];
 
 	constructor(contentIds: string[]) {
 		this.contentIds = contentIds;

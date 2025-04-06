@@ -9,9 +9,9 @@ export interface IContent {
 }
 
 export class Content implements IContent {
-	readonly id: string;
-	readonly title: string;
-	readonly questions: Question[];
+	readonly id: IContent["id"];
+	readonly title: IContent["title"];
+	readonly questions: IContent["questions"];
 
 	constructor(
 		contentId: string,

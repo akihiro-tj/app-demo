@@ -13,10 +13,10 @@ interface CorrectChoice {
 }
 
 export class Question implements IQuestion {
-	readonly statement: string;
-	readonly choices: string[];
+	readonly statement: IQuestion["statement"];
+	readonly choices: IQuestion["choices"];
 	readonly correctChoice: IQuestion["correctChoice"];
-	readonly explanation: string;
+	readonly explanation: IQuestion["explanation"];
 
 	constructor(rawQuestion: RawQuestion) {
 		this.statement = rawQuestion.statement;
