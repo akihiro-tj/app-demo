@@ -1,7 +1,7 @@
 import {
 	getContent,
 	getContentsEntries,
-} from "@/application/use-cases/content.js";
+} from "@/application/services/content.js";
 import type { EntryGenerator } from "./$types.js";
 
 export function load({ params }) {
