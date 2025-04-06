@@ -1,6 +1,6 @@
-import { getAllContents } from "@/application/services/content";
+import { container } from "@/config/container";
 
 export async function load() {
-	const contents = getAllContents();
+	const contents = container.createContentService().getAllContents();
 	return { contents };
 }

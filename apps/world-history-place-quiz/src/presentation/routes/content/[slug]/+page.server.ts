@@ -1,14 +1,11 @@
-import {
-	getContent,
-	getContentsEntries,
-} from "@/application/services/content.js";
+import { container } from "@/config/container.js";
 import type { EntryGenerator } from "./$types.js";
 
 export function load({ params }) {
-	const content = getContent(params.slug);
+	const content = container.createContentService().getContent(params.slug);
 	return { content };
 }
 
 export const entries: EntryGenerator = () => {
-	return getContentsEntries();
+	return container.createContentService().getContentsEntries();
 };

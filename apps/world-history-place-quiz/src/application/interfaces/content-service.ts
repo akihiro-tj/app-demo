@@ -1,6 +1,12 @@
 import type { IQuestion } from "@/domain/entities/question";
 import type { OGType } from "../constants/meta";
 
+export interface ContentService {
+	getContent(contentId: string): AppContent;
+	getAllContents(): AppContent[];
+	getContentsEntries(): { slug: string }[];
+}
+
 export interface AppContent {
 	id: string;
 	path: string;
