@@ -1,8 +1,8 @@
 <script>
 import "@fontsource-variable/inter";
 import "@fontsource-variable/noto-sans-jp";
-import "../app.css";
 import Header from "@/presentation/components/header/header.svelte";
+import "./app.css";
 import { SITE_NAME } from "./constant";
 import { headerContainerStyle } from "./layout.styles";
 </script>
