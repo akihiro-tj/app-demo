@@ -1,4 +1,4 @@
-import type { IQuestion } from "@/domain/interfaces/question";
+import type { IQuestion } from "@/domain/entities/question";
 
 export interface Question {
 	statement: string;

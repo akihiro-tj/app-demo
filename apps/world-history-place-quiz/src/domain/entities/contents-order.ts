@@ -1,4 +1,6 @@
-import type { IContentsOrder } from "../interfaces/contents-order";
+export interface IContentsOrder {
+	contentIds: string[];
+}
 
 export class ContentsOrder implements IContentsOrder {
 	readonly contentIds: string[];

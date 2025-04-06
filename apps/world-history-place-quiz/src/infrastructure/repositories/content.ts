@@ -4,8 +4,8 @@ import type {
 	IContentRepository,
 } from "@/application/interfaces/content-repository";
 import { Content } from "@/domain/entities/content";
-import type { RawMeta } from "@/domain/interfaces/meta";
-import type { RawQuestion } from "@/domain/interfaces/question";
+import type { RawMeta } from "@/domain/schemas/meta";
+import type { RawQuestion } from "@/domain/schemas/question";
 import { rawMetaSchema } from "@/infrastructure/schemas/meta";
 import { rawQuestionSchema } from "@/infrastructure/schemas/question";
 import { parseRawData } from "@/utils/parse-raw-data";

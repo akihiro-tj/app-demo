@@ -3,7 +3,7 @@ import type {
 	IContentsOrderRepository,
 } from "@/application/interfaces/contents-order-repository";
 import { ContentsOrder } from "@/domain/entities/contents-order";
-import type { RawContentsOrder } from "@/domain/interfaces/contents-order";
+import type { RawContentsOrder } from "@/domain/schemas/contents-order";
 import { rawContentsOrderSchema } from "@/infrastructure/schemas/contents-order";
 import { parseRawData } from "@/utils/parse-raw-data";
 
