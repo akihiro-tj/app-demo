@@ -1,6 +1,6 @@
-import type { ChoiceProps } from "@/components/choice/choice.svelte";
-import type { Question } from "@/routes/types/question";
-import type { QuestionResult } from "@/routes/types/question-result";
+import type { Question } from "@/application/interfaces/question";
+import type { QuestionResult } from "@/application/interfaces/question-result";
+import type { ChoiceProps } from "@/presentation/components/choice/choice.svelte";
 
 const isCorrectChoice = (
 	choiceIndex: number,

@@ -1,8 +1,8 @@
 <script lang="ts">
+import type { QuestionResult } from "@/application/interfaces/question-result";
 import ChoiceList, {
 	type ChoiceClickEventHandler,
-} from "@/components/choice-list/choice-list.svelte";
-import type { QuestionResult } from "@/routes/types/question-result";
+} from "@/presentation/components/choice-list/choice-list.svelte";
 import { visuallyHidden } from "styled-system/patterns";
 import { fade } from "svelte/transition";
 import { getCorrectCount } from "./helpers/get-correct-count";

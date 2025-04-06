@@ -1,25 +1,14 @@
-import { Content } from "@/entities/content";
-import {
-	type RawMetaContent,
-	rawMetaContentSchema,
-} from "@/schemas/meta-content";
-import { type RawQuestion, rawQuestionSchema } from "@/schemas/question";
+import type {
+	ContentRepositoryArgs,
+	ContentRepositoryGetArgs,
+	IContentRepository,
+} from "@/application/interfaces/content-repository";
+import { Content } from "@/domain/entities/content";
+import type { RawMetaContent } from "@/domain/interfaces/meta-content";
+import type { RawQuestion } from "@/domain/interfaces/question";
+import { rawMetaContentSchema } from "@/infrastructure/schemas/meta-content";
+import { rawQuestionSchema } from "@/infrastructure/schemas/question";
 import { parseRawData } from "@/utils/parse-raw-data";
-import type { FileLoader } from "@app-demo/file-loader";
-
-export interface IContentRepository {
-	get(args: ContentRepositoryGetArgs): Content;
-	getAll(): Content[];
-}
-
-export interface ContentRepositoryArgs {
-	fileLoader: FileLoader;
-	dataPath: `${string}/`;
-}
-
-export interface ContentRepositoryGetArgs {
-	contentId: string;
-}
 
 export class ContentRepository implements IContentRepository {
 	private fileLoader: ContentRepositoryArgs["fileLoader"];

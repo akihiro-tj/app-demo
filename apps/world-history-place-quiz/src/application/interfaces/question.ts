@@ -1,9 +1,9 @@
-import type { CorrectChoice } from "@/entities/question";
+import type { IQuestion } from "@/domain/interfaces/question";
 
 export interface Question {
 	statement: string;
 	image: string;
 	choices: string[];
-	correctChoice: CorrectChoice;
+	correctChoice: IQuestion["correctChoice"];
 	explanation: string;
 }

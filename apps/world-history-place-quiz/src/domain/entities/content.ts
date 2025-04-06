@@ -1,12 +1,7 @@
-import type { RawMetaContent } from "@/schemas/meta-content";
-import type { RawQuestion } from "@/schemas/question";
+import type { IContent } from "../interfaces/content";
+import type { RawMetaContent } from "../interfaces/meta-content";
+import type { RawQuestion } from "../interfaces/question";
 import { Question } from "./question";
-
-export interface IContent {
-	id: string;
-	title: string;
-	questions: Question[];
-}
 
 export class Content implements IContent {
 	readonly id: string;

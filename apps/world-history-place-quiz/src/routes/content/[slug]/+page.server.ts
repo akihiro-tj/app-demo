@@ -1,4 +1,7 @@
-import { getContent, getContentsEntries } from "@/usecases/content.js";
+import {
+	getContent,
+	getContentsEntries,
+} from "@/application/use-cases/content.js";
 import type { EntryGenerator } from "./$types.js";
 
 export function load({ params }) {

@@ -1,21 +1,9 @@
-import type { RawQuestion } from "@/schemas/question";
-
-export interface IQuestion {
-	statement: string;
-	choices: string[];
-	correctChoice: CorrectChoice;
-	explanation: string;
-}
-
-export interface CorrectChoice {
-	value: number;
-	text: string;
-}
+import type { IQuestion, RawQuestion } from "../interfaces/question";
 
 export class Question implements IQuestion {
 	readonly statement: string;
 	readonly choices: string[];
-	readonly correctChoice: CorrectChoice;
+	readonly correctChoice: IQuestion["correctChoice"];
 	readonly explanation: string;
 
 	constructor(rawQuestion: RawQuestion) {

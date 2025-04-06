@@ -1,4 +1,4 @@
-import { getAllContents } from "@/usecases/content";
+import { getAllContents } from "@/application/use-cases/content";
 
 export async function load() {
 	const contents = getAllContents();

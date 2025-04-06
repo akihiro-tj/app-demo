@@ -1,10 +1,12 @@
-import type { Content } from "@/entities/content";
-import type { Question } from "@/entities/question";
-import { ContentRepository } from "@/repositories/content";
-import { ContentsOrderRepository } from "@/repositories/contents-order";
-import type { Content as ContentForService } from "@/routes/types/content";
-import type { Question as QuestionForService } from "@/routes/types/question";
+import type { Content as ContentForService } from "@/application/interfaces/content";
+import type { Question as QuestionForService } from "@/application/interfaces/question";
+import type { Content } from "@/domain/entities/content";
+import type { Question } from "@/domain/entities/question";
+import { ContentRepository } from "@/infrastructure/repositories/content";
+import { ContentsOrderRepository } from "@/infrastructure/repositories/contents-order";
 import { FileLoader } from "@app-demo/file-loader";
+import type { IContentRepository } from "../interfaces/content-repository";
+import type { IContentsOrderRepository } from "../interfaces/contents-order-repository";
 
 const CONTENTS_PATH = "./contents/";
 
@@ -12,7 +14,7 @@ type Entry = {
 	slug: string;
 };
 
-const getContentRepository = (): ContentRepository => {
+const getContentRepository = (): IContentRepository => {
 	const fileLoader = new FileLoader();
 	const contentRepository = new ContentRepository({
 		fileLoader,
@@ -21,7 +23,7 @@ const getContentRepository = (): ContentRepository => {
 	return contentRepository;
 };
 
-const getContentsOrderRepository = (): ContentsOrderRepository => {
+const getContentsOrderRepository = (): IContentsOrderRepository => {
 	const fileLoader = new FileLoader();
 	const contentsOrderRepository = new ContentsOrderRepository({
 		fileLoader,

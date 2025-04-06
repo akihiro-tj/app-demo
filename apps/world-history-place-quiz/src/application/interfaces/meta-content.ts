@@ -1,7 +1,4 @@
-export enum OGType {
-	Article = "article",
-	Website = "website",
-}
+import type { OGType } from "../constants/meta-content";
 
 export interface MetaContent {
 	title: string;

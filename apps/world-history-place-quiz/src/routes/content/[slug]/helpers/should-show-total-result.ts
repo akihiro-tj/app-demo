@@ -1,4 +1,4 @@
-import type { Question } from "@/routes/types/question";
+import type { Question } from "@/application/interfaces/question";
 
 export const shouldShowTotalResult = (
 	questions: Question[],
