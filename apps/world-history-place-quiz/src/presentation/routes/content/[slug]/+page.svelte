@@ -7,7 +7,7 @@ import { visuallyHidden } from "styled-system/patterns";
 import { fade } from "svelte/transition";
 import { getCorrectCount } from "./helpers/get-correct-count";
 import { getCurrentQuestionIndex } from "./helpers/get-current-question-index";
-import { getMetaContent } from "./helpers/get-meta-content";
+import { getMeta } from "./helpers/get-meta";
 import { getQuestionResult } from "./helpers/get-question-result";
 import { shouldShowQuestion } from "./helpers/should-show-question";
 import { shouldShowQuestionResult } from "./helpers/should-show-question-result";
@@ -34,7 +34,7 @@ import {
 const { data } = $props();
 const { questions } = data.content;
 
-const metaContent = getMetaContent(data.content);
+const meta = getMeta(data.content);
 
 let results = $state<QuestionResult[]>(
 	questions.map((question) => getQuestionResult(question, null)),
@@ -54,11 +54,11 @@ const handleClickChoice: ChoiceClickEventHandler = (e) => {
 </script>
 
 <svelte:head>
-  <title>{metaContent.title}</title>
-  <meta property="og:title" content={metaContent.title} />
-  <meta property="og:type" content={metaContent.ogType} />
-  <meta property="og:url" content={metaContent.ogURL} />
-  <meta property="og:image" content={metaContent.ogImage} />
+  <title>{meta.title}</title>
+  <meta property="og:title" content={meta.title} />
+  <meta property="og:type" content={meta.ogType} />
+  <meta property="og:url" content={meta.ogURL} />
+  <meta property="og:image" content={meta.ogImage} />
 </svelte:head>
 
 <main class={mainColumnStyle}>

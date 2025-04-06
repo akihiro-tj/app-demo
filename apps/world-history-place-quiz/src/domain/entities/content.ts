@@ -1,5 +1,5 @@
 import type { IContent } from "../interfaces/content";
-import type { RawMetaContent } from "../interfaces/meta-content";
+import type { RawMeta } from "../interfaces/meta";
 import type { RawQuestion } from "../interfaces/question";
 import { Question } from "./question";
 
@@ -10,11 +10,11 @@ export class Content implements IContent {
 
 	constructor(
 		contentId: string,
-		rawMetaContent: RawMetaContent,
+		rawMeta: RawMeta,
 		rawQuestions: RawQuestion[],
 	) {
 		this.id = contentId;
-		this.title = rawMetaContent.title;
+		this.title = rawMeta.title;
 		this.questions = rawQuestions.map(
 			(rawQuestion) => new Question(rawQuestion),
 		);

@@ -4,9 +4,9 @@ import type {
 	IContentRepository,
 } from "@/application/interfaces/content-repository";
 import { Content } from "@/domain/entities/content";
-import type { RawMetaContent } from "@/domain/interfaces/meta-content";
+import type { RawMeta } from "@/domain/interfaces/meta";
 import type { RawQuestion } from "@/domain/interfaces/question";
-import { rawMetaContentSchema } from "@/infrastructure/schemas/meta-content";
+import { rawMetaSchema } from "@/infrastructure/schemas/meta";
 import { rawQuestionSchema } from "@/infrastructure/schemas/question";
 import { parseRawData } from "@/utils/parse-raw-data";
 
@@ -23,8 +23,8 @@ export class ContentRepository implements IContentRepository {
 		const metaFilePath = `${this.dataPath}${contentId}/meta.yaml`;
 		const questionsFilePath = `${this.dataPath}${contentId}/questions.yaml`;
 
-		const rawMetaContent = parseRawData<RawMetaContent>(
-			rawMetaContentSchema,
+		const rawMeta = parseRawData<RawMeta>(
+			rawMetaSchema,
 			this.fileLoader.loadYaml(metaFilePath),
 		);
 		const rawQuestions = parseRawData<RawQuestion[]>(
@@ -32,7 +32,7 @@ export class ContentRepository implements IContentRepository {
 			this.fileLoader.loadYaml(questionsFilePath),
 		);
 
-		return new Content(contentId, rawMetaContent, rawQuestions);
+		return new Content(contentId, rawMeta, rawQuestions);
 	}
 
 	findAll(): Content[] {

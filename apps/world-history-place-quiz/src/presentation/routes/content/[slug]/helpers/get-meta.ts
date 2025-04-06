@@ -1,9 +1,9 @@
-import { OGType } from "@/application/constants/meta-content";
+import { OGType } from "@/application/constants/meta";
 import type { Content } from "@/application/interfaces/content";
-import type { MetaContent } from "@/application/interfaces/meta-content";
+import type { Meta } from "@/application/interfaces/meta";
 import { SITE_NAME, SITE_ORIGIN } from "@/presentation/routes/constant";
 
-export const getMetaContent = (content: Content): MetaContent => {
+export const getMeta = (content: Content): Meta => {
 	return {
 		title: `${content.title} | ${SITE_NAME}`,
 		ogTitle: `${content.title} | ${SITE_NAME}`,

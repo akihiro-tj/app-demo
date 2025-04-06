@@ -1,6 +1,6 @@
-import type { OGType } from "../constants/meta-content";
+import type { OGType } from "../constants/meta";
 
-export interface MetaContent {
+export interface Meta {
 	title: string;
 	ogTitle: string;
 	ogType: OGType;
