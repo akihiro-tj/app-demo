@@ -16,6 +16,9 @@ const config = {
 			"styled-system": "./styled-system/*",
 			"@/*": "./src/*",
 		},
+		files: {
+			routes: "src/presentation/routes",
+		},
 	},
 };
 
