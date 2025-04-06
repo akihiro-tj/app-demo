@@ -3,7 +3,7 @@ import "@fontsource-variable/inter";
 import "@fontsource-variable/noto-sans-jp";
 import Header from "@/presentation/components/header/header.svelte";
 import "./app.css";
-import { SITE_NAME } from "./constant";
+import { SITE_NAME } from "@/application/constants/site";
 import { headerContainerStyle } from "./layout.styles";
 </script>
 

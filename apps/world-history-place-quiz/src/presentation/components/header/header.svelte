@@ -1,5 +1,5 @@
 <script>
-import { SITE_NAME } from "@/presentation/routes/constant";
+import { SITE_NAME } from "@/application/constants/site";
 import { titleStyle } from "./styles";
 </script>
 

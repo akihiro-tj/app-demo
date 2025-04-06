@@ -1,9 +1,9 @@
 import { OGType } from "@/application/constants/meta";
+import { SITE_NAME, SITE_ORIGIN } from "@/application/constants/site";
 import type {
 	AppContent,
 	Meta,
 } from "@/application/interfaces/content-service";
-import { SITE_NAME, SITE_ORIGIN } from "@/presentation/routes/constant";
 
 export const getMeta = (content: AppContent): Meta => {
 	return {
