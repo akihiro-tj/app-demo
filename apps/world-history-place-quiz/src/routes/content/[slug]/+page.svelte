@@ -14,16 +14,18 @@ import { shouldShowQuestionResult } from "./helpers/should-show-question-result"
 import { shouldShowTotalResult } from "./helpers/should-show-total-result";
 import {
 	choiceListContainerStyle,
-	columnStyle,
 	headingContainerStyle,
 	headingStyle,
 	imageContainerStyle,
+	mainColumnStyle,
 	questionCountStyle,
 	questionNumberStyle,
 	questionStyle,
 	resultTextContainerStyle,
 	resultTextStyle,
 	statementContainerStyle,
+	titleContainerStyle,
+	titleStyle,
 	totalResultContainerStyle,
 	totalResultStyle,
 	totalResultValueStyle,
@@ -59,10 +61,11 @@ const handleClickChoice: ChoiceClickEventHandler = (e) => {
   <meta property="og:image" content={metaContent.ogImage} />
 </svelte:head>
 
-<main>
-  <!-- TODO: Implement title -->
-  <h1>&nbsp;</h1>
-  <div class={columnStyle}>
+<main class={mainColumnStyle}>
+  <div class={titleContainerStyle}>
+    <h1 class={titleStyle}>{data.content.title}</h1>
+  </div>
+  <div>
     {#each questions as question, qi (question)}
       {#if shouldShowQuestion(qi, currentQuestionIndex) && results[qi]}
         <section class={questionStyle} in:fade>

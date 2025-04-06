@@ -1,9 +1,22 @@
 import { css, cva } from "styled-system/css";
 
-export const columnStyle = css({
+export const mainColumnStyle = css({
 	maxW: "prose",
 	mx: "auto",
 	px: "4",
+	py: "4",
+});
+
+export const titleContainerStyle = css({
+	mb: "6",
+});
+
+export const titleStyle = css({
+	pl: "3",
+	borderLeftWidth: "thick",
+	borderLeftColor: "slate.400",
+	fontSize: "2xl",
+	fontWeight: "bold",
 });
 
 export const questionStyle = css({
@@ -21,12 +34,12 @@ export const headingStyle = css({
 });
 
 export const questionNumberStyle = css({
-	fontSize: "3xl",
+	fontSize: "2xl",
 	fontWeight: "bold",
 });
 
 export const questionCountStyle = css({
-	fontSize: "xl",
+	fontSize: "lg",
 	fontWeight: "bold",
 });
 

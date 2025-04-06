@@ -1,5 +1,11 @@
 <script lang="ts">
 import { getMetaContent } from "./helpers/get-meta-content";
+import {
+	contentItemStyle,
+	contentLinkStyle,
+	contentListStyle,
+	mainColumnStyle,
+} from "./page.styles";
 
 const { data } = $props();
 const metaContent = getMetaContent();
@@ -13,12 +19,14 @@ const metaContent = getMetaContent();
   <meta property="og:image" content={metaContent.ogImage} />
 </svelte:head>
 
-<ul>
-  {#each data.contents as content (content.id)}
-    <li>
-      <a href={content.path}>
-        {content.title}
-      </a>
-    </li>
-  {/each}
-</ul>
+<main class={mainColumnStyle}>
+  <ul class={contentListStyle}>
+    {#each data.contents as content (content.id)}
+      <li class={contentItemStyle}>
+        <a class={contentLinkStyle} href={content.path}>
+          {content.title}
+        </a>
+      </li>
+    {/each}
+  </ul>
+</main>
