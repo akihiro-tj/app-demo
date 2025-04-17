@@ -1,5 +1,5 @@
 <script lang="ts">
-import { getMeta } from "./helpers/get-meta";
+import { generateMetaInfo } from "@/application/services/meta-info.service";
 import {
 	contentItemStyle,
 	contentLinkStyle,
@@ -8,15 +8,15 @@ import {
 } from "./page.styles";
 
 const { data } = $props();
-const meta = getMeta();
+const metaInfo = generateMetaInfo();
 </script>
 
 <svelte:head>
-  <title>{meta.title}</title>
-  <meta property="og:title" content={meta.ogTitle} />
-  <meta property="og:type" content={meta.ogType} />
-  <meta property="og:url" content={meta.ogURL} />
-  <meta property="og:image" content={meta.ogImage} />
+  <title>{metaInfo.title}</title>
+  <meta property="og:title" content={metaInfo.ogTitle} />
+  <meta property="og:type" content={metaInfo.ogType} />
+  <meta property="og:url" content={metaInfo.ogURL} />
+  <meta property="og:image" content={metaInfo.ogImage} />
 </svelte:head>
 
 <main class={mainColumnStyle}>
