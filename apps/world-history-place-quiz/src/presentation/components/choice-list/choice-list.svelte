@@ -1,14 +1,16 @@
 <script lang="ts">
-import type { Choice as IChoice } from "@/application/interfaces/content-service";
+import type { QuestionViewModel } from "@/presentation/models/question.view-model";
 import type { MouseEventHandler } from "svelte/elements";
 import Choice from "../choice/choice.svelte";
 import { listStyle } from "./styles";
 
 export interface ChoiceListProps {
 	id: number;
-	choices: IChoice[];
+	choices: QuestionViewModel["choices"];
+	correctChoice: QuestionViewModel["correctChoice"]["value"];
+	selectedChoice?: QuestionViewModel["choices"][number]["value"];
+	isAnswered?: boolean;
 	onClickChoice: ChoiceClickEventHandler;
-	isDisabled?: boolean;
 }
 
 export interface ChoiceClickEvent {
@@ -18,7 +20,14 @@ export interface ChoiceClickEvent {
 
 export type ChoiceClickEventHandler = (e: ChoiceClickEvent) => void;
 
-const { id, isDisabled, choices, onClickChoice }: ChoiceListProps = $props();
+const {
+	id,
+	choices,
+	correctChoice,
+	selectedChoice,
+	isAnswered,
+	onClickChoice,
+}: ChoiceListProps = $props();
 
 const handleClickChoice: MouseEventHandler<HTMLButtonElement> = (e) => {
 	const target = e.currentTarget;
@@ -29,12 +38,14 @@ const handleClickChoice: MouseEventHandler<HTMLButtonElement> = (e) => {
 
 <ul class={listStyle}>
   {#each choices as choice, index (choice)}
+    {@const isSelected = choice.value === selectedChoice}
+    {@const isCorrect = choice.value === correctChoice}
     <li>
       <Choice
         data-id={index}
-        disabled={isDisabled}
+        disabled={isAnswered}
         onclick={handleClickChoice}
-        isCorrect={choice.isCorrect}
+        isCorrect={isAnswered && (isSelected || isCorrect) ? isCorrect : undefined}
       >
         {choice.text}
       </Choice>
