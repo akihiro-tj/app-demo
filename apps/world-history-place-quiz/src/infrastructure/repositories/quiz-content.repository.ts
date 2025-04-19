@@ -1,5 +1,6 @@
 import type { IQuizContentRepository } from "@/application/ports/quiz-content.repository";
 import { ValidationError } from "@/domain/errors/validation-error";
+import { Choice } from "@/domain/models/choice.model";
 import { Question } from "@/domain/models/question.model";
 import { QuizContent } from "@/domain/models/quiz-content.model";
 import { metaInfoSchema } from "@/domain/schemas/meta-info.schema";
@@ -36,18 +37,20 @@ export class FileQuizContentRepository implements IQuizContentRepository {
 				]);
 			}
 
+			const questions = questionsResult.data.map((q, i) =>
+				this.createQuestion(
+					`${id.getValue()}-${i}`,
+					q.statement,
+					q.choices,
+					q.correctChoice,
+					q.explanation,
+				),
+			);
+
 			return QuizContent.create(
 				id.getValue(),
 				metaInfoResult.data.title,
-				questionsResult.data.map((q, i) =>
-					Question.create(
-						`${id.getValue()}-${i}`,
-						q.statement,
-						q.choices,
-						q.correctChoice,
-						q.explanation,
-					),
-				),
+				questions,
 			);
 		} catch (error) {
 			if (error instanceof ValidationError) {
@@ -91,5 +94,23 @@ export class FileQuizContentRepository implements IQuizContentRepository {
 			}
 			throw new Error("Failed to load all quiz contents");
 		}
+	}
+
+	private createQuestion(
+		id: string,
+		statement: string,
+		_choices: string[],
+		_correctChoice: number,
+		explanation: string,
+	): Question {
+		const choices = _choices.map((choice, index) =>
+			Choice.create(`${id}-${index}`, index, choice),
+		);
+		const correctChoice = choices[_correctChoice];
+		if (!correctChoice) {
+			throw new Error("Correct choice must be within choices range");
+		}
+
+		return Question.create(id, statement, choices, correctChoice, explanation);
 	}
 }
