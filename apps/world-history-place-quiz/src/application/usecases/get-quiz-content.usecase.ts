@@ -1,4 +1,5 @@
 import type { IQuizContentRepository } from "@/application/ports/quiz-content.repository";
+import { ValidationError } from "@/domain/errors/validation-error";
 import type { Choice } from "@/domain/models/choice.model";
 import type { Question } from "@/domain/models/question.model";
 import type { QuizContent } from "@/domain/models/quiz-content.model";
@@ -17,10 +18,12 @@ export class GetQuizContentUseCase {
 			);
 			return this.mapQuizContentToViewModel(content);
 		} catch (error) {
-			if (error instanceof Error) {
-				throw new Error(`Failed to get quiz content: ${error.message}`);
+			if (error instanceof ValidationError) {
+				throw error;
 			}
-			throw new Error("Failed to get quiz content");
+			throw new Error(
+				`Failed to get quiz content '${contentId}': ${error instanceof Error ? error.message : ""}`,
+			);
 		}
 	}
 
@@ -29,10 +32,12 @@ export class GetQuizContentUseCase {
 			const contents = await this.quizContentRepository.findAll();
 			return contents.map((content) => this.mapQuizContentToViewModel(content));
 		} catch (error) {
-			if (error instanceof Error) {
-				throw new Error(`Failed to get all quiz contents: ${error.message}`);
+			if (error instanceof ValidationError) {
+				throw error;
 			}
-			throw new Error("Failed to get all quiz contents");
+			throw new Error(
+				`Failed to get all quiz contents: ${error instanceof Error ? error.message : ""}`,
+			);
 		}
 	}
 
