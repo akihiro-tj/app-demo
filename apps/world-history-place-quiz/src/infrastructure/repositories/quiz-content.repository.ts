@@ -7,12 +7,12 @@ import { metaInfoSchema } from "@/domain/schemas/meta-info.schema";
 import { orderSchema } from "@/domain/schemas/order.schema";
 import { questionSchema } from "@/domain/schemas/question.schema";
 import { ContentId } from "@/domain/value-objects/content-id.value-object";
-import type { FileLoader } from "@app-demo/file-loader";
+import type { IFsUtils } from "@app-demo/fs-utils";
 import { z } from "zod";
 
 export class FileQuizContentRepository implements IQuizContentRepository {
 	constructor(
-		private readonly fileLoader: FileLoader,
+		private readonly fsUtils: IFsUtils,
 		private readonly dataPath: string,
 	) {}
 
@@ -21,8 +21,8 @@ export class FileQuizContentRepository implements IQuizContentRepository {
 
 		try {
 			const [rawMetaInfo, rawQuestions] = [
-				this.fileLoader.loadYaml(`${contentPath}/meta.yaml`),
-				this.fileLoader.loadYaml(`${contentPath}/questions.yaml`),
+				this.fsUtils.loadYaml(`${contentPath}/meta.yaml`),
+				this.fsUtils.loadYaml(`${contentPath}/questions.yaml`),
 			];
 
 			const metaInfoResult = metaInfoSchema.safeParse(rawMetaInfo);
@@ -65,7 +65,7 @@ export class FileQuizContentRepository implements IQuizContentRepository {
 
 	async findAll(): Promise<QuizContent[]> {
 		try {
-			const rawOrder = this.fileLoader.loadYaml(`${this.dataPath}/order.yaml`);
+			const rawOrder = this.fsUtils.loadYaml(`${this.dataPath}/order.yaml`);
 
 			const orderResult = orderSchema.safeParse(rawOrder);
 			if (!orderResult.success) {
