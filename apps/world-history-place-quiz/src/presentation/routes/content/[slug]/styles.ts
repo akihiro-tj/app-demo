@@ -4,27 +4,39 @@ export const mainColumnStyle = css({
 	maxW: "prose",
 	mx: "auto",
 	px: "4",
-	py: "4",
+	py: "6",
 });
 
 export const titleContainerStyle = css({
-	mb: "6",
+	mb: "8",
 });
 
 export const titleStyle = css({
-	pl: "3",
-	borderLeftWidth: "thick",
-	borderLeftColor: "slate.400",
-	fontSize: "2xl",
+	fontSize: "3xl",
 	fontWeight: "bold",
+	lineHeight: "tight",
+	letterSpacing: "tight",
 });
 
-export const questionStyle = css({
-	mb: "12",
+export const questionStyle = cva({
+	base: {
+		mb: "16",
+		pb: "8",
+	},
+	variants: {
+		showBorder: {
+			true: {
+				borderBottomWidth: "1px",
+				borderBottomStyle: "solid",
+				borderColor: "slate.200",
+			},
+			false: {},
+		},
+	},
 });
 
 export const headingContainerStyle = css({
-	mb: "2",
+	mb: "4",
 });
 
 export const headingStyle = css({
@@ -36,49 +48,61 @@ export const headingStyle = css({
 export const questionNumberStyle = css({
 	fontSize: "2xl",
 	fontWeight: "bold",
+	color: "slate.700",
+	letterSpacing: "tight",
 });
 
 export const questionCountStyle = css({
 	fontSize: "lg",
-	fontWeight: "bold",
+	fontWeight: "medium",
+	color: "slate.500",
 });
 
 export const statementContainerStyle = css({
-	mb: "4",
+	mb: "6",
+	fontSize: "lg",
+	lineHeight: "relaxed",
+	color: "slate.800",
 });
 
 export const imageContainerStyle = css({
-	mb: "4",
+	mb: "6",
 	aspectRatio: "4/3",
 });
 
 export const choiceListContainerStyle = css({
-	mb: "4",
+	mb: "6",
 });
 
 export const resultTextContainerStyle = css({
-	mb: "2",
+	mb: "4",
+	mt: "4",
 });
 
 export const resultTextStyle = cva({
 	base: {
 		fontSize: "2xl",
 		fontWeight: "bold",
+		letterSpacing: "tight",
 	},
 	variants: {
 		isCorrect: {
 			true: {
-				color: "emerald.400",
+				color: "emerald.500",
 			},
 			false: {
-				color: "rose.400",
+				color: "rose.500",
 			},
 		},
 	},
 });
 
 export const totalResultStyle = css({
-	mb: "12",
+	mb: "16",
+	mt: "8",
+	p: "6",
+	bg: "slate.50",
+	borderRadius: "lg",
 });
 
 export const totalResultContainerStyle = css({
@@ -88,6 +112,8 @@ export const totalResultContainerStyle = css({
 });
 
 export const totalResultValueStyle = css({
-	fontSize: "2xl",
+	fontSize: "3xl",
 	fontWeight: "bold",
+	color: "slate.800",
+	letterSpacing: "tight",
 });

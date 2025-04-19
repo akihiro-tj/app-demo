@@ -70,7 +70,10 @@ const handleClickChoice: ChoiceClickEventHandler = (e) => {
   <div>
     {#each questions as question, qi (question.id)}
       {#if isQuestionVisible(qi)}
-        <section class={questionStyle} in:fade>
+        <section
+          class={questionStyle({ showBorder: isQuestionResultVisible(question.id) })}
+          in:fade
+        >
           <div class={headingContainerStyle}>
             <h2 class={headingStyle}>
               <span class={questionNumberStyle}>Q.{qi + 1}</span>
