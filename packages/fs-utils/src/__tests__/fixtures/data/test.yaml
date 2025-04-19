@@ -1,0 +1,9 @@
+test: data
+nested:
+  key: value
+  array:
+    - 1
+    - 2
+    - 3
+boolean: true
+number: 42
