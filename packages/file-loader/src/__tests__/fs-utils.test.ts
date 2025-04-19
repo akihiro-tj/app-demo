@@ -1,15 +1,15 @@
-import { describe, it, expect, beforeEach, afterEach } from "vitest";
-import { FileLoader } from "../file-loader";
 import fs from "node:fs";
 import path from "node:path";
+import { afterEach, beforeEach, describe, expect, it } from "vitest";
+import { FsUtils } from "../fs-utils";
 
-describe("FileLoader", () => {
+describe("FsUtils", () => {
 	const testDir = path.join(__dirname, "test-files");
 	const dataDir = path.join(__dirname, "fixtures", "data");
-	let fileLoader: FileLoader;
+	let fsUtils: FsUtils;
 
 	beforeEach(() => {
-		fileLoader = new FileLoader();
+		fsUtils = new FsUtils();
 
 		if (!fs.existsSync(testDir)) {
 			fs.mkdirSync(testDir);
@@ -31,7 +31,7 @@ describe("FileLoader", () => {
 	describe("Synchronous Methods", () => {
 		describe("loadJson", () => {
 			it("should load and parse JSON file", () => {
-				const result = fileLoader.loadJson(path.join(testDir, "test.json"));
+				const result = fsUtils.loadJson(path.join(testDir, "test.json"));
 				expect(result).toEqual({
 					test: "data",
 					nested: {
@@ -45,14 +45,14 @@ describe("FileLoader", () => {
 
 			it("should throw error for non-existent JSON file", () => {
 				expect(() => {
-					fileLoader.loadJson(path.join(testDir, "non-existent.json"));
+					fsUtils.loadJson(path.join(testDir, "non-existent.json"));
 				}).toThrow();
 			});
 		});
 
 		describe("loadYaml", () => {
 			it("should load and parse YAML file", () => {
-				const result = fileLoader.loadYaml(path.join(testDir, "test.yaml"));
+				const result = fsUtils.loadYaml(path.join(testDir, "test.yaml"));
 				expect(result).toEqual({
 					test: "data",
 					nested: {
@@ -66,21 +66,21 @@ describe("FileLoader", () => {
 
 			it("should throw error for non-existent YAML file", () => {
 				expect(() => {
-					fileLoader.loadYaml(path.join(testDir, "non-existent.yaml"));
+					fsUtils.loadYaml(path.join(testDir, "non-existent.yaml"));
 				}).toThrow();
 			});
 		});
 
 		describe("readFile", () => {
 			it("should read file content", () => {
-				const content = fileLoader.readFile(path.join(testDir, "test.json"));
+				const content = fsUtils.readFile(path.join(testDir, "test.json"));
 				expect(content).toContain('"test": "data"');
 				expect(content).toContain('"nested"');
 				expect(content).toContain('"array": [1, 2, 3]');
 			});
 
 			it("should handle Buffer content", () => {
-				const content = fileLoader.readFile(path.join(testDir, "test.json"), {
+				const content = fsUtils.readFile(path.join(testDir, "test.json"), {
 					encoding: "binary",
 				});
 				expect(Buffer.isBuffer(content)).toBe(false);
@@ -88,7 +88,7 @@ describe("FileLoader", () => {
 			});
 
 			it("should handle Buffer content with toString", () => {
-				const content = fileLoader.readFile(path.join(testDir, "test.json"), {
+				const content = fsUtils.readFile(path.join(testDir, "test.json"), {
 					encoding: "ascii",
 				});
 				expect(typeof content).toBe("string");
@@ -97,7 +97,7 @@ describe("FileLoader", () => {
 
 			it("should throw error for non-existent file", () => {
 				expect(() => {
-					fileLoader.readFile(path.join(testDir, "non-existent.txt"));
+					fsUtils.readFile(path.join(testDir, "non-existent.txt"));
 				}).toThrow();
 			});
 		});
@@ -108,7 +108,7 @@ describe("FileLoader", () => {
 
 				fs.cpSync(dataDir, targetDirsPath, { recursive: true });
 
-				const dirNames = fileLoader.getDirNames(targetDirsPath);
+				const dirNames = fsUtils.getDirNames(targetDirsPath);
 				expect(dirNames).toContain("dir1");
 				expect(dirNames).toContain("dir2");
 				expect(dirNames).toContain("dir3");
@@ -119,7 +119,7 @@ describe("FileLoader", () => {
 
 				fs.cpSync(dataDir, targetDirsPath, { recursive: true });
 
-				const dirNames = fileLoader.getDirNames(targetDirsPath, {
+				const dirNames = fsUtils.getDirNames(targetDirsPath, {
 					recursive: true,
 				});
 				expect(dirNames).toContain("dir1");
@@ -134,7 +134,7 @@ describe("FileLoader", () => {
 
 				fs.cpSync(dataDir, targetDirsPath, { recursive: true });
 
-				const dirNames = fileLoader.getDirNames(targetDirsPath, {
+				const dirNames = fsUtils.getDirNames(targetDirsPath, {
 					filter: (name) => name.includes("1"),
 				});
 				expect(dirNames).toContain("dir1");
@@ -147,7 +147,7 @@ describe("FileLoader", () => {
 
 				fs.cpSync(dataDir, targetDirsPath, { recursive: true });
 
-				const dirNames = fileLoader.getDirNames(targetDirsPath, {
+				const dirNames = fsUtils.getDirNames(targetDirsPath, {
 					recursive: true,
 					filter: (name) => name.includes("1"),
 				});
@@ -159,7 +159,7 @@ describe("FileLoader", () => {
 
 			it("should throw error for non-existent directory", () => {
 				expect(() => {
-					fileLoader.getDirNames(path.join(testDir, "non-existent"));
+					fsUtils.getDirNames(path.join(testDir, "non-existent"));
 				}).toThrow();
 			});
 		});
@@ -170,7 +170,7 @@ describe("FileLoader", () => {
 
 				fs.cpSync(dataDir, targetDirsPath, { recursive: true });
 
-				const fileNames = fileLoader.getFileNames(
+				const fileNames = fsUtils.getFileNames(
 					path.join(targetDirsPath, "dir1"),
 				);
 				expect(fileNames).toContain("file1.txt");
@@ -181,7 +181,7 @@ describe("FileLoader", () => {
 
 				fs.cpSync(dataDir, targetDirsPath, { recursive: true });
 
-				const fileNames = fileLoader.getFileNames(targetDirsPath, {
+				const fileNames = fsUtils.getFileNames(targetDirsPath, {
 					recursive: true,
 				});
 				expect(fileNames).toContain("test.json");
@@ -198,7 +198,7 @@ describe("FileLoader", () => {
 
 				fs.cpSync(dataDir, targetDirsPath, { recursive: true });
 
-				const fileNames = fileLoader.getFileNames(targetDirsPath, {
+				const fileNames = fsUtils.getFileNames(targetDirsPath, {
 					filter: (name) => name.endsWith(".json"),
 				});
 				expect(fileNames).toContain("test.json");
@@ -210,7 +210,7 @@ describe("FileLoader", () => {
 
 				fs.cpSync(dataDir, targetDirsPath, { recursive: true });
 
-				const fileNames = fileLoader.getFileNames(targetDirsPath, {
+				const fileNames = fsUtils.getFileNames(targetDirsPath, {
 					recursive: true,
 					filter: (name) => name.includes("file1"),
 				});
@@ -222,18 +222,18 @@ describe("FileLoader", () => {
 
 			it("should throw error for non-existent directory", () => {
 				expect(() => {
-					fileLoader.getFileNames(path.join(testDir, "non-existent"));
+					fsUtils.getFileNames(path.join(testDir, "non-existent"));
 				}).toThrow();
 			});
 		});
 
 		describe("exists", () => {
 			it("should return true for existing file", () => {
-				expect(fileLoader.exists(path.join(testDir, "test.json"))).toBe(true);
+				expect(fsUtils.exists(path.join(testDir, "test.json"))).toBe(true);
 			});
 
 			it("should return false for non-existent file", () => {
-				expect(fileLoader.exists(path.join(testDir, "non-existent.txt"))).toBe(
+				expect(fsUtils.exists(path.join(testDir, "non-existent.txt"))).toBe(
 					false,
 				);
 			});
@@ -243,7 +243,7 @@ describe("FileLoader", () => {
 	describe("Asynchronous Methods", () => {
 		describe("loadJsonAsync", () => {
 			it("should load and parse JSON file asynchronously", async () => {
-				const result = await fileLoader.loadJsonAsync(
+				const result = await fsUtils.loadJsonAsync(
 					path.join(testDir, "test.json"),
 				);
 				expect(result).toEqual({
@@ -259,14 +259,14 @@ describe("FileLoader", () => {
 
 			it("should throw error for non-existent JSON file", async () => {
 				await expect(
-					fileLoader.loadJsonAsync(path.join(testDir, "non-existent.json")),
+					fsUtils.loadJsonAsync(path.join(testDir, "non-existent.json")),
 				).rejects.toThrow();
 			});
 		});
 
 		describe("loadYamlAsync", () => {
 			it("should load and parse YAML file asynchronously", async () => {
-				const result = await fileLoader.loadYamlAsync(
+				const result = await fsUtils.loadYamlAsync(
 					path.join(testDir, "test.yaml"),
 				);
 				expect(result).toEqual({
@@ -282,14 +282,14 @@ describe("FileLoader", () => {
 
 			it("should throw error for non-existent YAML file", async () => {
 				await expect(
-					fileLoader.loadYamlAsync(path.join(testDir, "non-existent.yaml")),
+					fsUtils.loadYamlAsync(path.join(testDir, "non-existent.yaml")),
 				).rejects.toThrow();
 			});
 		});
 
 		describe("readFileAsync", () => {
 			it("should read file content asynchronously", async () => {
-				const content = await fileLoader.readFileAsync(
+				const content = await fsUtils.readFileAsync(
 					path.join(testDir, "test.json"),
 				);
 				expect(content).toContain('"test": "data"');
@@ -298,7 +298,7 @@ describe("FileLoader", () => {
 			});
 
 			it("should handle Buffer content asynchronously", async () => {
-				const content = await fileLoader.readFileAsync(
+				const content = await fsUtils.readFileAsync(
 					path.join(testDir, "test.json"),
 					{
 						encoding: "binary",
@@ -309,7 +309,7 @@ describe("FileLoader", () => {
 			});
 
 			it("should handle Buffer content with toString asynchronously", async () => {
-				const content = await fileLoader.readFileAsync(
+				const content = await fsUtils.readFileAsync(
 					path.join(testDir, "test.json"),
 					{
 						encoding: "ascii",
@@ -321,7 +321,7 @@ describe("FileLoader", () => {
 
 			it("should throw error for non-existent file", async () => {
 				await expect(
-					fileLoader.readFileAsync(path.join(testDir, "non-existent.txt")),
+					fsUtils.readFileAsync(path.join(testDir, "non-existent.txt")),
 				).rejects.toThrow();
 			});
 		});
@@ -332,7 +332,7 @@ describe("FileLoader", () => {
 
 				fs.cpSync(dataDir, targetDirsPath, { recursive: true });
 
-				const dirNames = await fileLoader.getDirNamesAsync(targetDirsPath);
+				const dirNames = await fsUtils.getDirNamesAsync(targetDirsPath);
 				expect(dirNames).toContain("dir1");
 				expect(dirNames).toContain("dir2");
 				expect(dirNames).toContain("dir3");
@@ -343,7 +343,7 @@ describe("FileLoader", () => {
 
 				fs.cpSync(dataDir, targetDirsPath, { recursive: true });
 
-				const dirNames = await fileLoader.getDirNamesAsync(targetDirsPath, {
+				const dirNames = await fsUtils.getDirNamesAsync(targetDirsPath, {
 					recursive: true,
 				});
 				expect(dirNames).toContain("dir1");
@@ -355,7 +355,7 @@ describe("FileLoader", () => {
 
 			it("should throw error for non-existent directory", async () => {
 				await expect(
-					fileLoader.getDirNamesAsync(path.join(testDir, "non-existent")),
+					fsUtils.getDirNamesAsync(path.join(testDir, "non-existent")),
 				).rejects.toThrow();
 			});
 		});
@@ -366,7 +366,7 @@ describe("FileLoader", () => {
 
 				fs.cpSync(dataDir, targetDirsPath, { recursive: true });
 
-				const fileNames = await fileLoader.getFileNamesAsync(
+				const fileNames = await fsUtils.getFileNamesAsync(
 					path.join(targetDirsPath, "dir1"),
 				);
 				expect(fileNames).toContain("file1.txt");
@@ -377,7 +377,7 @@ describe("FileLoader", () => {
 
 				fs.cpSync(dataDir, targetDirsPath, { recursive: true });
 
-				const fileNames = await fileLoader.getFileNamesAsync(targetDirsPath, {
+				const fileNames = await fsUtils.getFileNamesAsync(targetDirsPath, {
 					recursive: true,
 				});
 				expect(fileNames).toContain("test.json");
@@ -391,21 +391,21 @@ describe("FileLoader", () => {
 
 			it("should throw error for non-existent directory", async () => {
 				await expect(
-					fileLoader.getFileNamesAsync(path.join(testDir, "non-existent")),
+					fsUtils.getFileNamesAsync(path.join(testDir, "non-existent")),
 				).rejects.toThrow();
 			});
 		});
 
 		describe("existsAsync", () => {
 			it("should return true for existing file", async () => {
-				const exists = await fileLoader.existsAsync(
+				const exists = await fsUtils.existsAsync(
 					path.join(testDir, "test.json"),
 				);
 				expect(exists).toBe(true);
 			});
 
 			it("should return false for non-existent file", async () => {
-				const exists = await fileLoader.existsAsync(
+				const exists = await fsUtils.existsAsync(
 					path.join(testDir, "non-existent.txt"),
 				);
 				expect(exists).toBe(false);

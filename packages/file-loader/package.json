@@ -1,5 +1,5 @@
 {
-	"name": "@app-demo/file-loader",
+	"name": "@app-demo/fs-utils",
 	"version": "1.0.0",
 	"description": "",
 	"exports": {

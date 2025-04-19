@@ -1,15 +1,15 @@
 import fs from "node:fs";
 import yaml from "js-yaml";
-import type { FileLoaderOptions, IFileLoader } from "./types";
-import { FileLoaderError } from "./errors";
+import { FsUtilsError } from "./errors";
+import type { FsUtilsOptions, IFsUtils } from "./types";
 
-export class FileLoader implements IFileLoader {
-	private defaultOptions: FileLoaderOptions = {
+export class FsUtils implements IFsUtils {
+	private defaultOptions: FsUtilsOptions = {
 		encoding: "utf-8",
 		recursive: false,
 	};
 
-	private mergeOptions(options?: FileLoaderOptions): FileLoaderOptions {
+	private mergeOptions(options?: FsUtilsOptions): FsUtilsOptions {
 		return { ...this.defaultOptions, ...options };
 	}
 
@@ -18,7 +18,7 @@ export class FileLoader implements IFileLoader {
 			const textContent = this.readFile(path);
 			return yaml.load(textContent);
 		} catch (error) {
-			throw new FileLoaderError("load YAML file", path, error);
+			throw new FsUtilsError("load YAML file", path, error);
 		}
 	}
 
@@ -27,11 +27,11 @@ export class FileLoader implements IFileLoader {
 			const textContent = this.readFile(path);
 			return JSON.parse(textContent);
 		} catch (error) {
-			throw new FileLoaderError("load JSON file", path, error);
+			throw new FsUtilsError("load JSON file", path, error);
 		}
 	}
 
-	readFile(path: string, options?: FileLoaderOptions): string {
+	readFile(path: string, options?: FsUtilsOptions): string {
 		try {
 			const mergedOptions = this.mergeOptions(options);
 			const content = fs.readFileSync(path, mergedOptions.encoding);
@@ -39,11 +39,11 @@ export class FileLoader implements IFileLoader {
 				? content
 				: content.toString(mergedOptions.encoding);
 		} catch (error) {
-			throw new FileLoaderError("read file", path, error);
+			throw new FsUtilsError("read file", path, error);
 		}
 	}
 
-	getDirNames(path: string, options?: FileLoaderOptions): string[] {
+	getDirNames(path: string, options?: FsUtilsOptions): string[] {
 		try {
 			const mergedOptions = this.mergeOptions(options);
 			const entries = fs.readdirSync(path, { withFileTypes: true });
@@ -64,11 +64,11 @@ export class FileLoader implements IFileLoader {
 
 			return dirNames;
 		} catch (error) {
-			throw new FileLoaderError("get directory names", path, error);
+			throw new FsUtilsError("get directory names", path, error);
 		}
 	}
 
-	getFileNames(path: string, options?: FileLoaderOptions): string[] {
+	getFileNames(path: string, options?: FsUtilsOptions): string[] {
 		try {
 			const mergedOptions = this.mergeOptions(options);
 			const entries = fs.readdirSync(path, { withFileTypes: true });
@@ -93,7 +93,7 @@ export class FileLoader implements IFileLoader {
 
 			return fileNames;
 		} catch (error) {
-			throw new FileLoaderError("get file names", path, error);
+			throw new FsUtilsError("get file names", path, error);
 		}
 	}
 
@@ -106,7 +106,7 @@ export class FileLoader implements IFileLoader {
 			const textContent = await this.readFileAsync(path);
 			return yaml.load(textContent);
 		} catch (error) {
-			throw new FileLoaderError("load YAML file", path, error);
+			throw new FsUtilsError("load YAML file", path, error);
 		}
 	}
 
@@ -115,14 +115,11 @@ export class FileLoader implements IFileLoader {
 			const textContent = await this.readFileAsync(path);
 			return JSON.parse(textContent);
 		} catch (error) {
-			throw new FileLoaderError("load JSON file", path, error);
+			throw new FsUtilsError("load JSON file", path, error);
 		}
 	}
 
-	async readFileAsync(
-		path: string,
-		options?: FileLoaderOptions,
-	): Promise<string> {
+	async readFileAsync(path: string, options?: FsUtilsOptions): Promise<string> {
 		try {
 			const mergedOptions = this.mergeOptions(options);
 			const content = await fs.promises.readFile(path, mergedOptions.encoding);
@@ -130,13 +127,13 @@ export class FileLoader implements IFileLoader {
 				? content
 				: content.toString(mergedOptions.encoding);
 		} catch (error) {
-			throw new FileLoaderError("read file", path, error);
+			throw new FsUtilsError("read file", path, error);
 		}
 	}
 
 	async getDirNamesAsync(
 		path: string,
-		options?: FileLoaderOptions,
+		options?: FsUtilsOptions,
 	): Promise<string[]> {
 		try {
 			const mergedOptions = this.mergeOptions(options);
@@ -162,13 +159,13 @@ export class FileLoader implements IFileLoader {
 
 			return dirNames;
 		} catch (error) {
-			throw new FileLoaderError("get directory names", path, error);
+			throw new FsUtilsError("get directory names", path, error);
 		}
 	}
 
 	async getFileNamesAsync(
 		path: string,
-		options?: FileLoaderOptions,
+		options?: FsUtilsOptions,
 	): Promise<string[]> {
 		try {
 			const mergedOptions = this.mergeOptions(options);
@@ -198,7 +195,7 @@ export class FileLoader implements IFileLoader {
 
 			return fileNames;
 		} catch (error) {
-			throw new FileLoaderError("get file names", path, error);
+			throw new FsUtilsError("get file names", path, error);
 		}
 	}
 
