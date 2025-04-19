@@ -7,14 +7,15 @@ import { metaInfoSchema } from "@/domain/schemas/meta-info.schema";
 import { orderSchema } from "@/domain/schemas/order.schema";
 import { questionSchema } from "@/domain/schemas/question.schema";
 import { ContentId } from "@/domain/value-objects/content-id.value-object";
-import type { IFsUtils } from "@app-demo/fs-utils";
+import { FsUtils } from "@app-demo/fs-utils";
 import { z } from "zod";
 
 export class FileQuizContentRepository implements IQuizContentRepository {
-	constructor(
-		private readonly fsUtils: IFsUtils,
-		private readonly dataPath: string,
-	) {}
+	private readonly fsUtils: FsUtils;
+
+	constructor(private readonly dataPath: string) {
+		this.fsUtils = new FsUtils();
+	}
 
 	async find(id: ContentId): Promise<QuizContent> {
 		const contentPath = `${this.dataPath}/${id.getValue()}`;
