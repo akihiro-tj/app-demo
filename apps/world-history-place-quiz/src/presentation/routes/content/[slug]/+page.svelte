@@ -29,13 +29,13 @@ const { title, path, questions } = data.content;
 
 const metaInfo = generateMetaInfo({ title, path });
 
-let answers = $state(new Map<number, number>());
+let answers = $state(new Map<string, number>());
 
 const currentQuestionIndex = $derived(answers.size);
 
 const correctCount = $derived(
-	questions.reduce((count, question, index) => {
-		const answer = answers.get(index);
+	questions.reduce((count, question) => {
+		const answer = answers.get(question.id);
 		return count + (answer === question.correctChoice.value ? 1 : 0);
 	}, 0),
 );
@@ -43,15 +43,15 @@ const correctCount = $derived(
 const isQuestionVisible = (questionIndex: number) =>
 	questionIndex <= currentQuestionIndex;
 
-const isQuestionResultVisible = (questionIndex: number) =>
-	answers.get(questionIndex) !== undefined;
+const isQuestionResultVisible = (questionId: string) =>
+	answers.get(questionId) !== undefined;
 
 const isTotalResultVisible = () => currentQuestionIndex === questions.length;
 
 const handleClickChoice: ChoiceClickEventHandler = (e) => {
-	const questionIndex = e.choiceListId;
-	const choiceIndex = e.choiceId;
-	answers = new Map(answers).set(questionIndex, choiceIndex);
+	const questionId = e.choiceListId;
+	const choiceId = e.choiceId;
+	answers = new Map(answers).set(questionId, Number(choiceId));
 };
 </script>
 
@@ -68,7 +68,7 @@ const handleClickChoice: ChoiceClickEventHandler = (e) => {
     <h1 class={titleStyle}>{title}</h1>
   </div>
   <div>
-    {#each questions as question, qi (question)}
+    {#each questions as question, qi (question.id)}
       {#if isQuestionVisible(qi)}
         <section class={questionStyle} in:fade>
           <div class={headingContainerStyle}>
@@ -85,16 +85,16 @@ const handleClickChoice: ChoiceClickEventHandler = (e) => {
           </div>
           <div class={choiceListContainerStyle}>
             <ChoiceList
-              id={qi}
+              id={question.id}
               choices={question.choices}
               correctChoice={question.correctChoice.value}
-              selectedChoice={answers.get(qi)}
-              isAnswered={answers.has(qi)}
+              selectedChoice={answers.get(question.id)}
+              isAnswered={answers.has(question.id)}
               onClickChoice={handleClickChoice}
             />
           </div>
-          {#if isQuestionResultVisible(qi)}
-            {@const isCorrect = answers.get(qi) === question.correctChoice.value}
+          {#if isQuestionResultVisible(question.id)}
+            {@const isCorrect = answers.get(question.id) === question.correctChoice.value}
             <div in:fade>
               <div class={resultTextContainerStyle}>
                 <p class={resultTextStyle({ isCorrect })}>

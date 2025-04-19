@@ -60,6 +60,7 @@ export class GetQuizContentUseCase {
 		questionIndex: number,
 	): QuestionViewModel {
 		return {
+			id: question.getId().getValue(),
 			statement: question.getStatement(),
 			choices: question.getChoices().map((choice) => ({
 				value: choice.getIndex(),
