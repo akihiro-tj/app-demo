@@ -5,7 +5,7 @@ import Choice from "../choice/choice.svelte";
 import { listStyle } from "./styles";
 
 export interface ChoiceListProps {
-	id: number;
+	id: string;
 	choices: QuestionViewModel["choices"];
 	correctChoice: QuestionViewModel["correctChoice"]["value"];
 	selectedChoice?: QuestionViewModel["choices"][number]["value"];
@@ -14,8 +14,8 @@ export interface ChoiceListProps {
 }
 
 export interface ChoiceClickEvent {
-	choiceListId: number;
-	choiceId: number;
+	choiceListId: string;
+	choiceId: string;
 }
 
 export type ChoiceClickEventHandler = (e: ChoiceClickEvent) => void;
@@ -31,7 +31,7 @@ const {
 
 const handleClickChoice: MouseEventHandler<HTMLButtonElement> = (e) => {
 	const target = e.currentTarget;
-	const choiceId = Number(target.getAttribute("data-id"));
+	const choiceId = target.getAttribute("data-id") ?? "";
 	onClickChoice({ choiceListId: id, choiceId });
 };
 </script>

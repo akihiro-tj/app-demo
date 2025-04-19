@@ -1,4 +1,5 @@
 export interface QuestionViewModel {
+	id: string;
 	statement: string;
 	choices: {
 		value: number;
