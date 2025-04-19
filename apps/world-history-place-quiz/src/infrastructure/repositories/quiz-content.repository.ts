@@ -20,81 +20,67 @@ export class FileQuizContentRepository implements IQuizContentRepository {
 	async find(id: ContentId): Promise<QuizContent> {
 		const contentPath = `${this.dataPath}/${id.getValue()}`;
 
-		try {
-			const [rawMetaInfo, rawQuestions] = [
-				this.fsUtils.loadYaml(`${contentPath}/meta.yaml`),
-				this.fsUtils.loadYaml(`${contentPath}/questions.yaml`),
-			];
+		const [metaInfoFilePath, questionsFilePath] = [
+			`${contentPath}/meta.yaml`,
+			`${contentPath}/questions.yaml`,
+		];
 
-			const metaInfoResult = metaInfoSchema.safeParse(rawMetaInfo);
-			if (!metaInfoResult.success) {
-				throw new ValidationError("Invalid meta data", [metaInfoResult.error]);
-			}
+		const [rawMetaInfo, rawQuestions] = [
+			this.fsUtils.loadYaml(metaInfoFilePath),
+			this.fsUtils.loadYaml(questionsFilePath),
+		];
 
-			const questionsResult = z.array(questionSchema).safeParse(rawQuestions);
-			if (!questionsResult.success) {
-				throw new ValidationError("Invalid questions data", [
-					questionsResult.error,
-				]);
-			}
+		const [metaInfo, questions] = [
+			this.validateSchema(metaInfoSchema, rawMetaInfo, metaInfoFilePath),
+			this.validateSchema(
+				z.array(questionSchema),
+				rawQuestions,
+				questionsFilePath,
+			),
+		];
 
-			const questions = questionsResult.data.map((q, i) =>
-				this.createQuestion(
-					`${id.getValue()}-${i}`,
-					q.statement,
-					q.choices,
-					q.correctChoice,
-					q.explanation,
-				),
-			);
+		const questionModels = questions.map((q, i) =>
+			this.createQuestion(
+				`${id.getValue()}-${i}`,
+				q.statement,
+				q.choices,
+				q.correctChoice,
+				q.explanation,
+			),
+		);
 
-			return QuizContent.create(
-				id.getValue(),
-				metaInfoResult.data.title,
-				questions,
-			);
-		} catch (error) {
-			if (error instanceof ValidationError) {
-				throw error;
-			}
-			if (error instanceof Error) {
-				throw new Error(`Failed to load quiz content: ${error.message}`);
-			}
-			throw new Error("Failed to load quiz content");
-		}
+		return QuizContent.create(id.getValue(), metaInfo.title, questionModels);
 	}
 
 	async findAll(): Promise<QuizContent[]> {
-		try {
-			const rawOrder = this.fsUtils.loadYaml(`${this.dataPath}/order.yaml`);
+		const orderFilePath = `${this.dataPath}/order.yaml`;
+		const rawOrder = this.fsUtils.loadYaml(orderFilePath);
+		const order = this.validateSchema(orderSchema, rawOrder, orderFilePath);
 
-			const orderResult = orderSchema.safeParse(rawOrder);
-			if (!orderResult.success) {
-				throw new ValidationError("Invalid content order", [orderResult.error]);
-			}
+		const contents = await Promise.all(
+			order.map((id) => this.find(ContentId.create(id))),
+		);
+		const sortedContents = contents.sort((a, b) => {
+			const aIndex = order.indexOf(a.getId().getValue());
+			const bIndex = order.indexOf(b.getId().getValue());
+			if (aIndex === -1) return 1;
+			if (bIndex === -1) return -1;
+			return aIndex - bIndex;
+		});
 
-			const contents = await Promise.all(
-				orderResult.data.map((id) => this.find(ContentId.create(id))),
-			);
+		return sortedContents;
+	}
 
-			const sortedContents = contents.sort((a, b) => {
-				const aIndex = orderResult.data.indexOf(a.getId().getValue());
-				const bIndex = orderResult.data.indexOf(b.getId().getValue());
-				if (aIndex === -1) return 1;
-				if (bIndex === -1) return -1;
-				return aIndex - bIndex;
-			});
-
-			return sortedContents;
-		} catch (error) {
-			if (error instanceof ValidationError) {
-				throw error;
-			}
-			if (error instanceof Error) {
-				throw new Error(`Failed to load all quiz contents: ${error.message}`);
-			}
-			throw new Error("Failed to load all quiz contents");
+	private validateSchema<T>(
+		schema: z.ZodSchema<T>,
+		data: unknown,
+		filePath: string,
+	): T {
+		const result = schema.safeParse(data);
+		if (!result.success) {
+			throw new ValidationError(`Invalid data: '${filePath}'`, [result.error]);
 		}
+		return result.data;
 	}
 
 	private createQuestion(
@@ -107,6 +93,7 @@ export class FileQuizContentRepository implements IQuizContentRepository {
 		const choices = _choices.map((choice, index) =>
 			Choice.create(`${id}-${index}`, index, choice),
 		);
+
 		const correctChoice = choices[_correctChoice];
 		if (!correctChoice) {
 			throw new Error("Correct choice must be within choices range");
