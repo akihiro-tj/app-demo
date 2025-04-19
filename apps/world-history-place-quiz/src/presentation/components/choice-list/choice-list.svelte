@@ -1,14 +1,14 @@
 <script lang="ts">
-import type { QuestionViewModel } from "@/presentation/models/question.view-model";
+import type { ChoiceViewModel } from "@/presentation/models/choice-view-model";
 import type { MouseEventHandler } from "svelte/elements";
 import Choice from "../choice/choice.svelte";
 import { listStyle } from "./styles";
 
 export interface ChoiceListProps {
 	id: string;
-	choices: QuestionViewModel["choices"];
-	correctChoice: QuestionViewModel["correctChoice"]["value"];
-	selectedChoice?: QuestionViewModel["choices"][number]["value"];
+	choices: ChoiceViewModel[];
+	correctChoice: ChoiceViewModel["value"];
+	selectedChoice?: ChoiceViewModel["value"];
 	isAnswered?: boolean;
 	onClickChoice: ChoiceClickEventHandler;
 }
@@ -37,12 +37,12 @@ const handleClickChoice: MouseEventHandler<HTMLButtonElement> = (e) => {
 </script>
 
 <ul class={listStyle}>
-  {#each choices as choice, index (choice)}
+  {#each choices as choice (choice.id)}
     {@const isSelected = choice.value === selectedChoice}
     {@const isCorrect = choice.value === correctChoice}
     <li>
       <Choice
-        data-id={index}
+        data-id={choice.value}
         disabled={isAnswered}
         onclick={handleClickChoice}
         isCorrect={isAnswered && (isSelected || isCorrect) ? isCorrect : undefined}
