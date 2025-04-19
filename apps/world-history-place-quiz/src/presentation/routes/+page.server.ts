@@ -1,13 +1,9 @@
+import { CONTENT_PATH } from "@/application/constants/content.constant";
 import { GetQuizContentUseCase } from "@/application/usecases/get-quiz-content.usecase";
 import { FileQuizContentRepository } from "@/infrastructure/repositories/quiz-content.repository";
-import { FileLoader } from "@app-demo/file-loader";
 
 export async function load() {
-	const fileLoader = new FileLoader();
-	const quizContentRepository = new FileQuizContentRepository(
-		fileLoader,
-		"./contents",
-	);
+	const quizContentRepository = new FileQuizContentRepository(CONTENT_PATH);
 	const getQuizContentUseCase = new GetQuizContentUseCase(
 		quizContentRepository,
 	);
