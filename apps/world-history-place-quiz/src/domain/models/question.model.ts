@@ -1,5 +1,5 @@
-import { Choice } from "../value-objects/choice.value-object";
 import { QuestionId } from "../value-objects/question-id.value-object";
+import type { Choice } from "./choice.model";
 
 export class Question {
 	private constructor(
@@ -15,8 +15,8 @@ export class Question {
 		if (choices.length === 0) {
 			throw new Error("Question must have at least one choice");
 		}
-		if (correctChoice.getIndex() >= choices.length) {
-			throw new Error("Correct choice index must be within choices range");
+		if (correctChoice.getValue() >= choices.length) {
+			throw new Error("Correct choice value must be within choices range");
 		}
 		if (!explanation) {
 			throw new Error("Question explanation must not be empty");
@@ -26,15 +26,15 @@ export class Question {
 	static create(
 		id: string,
 		statement: string,
-		choices: string[],
-		correctChoice: number,
+		choices: Choice[],
+		correctChoice: Choice,
 		explanation: string,
 	): Question {
 		return new Question(
 			QuestionId.create(id),
 			statement,
-			choices.map(Choice.create),
-			Choice.create(choices[correctChoice] ?? "", correctChoice),
+			choices,
+			correctChoice,
 			explanation,
 		);
 	}
