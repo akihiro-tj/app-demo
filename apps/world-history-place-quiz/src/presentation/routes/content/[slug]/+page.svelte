@@ -22,6 +22,8 @@ import {
 	totalResultContainerStyle,
 	totalResultStyle,
 	totalResultValueStyle,
+	topPageLinkContainerStyle,
+	topPageLinkStyle,
 } from "./styles";
 
 const { data } = $props();
@@ -123,6 +125,9 @@ const handleClickChoice: ChoiceClickEventHandler = (e) => {
           <span>正解</span>
         </p>
       </section>
+      <div class={topPageLinkContainerStyle}>
+        <a href="/" class={topPageLinkStyle}>トップページ</a>
+      </div>
     {/if}
   </div>
 </main>

@@ -98,8 +98,7 @@ export const resultTextStyle = cva({
 });
 
 export const totalResultStyle = css({
-	mb: "16",
-	mt: "8",
+	my: "16",
 	p: "6",
 	bg: "slate.50",
 	borderRadius: "lg",
@@ -116,4 +115,22 @@ export const totalResultValueStyle = css({
 	fontWeight: "bold",
 	color: "slate.800",
 	letterSpacing: "tight",
+});
+
+export const topPageLinkContainerStyle = css({
+	display: "flex",
+	justifyContent: "center",
+	mb: "16",
+});
+
+export const topPageLinkStyle = css({
+	px: "6",
+	py: "3",
+	bg: "slate.50",
+	borderRadius: "md",
+	color: "slate.700",
+	fontWeight: "medium",
+	_hover: {
+		bg: "slate.100",
+	},
 });
