@@ -1,13 +1,9 @@
+import { CONTENT_PATH } from "@/application/constants/content.constant.js";
 import { GetQuizContentUseCase } from "@/application/usecases/get-quiz-content.usecase";
 import { FileQuizContentRepository } from "@/infrastructure/repositories/quiz-content.repository";
-import { FileLoader } from "@app-demo/file-loader";
 import type { EntryGenerator } from "./$types.js";
 
-const fileLoader = new FileLoader();
-const quizContentRepository = new FileQuizContentRepository(
-	fileLoader,
-	"./contents",
-);
+const quizContentRepository = new FileQuizContentRepository(CONTENT_PATH);
 const getQuizContentUseCase = new GetQuizContentUseCase(quizContentRepository);
 
 export async function load({ params }) {
