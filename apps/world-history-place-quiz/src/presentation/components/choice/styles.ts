@@ -3,12 +3,12 @@ import { cva } from "styled-system/css";
 export const buttonStyle = cva({
 	base: {
 		w: "full",
-		py: "3",
+		p: "3",
 		borderRadius: "sm",
-		bg: "slate.100",
+		bg: "slate.50",
 		fontWeight: "bold",
 		_hover: {
-			bg: "slate.200",
+			bg: "slate.100",
 			cursor: "pointer",
 		},
 		_disabled: {

@@ -22,6 +22,8 @@ import {
 	totalResultContainerStyle,
 	totalResultStyle,
 	totalResultValueStyle,
+	topPageLinkContainerStyle,
+	topPageLinkStyle,
 } from "./styles";
 
 const { data } = $props();
@@ -70,7 +72,10 @@ const handleClickChoice: ChoiceClickEventHandler = (e) => {
   <div>
     {#each questions as question, qi (question.id)}
       {#if isQuestionVisible(qi)}
-        <section class={questionStyle} in:fade>
+        <section
+          class={questionStyle({ showBorder: isQuestionResultVisible(question.id) })}
+          in:fade
+        >
           <div class={headingContainerStyle}>
             <h2 class={headingStyle}>
               <span class={questionNumberStyle}>Q.{qi + 1}</span>
@@ -120,6 +125,9 @@ const handleClickChoice: ChoiceClickEventHandler = (e) => {
           <span>正解</span>
         </p>
       </section>
+      <div class={topPageLinkContainerStyle}>
+        <a href="/" class={topPageLinkStyle}>トップページ</a>
+      </div>
     {/if}
   </div>
 </main>
