@@ -1,7 +1,9 @@
 import type { IQuizContentRepository } from "@/application/ports/quiz-content.repository";
+import type { Choice } from "@/domain/models/choice.model";
 import type { Question } from "@/domain/models/question.model";
 import type { QuizContent } from "@/domain/models/quiz-content.model";
 import { ContentId } from "@/domain/value-objects/content-id.value-object";
+import type { ChoiceViewModel } from "@/presentation/models/choice-view-model";
 import type { QuestionViewModel } from "@/presentation/models/question.view-model";
 import type { QuizContentViewModel } from "@/presentation/models/quiz-content.view-model";
 
@@ -62,16 +64,20 @@ export class GetQuizContentUseCase {
 		return {
 			id: question.getId().getValue(),
 			statement: question.getStatement(),
-			choices: question.getChoices().map((choice) => ({
-				value: choice.getIndex(),
-				text: choice.getText(),
-			})),
-			correctChoice: {
-				value: question.getCorrectChoice().getIndex(),
-				text: question.getCorrectChoice().getText(),
-			},
+			choices: question
+				.getChoices()
+				.map((choice) => this.mapChoiceToViewModel(choice)),
+			correctChoice: this.mapChoiceToViewModel(question.getCorrectChoice()),
 			explanation: question.getExplanation(),
 			imagePath: `/content/${contentId}/q${questionIndex + 1}.png`,
+		};
+	}
+
+	private mapChoiceToViewModel(choice: Choice): ChoiceViewModel {
+		return {
+			id: choice.getId().getValue(),
+			value: choice.getValue(),
+			text: choice.getText(),
 		};
 	}
 }
