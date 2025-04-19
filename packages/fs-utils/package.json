@@ -1,0 +1,37 @@
+{
+	"name": "@app-demo/fs-utils",
+	"version": "1.0.0",
+	"description": "",
+	"exports": {
+		".": {
+			"import": "./dist/index.mjs",
+			"types": "./dist/index.d.mts"
+		}
+	},
+	"scripts": {
+		"build": "tsup src/index.ts --format esm --dts",
+		"dev": "tsup src/index.ts --format esm --dts --watch",
+		"check": "biome check src",
+		"check:write": "biome check --write src",
+		"test": "vitest run && exit 0",
+		"test:watch": "vitest",
+		"test:coverage": "vitest run --coverage"
+	},
+	"devDependencies": {
+		"@app-demo/biome-config": "workspace:*",
+		"@app-demo/typescript-config": "workspace:*",
+		"@biomejs/biome": "1.9.4",
+		"@types/js-yaml": "^4.0.9",
+		"@types/node": "^22.13.10",
+		"@vitest/coverage-v8": "3.1.1",
+		"tsup": "^8.4.0",
+		"typescript": "^5.8.2",
+		"vitest": "^3.1.1"
+	},
+	"dependencies": {
+		"js-yaml": "^4.1.0"
+	},
+	"files": [
+		"dist"
+	]
+}

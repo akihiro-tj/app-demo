@@ -22,7 +22,7 @@
 	},
 	"devDependencies": {
 		"@app-demo/biome-config": "workspace:*",
-		"@app-demo/file-loader": "workspace:*",
+		"@app-demo/fs-utils": "workspace:*",
 		"@app-demo/typescript-config": "workspace:*",
 		"@pandacss/dev": "^0.53.0",
 		"@sveltejs/adapter-vercel": "^5.6.3",
