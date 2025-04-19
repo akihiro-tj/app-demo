@@ -49,7 +49,8 @@ export class FileLoader implements IFileLoader {
 			const entries = fs.readdirSync(path, { withFileTypes: true });
 			const dirNames = entries
 				.filter((dirent) => dirent.isDirectory())
-				.map((dirent) => dirent.name);
+				.map((dirent) => dirent.name)
+				.filter((name) => !mergedOptions.filter || mergedOptions.filter(name));
 
 			if (mergedOptions.recursive) {
 				const subDirs = dirNames.flatMap((dir) => {
@@ -73,10 +74,14 @@ export class FileLoader implements IFileLoader {
 			const entries = fs.readdirSync(path, { withFileTypes: true });
 			const fileNames = entries
 				.filter((dirent) => dirent.isFile())
-				.map((dirent) => dirent.name);
+				.map((dirent) => dirent.name)
+				.filter((name) => !mergedOptions.filter || mergedOptions.filter(name));
 
 			if (mergedOptions.recursive) {
-				const subDirs = this.getDirNames(path, mergedOptions);
+				const subDirs = this.getDirNames(path, {
+					...mergedOptions,
+					filter: undefined,
+				});
 				const subFiles = subDirs.flatMap((dir) => {
 					const subPath = `${path}/${dir}`;
 					return this.getFileNames(subPath, mergedOptions).map(
@@ -138,7 +143,8 @@ export class FileLoader implements IFileLoader {
 			const entries = await fs.promises.readdir(path, { withFileTypes: true });
 			const dirNames = entries
 				.filter((dirent) => dirent.isDirectory())
-				.map((dirent) => dirent.name);
+				.map((dirent) => dirent.name)
+				.filter((name) => !mergedOptions.filter || mergedOptions.filter(name));
 
 			if (mergedOptions.recursive) {
 				const subDirs = await Promise.all(
@@ -169,10 +175,14 @@ export class FileLoader implements IFileLoader {
 			const entries = await fs.promises.readdir(path, { withFileTypes: true });
 			const fileNames = entries
 				.filter((dirent) => dirent.isFile())
-				.map((dirent) => dirent.name);
+				.map((dirent) => dirent.name)
+				.filter((name) => !mergedOptions.filter || mergedOptions.filter(name));
 
 			if (mergedOptions.recursive) {
-				const subDirs = await this.getDirNamesAsync(path, mergedOptions);
+				const subDirs = await this.getDirNamesAsync(path, {
+					...mergedOptions,
+					filter: undefined,
+				});
 				const subFiles = await Promise.all(
 					subDirs.map(async (dir) => {
 						const subPath = `${path}/${dir}`;
