@@ -1,5 +1,5 @@
 import { CONTENT_PATH } from "@/application/constants/content";
-import { getAllQuizContents } from "@/application/usecases/get-quiz-content";
+import { getAllQuizContents } from "@/application/services/quiz-content";
 import { FileQuizContentRepository } from "@/infrastructure/repositories/quiz-content";
 
 export async function load() {

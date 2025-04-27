@@ -2,7 +2,7 @@ import { CONTENT_PATH } from "@/application/constants/content.js";
 import {
 	getAllQuizContents,
 	getQuizContent,
-} from "@/application/usecases/get-quiz-content.js";
+} from "@/application/services/quiz-content.js";
 import { FileQuizContentRepository } from "@/infrastructure/repositories/quiz-content.js";
 import type { EntryGenerator } from "./$types.js";
 
