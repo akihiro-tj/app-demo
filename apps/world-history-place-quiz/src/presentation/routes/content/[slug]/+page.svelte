@@ -1,5 +1,5 @@
 <script lang="ts">
-import { generateMetaInfo } from "@/application/services/meta-info.service";
+import { generateMetaInfo } from "@/application/services/meta-info";
 import ChoiceList, {
 	type ChoiceClickEventHandler,
 } from "@/presentation/components/choice-list/choice-list.svelte";
@@ -19,11 +19,11 @@ import {
 	statementContainerStyle,
 	titleContainerStyle,
 	titleStyle,
+	topPageLinkContainerStyle,
+	topPageLinkStyle,
 	totalResultContainerStyle,
 	totalResultStyle,
 	totalResultValueStyle,
-	topPageLinkContainerStyle,
-	topPageLinkStyle,
 } from "./styles";
 
 const { data } = $props();

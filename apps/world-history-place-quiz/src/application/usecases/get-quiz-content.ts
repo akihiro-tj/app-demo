@@ -1,12 +1,12 @@
-import type { IQuizContentRepository } from "@/application/ports/quiz-content.repository";
+import type { IQuizContentRepository } from "@/application/ports/quiz-content";
 import { ValidationError } from "@/domain/errors/validation-error";
-import type { Choice } from "@/domain/models/choice.model";
-import type { Question } from "@/domain/models/question.model";
-import type { QuizContent } from "@/domain/models/quiz-content.model";
-import { ContentId } from "@/domain/value-objects/content-id.value-object";
-import type { ChoiceViewModel } from "@/presentation/models/choice-view-model";
-import type { QuestionViewModel } from "@/presentation/models/question.view-model";
-import type { QuizContentViewModel } from "@/presentation/models/quiz-content.view-model";
+import type { Choice } from "@/domain/models/choice";
+import type { Question } from "@/domain/models/question";
+import type { QuizContent } from "@/domain/models/quiz-content";
+import { ContentId } from "@/domain/value-objects/content-id";
+import type { ChoiceViewModel } from "@/presentation/models/choice";
+import type { QuestionViewModel } from "@/presentation/models/question";
+import type { QuizContentViewModel } from "@/presentation/models/quiz-content";
 
 export class GetQuizContentUseCase {
 	constructor(private readonly quizContentRepository: IQuizContentRepository) {}

@@ -1,4 +1,4 @@
-import type { ChoiceViewModel } from "./choice-view-model";
+import type { ChoiceViewModel } from "./choice";
 
 export interface QuestionViewModel {
 	id: string;

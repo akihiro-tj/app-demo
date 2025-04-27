@@ -1,4 +1,4 @@
-import type { QuestionViewModel } from "./question.view-model";
+import type { QuestionViewModel } from "./question";
 
 export interface QuizContentViewModel {
 	id: string;

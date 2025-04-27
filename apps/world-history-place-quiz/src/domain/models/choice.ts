@@ -1,4 +1,4 @@
-import { ChoiceId } from "../value-objects/choice-id.value-object";
+import { ChoiceId } from "../value-objects/choice-id";
 
 export class Choice {
 	private constructor(
