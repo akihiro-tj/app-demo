@@ -1,6 +1,6 @@
 import { ValidationError } from "@/domain/errors/validation-error";
 import { QuizContent } from "@/domain/models/quiz-content";
-import type { IQuizContentRepository } from "@/domain/repositories/quiz-content-interface";
+import type { IQuizContentRepository } from "@/domain/repositories/quiz-content";
 import { metaInfoSchema } from "@/domain/schemas/meta-info";
 import { orderSchema } from "@/domain/schemas/order";
 import { questionSchema } from "@/domain/schemas/question";
