@@ -1,14 +1,27 @@
-import { QuestionId } from "../value-objects/question-id";
-import type { Choice } from "./choice";
+import { Choice } from "./choice";
+
+interface ChoiceData {
+	value: number;
+	text: string;
+}
 
 export class Question {
+	private readonly id: string;
+	private readonly statement: string;
+	private readonly choices: Choice[];
+	private readonly correctChoice: Choice;
+	private readonly explanation: string;
+
 	private constructor(
-		private readonly id: QuestionId,
-		private readonly statement: string,
-		private readonly choices: Choice[],
-		private readonly correctChoice: Choice,
-		private readonly explanation: string,
+		id: string,
+		statement: string,
+		choices: Choice[],
+		correctChoice: Choice,
+		explanation: string,
 	) {
+		if (!id) {
+			throw new Error("Question id must not be empty");
+		}
 		if (!statement) {
 			throw new Error("Question statement must not be empty");
 		}
@@ -21,25 +34,33 @@ export class Question {
 		if (!explanation) {
 			throw new Error("Question explanation must not be empty");
 		}
+
+		this.id = id;
+		this.statement = statement;
+		this.choices = choices;
+		this.correctChoice = correctChoice;
+		this.explanation = explanation;
 	}
 
 	static create(
 		id: string,
 		statement: string,
-		choices: Choice[],
-		correctChoice: Choice,
+		choiceData: ChoiceData[],
+		correctChoiceData: ChoiceData,
 		explanation: string,
 	): Question {
-		return new Question(
-			QuestionId.create(id),
-			statement,
-			choices,
-			correctChoice,
-			explanation,
+		const choices = choiceData.map((choice) =>
+			Choice.create(`${id}-${choice.value}`, choice.value, choice.text),
 		);
+		const correctChoice = Choice.create(
+			`${id}-${correctChoiceData.value}`,
+			correctChoiceData.value,
+			correctChoiceData.text,
+		);
+		return new Question(id, statement, choices, correctChoice, explanation);
 	}
 
-	getId(): QuestionId {
+	getId(): string {
 		return this.id;
 	}
 
