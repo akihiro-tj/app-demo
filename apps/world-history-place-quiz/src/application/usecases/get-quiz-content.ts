@@ -3,7 +3,6 @@ import { ValidationError } from "@/domain/errors/validation-error";
 import type { Choice } from "@/domain/models/choice";
 import type { Question } from "@/domain/models/question";
 import type { QuizContent } from "@/domain/models/quiz-content";
-import { ContentId } from "@/domain/value-objects/content-id";
 import type { ChoiceViewModel } from "@/presentation/models/choice";
 import type { QuestionViewModel } from "@/presentation/models/question";
 import type { QuizContentViewModel } from "@/presentation/models/quiz-content";
@@ -13,9 +12,7 @@ export class GetQuizContentUseCase {
 
 	async execute(contentId: string): Promise<QuizContentViewModel> {
 		try {
-			const content = await this.quizContentRepository.find(
-				ContentId.create(contentId),
-			);
+			const content = await this.quizContentRepository.find(contentId);
 			return this.mapQuizContentToViewModel(content);
 		} catch (error) {
 			if (error instanceof ValidationError) {
@@ -45,17 +42,13 @@ export class GetQuizContentUseCase {
 		content: QuizContent,
 	): QuizContentViewModel {
 		return {
-			id: content.getId().getValue(),
-			path: `/content/${content.getId().getValue()}`,
+			id: content.getId(),
+			path: `/content/${content.getId()}`,
 			title: content.getTitle(),
 			questions: content
 				.getQuestions()
 				.map((question, index) =>
-					this.mapQuestionToViewModel(
-						question,
-						content.getId().getValue(),
-						index,
-					),
+					this.mapQuestionToViewModel(question, content.getId(), index),
 				),
 			totalQuestions: content.getTotalQuestions(),
 		};
@@ -67,7 +60,7 @@ export class GetQuizContentUseCase {
 		questionIndex: number,
 	): QuestionViewModel {
 		return {
-			id: question.getId().getValue(),
+			id: question.getId(),
 			statement: question.getStatement(),
 			choices: question
 				.getChoices()
@@ -80,7 +73,7 @@ export class GetQuizContentUseCase {
 
 	private mapChoiceToViewModel(choice: Choice): ChoiceViewModel {
 		return {
-			id: choice.getId().getValue(),
+			id: choice.getId(),
 			value: choice.getValue(),
 			text: choice.getText(),
 		};

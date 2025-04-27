@@ -1,24 +1,29 @@
-import { ChoiceId } from "../value-objects/choice-id";
-
 export class Choice {
-	private constructor(
-		private readonly id: ChoiceId,
-		private readonly value: number,
-		private readonly text: string,
-	) {
+	private readonly id: string;
+	private readonly value: number;
+	private readonly text: string;
+
+	private constructor(id: string, value: number, text: string) {
+		if (!id) {
+			throw new Error("Choice id must not be empty");
+		}
 		if (!text) {
 			throw new Error("Choice text must not be empty");
 		}
 		if (value < 0) {
 			throw new Error("Choice value must be non-negative");
 		}
+
+		this.id = id;
+		this.value = value;
+		this.text = text;
 	}
 
 	static create(id: string, value: number, text: string): Choice {
-		return new Choice(ChoiceId.create(id), value, text);
+		return new Choice(id, value, text);
 	}
 
-	getId(): ChoiceId {
+	getId(): string {
 		return this.id;
 	}
 

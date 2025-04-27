@@ -1,7 +1,6 @@
 import type { QuizContent } from "@/domain/models/quiz-content";
-import type { ContentId } from "@/domain/value-objects/content-id";
 
 export interface IQuizContentRepository {
-	find(id: ContentId): Promise<QuizContent>;
+	find(id: string): Promise<QuizContent>;
 	findAll(): Promise<QuizContent[]>;
 }

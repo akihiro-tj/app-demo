@@ -1,12 +1,9 @@
 import type { IQuizContentRepository } from "@/application/ports/quiz-content";
 import { ValidationError } from "@/domain/errors/validation-error";
-import { Choice } from "@/domain/models/choice";
-import { Question } from "@/domain/models/question";
 import { QuizContent } from "@/domain/models/quiz-content";
 import { metaInfoSchema } from "@/domain/schemas/meta-info";
 import { orderSchema } from "@/domain/schemas/order";
 import { questionSchema } from "@/domain/schemas/question";
-import { ContentId } from "@/domain/value-objects/content-id";
 import { FsUtils } from "@app-demo/fs-utils";
 import { z } from "zod";
 
@@ -17,8 +14,8 @@ export class FileQuizContentRepository implements IQuizContentRepository {
 		this.fsUtils = new FsUtils();
 	}
 
-	async find(id: ContentId): Promise<QuizContent> {
-		const contentPath = `${this.dataPath}/${id.getValue()}`;
+	async find(contentId: string): Promise<QuizContent> {
+		const contentPath = `${this.dataPath}/${contentId}`;
 
 		const [metaInfoFilePath, questionsFilePath] = [
 			`${contentPath}/meta.yaml`,
@@ -39,17 +36,7 @@ export class FileQuizContentRepository implements IQuizContentRepository {
 			),
 		];
 
-		const questionModels = questions.map((q, i) =>
-			this.createQuestion(
-				`${id.getValue()}-${i}`,
-				q.statement,
-				q.choices,
-				q.correctChoice,
-				q.explanation,
-			),
-		);
-
-		return QuizContent.create(id.getValue(), metaInfo.title, questionModels);
+		return QuizContent.create(contentId, metaInfo.title, questions);
 	}
 
 	async findAll(): Promise<QuizContent[]> {
@@ -58,11 +45,11 @@ export class FileQuizContentRepository implements IQuizContentRepository {
 		const order = this.validateSchema(orderSchema, rawOrder, orderFilePath);
 
 		const contents = await Promise.all(
-			order.map((id) => this.find(ContentId.create(id))),
+			order.map((contentId) => this.find(contentId)),
 		);
 		const sortedContents = contents.sort((a, b) => {
-			const aIndex = order.indexOf(a.getId().getValue());
-			const bIndex = order.indexOf(b.getId().getValue());
+			const aIndex = order.indexOf(a.getId());
+			const bIndex = order.indexOf(b.getId());
 			if (aIndex === -1) return 1;
 			if (bIndex === -1) return -1;
 			return aIndex - bIndex;
@@ -81,24 +68,5 @@ export class FileQuizContentRepository implements IQuizContentRepository {
 			throw new ValidationError(`Invalid data: '${filePath}'`, [result.error]);
 		}
 		return result.data;
-	}
-
-	private createQuestion(
-		id: string,
-		statement: string,
-		_choices: string[],
-		_correctChoice: number,
-		explanation: string,
-	): Question {
-		const choices = _choices.map((choice, index) =>
-			Choice.create(`${id}-${index}`, index, choice),
-		);
-
-		const correctChoice = choices[_correctChoice];
-		if (!correctChoice) {
-			throw new Error("Correct choice must be within choices range");
-		}
-
-		return Question.create(id, statement, choices, correctChoice, explanation);
 	}
 }
