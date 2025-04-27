@@ -1,5 +1,5 @@
-import { ContentId } from "../value-objects/content-id.value-object";
-import type { Question } from "./question.model";
+import { ContentId } from "../value-objects/content-id";
+import type { Question } from "./question";
 
 export class QuizContent {
 	private readonly id: ContentId;
