@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { ChoiceViewModel } from "@/presentation/models/choice-view-model";
+import type { ChoiceViewModel } from "@/presentation/models/choice";
 import type { MouseEventHandler } from "svelte/elements";
 import Choice from "../choice/choice.svelte";
 import { listStyle } from "./styles";

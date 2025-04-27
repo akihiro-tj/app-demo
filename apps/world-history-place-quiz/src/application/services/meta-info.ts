@@ -1,9 +1,9 @@
-import { OGType } from "@/application/constants/meta-info.constant";
-import { SITE_NAME, SITE_ORIGIN } from "@/application/constants/site.constant";
+import { OGType } from "@/application/constants/meta-info";
+import { SITE_NAME, SITE_ORIGIN } from "@/application/constants/site";
 import type {
 	MetaInfo,
 	MetaInfoOptions,
-} from "@/application/interfaces/meta-info.interface";
+} from "@/application/interfaces/meta-info";
 
 export function generateMetaInfo(options: MetaInfoOptions = {}): MetaInfo {
 	const { title, path } = options;

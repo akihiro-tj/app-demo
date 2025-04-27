@@ -1,6 +1,6 @@
-import { CONTENT_PATH } from "@/application/constants/content.constant.js";
-import { GetQuizContentUseCase } from "@/application/usecases/get-quiz-content.usecase";
-import { FileQuizContentRepository } from "@/infrastructure/repositories/quiz-content.repository";
+import { CONTENT_PATH } from "@/application/constants/content.js";
+import { GetQuizContentUseCase } from "@/application/usecases/get-quiz-content.js";
+import { FileQuizContentRepository } from "@/infrastructure/repositories/quiz-content.js";
 import type { EntryGenerator } from "./$types.js";
 
 const quizContentRepository = new FileQuizContentRepository(CONTENT_PATH);

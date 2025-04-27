@@ -1,5 +1,5 @@
 <script lang="ts">
-import { generateMetaInfo } from "@/application/services/meta-info.service";
+import { generateMetaInfo } from "@/application/services/meta-info";
 import {
 	contentItemStyle,
 	contentLinkStyle,

@@ -1,12 +1,12 @@
-import type { IQuizContentRepository } from "@/application/ports/quiz-content.repository";
+import type { IQuizContentRepository } from "@/application/ports/quiz-content";
 import { ValidationError } from "@/domain/errors/validation-error";
-import { Choice } from "@/domain/models/choice.model";
-import { Question } from "@/domain/models/question.model";
-import { QuizContent } from "@/domain/models/quiz-content.model";
-import { metaInfoSchema } from "@/domain/schemas/meta-info.schema";
-import { orderSchema } from "@/domain/schemas/order.schema";
-import { questionSchema } from "@/domain/schemas/question.schema";
-import { ContentId } from "@/domain/value-objects/content-id.value-object";
+import { Choice } from "@/domain/models/choice";
+import { Question } from "@/domain/models/question";
+import { QuizContent } from "@/domain/models/quiz-content";
+import { metaInfoSchema } from "@/domain/schemas/meta-info";
+import { orderSchema } from "@/domain/schemas/order";
+import { questionSchema } from "@/domain/schemas/question";
+import { ContentId } from "@/domain/value-objects/content-id";
 import { FsUtils } from "@app-demo/fs-utils";
 import { z } from "zod";
 

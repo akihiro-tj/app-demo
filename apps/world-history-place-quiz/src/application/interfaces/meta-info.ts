@@ -1,4 +1,4 @@
-import type { OGType } from "@/application/constants/meta-info.constant";
+import type { OGType } from "@/application/constants/meta-info";
 
 export interface MetaInfo {
 	title: string;

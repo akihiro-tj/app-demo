@@ -1,5 +1,5 @@
-import { QuestionId } from "../value-objects/question-id.value-object";
-import type { Choice } from "./choice.model";
+import { QuestionId } from "../value-objects/question-id";
+import type { Choice } from "./choice";
 
 export class Question {
 	private constructor(
