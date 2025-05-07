@@ -14,13 +14,13 @@ export class QuizContent {
 
 	private constructor(id: string, title: string, questions: Question[]) {
 		if (!id) {
-			throw new Error("Id must not be empty");
+			throw new Error("Quiz content id must not be empty");
 		}
 		if (!title) {
-			throw new Error("Title must not be empty");
+			throw new Error("Quiz content title must not be empty");
 		}
 		if (questions.length === 0) {
-			throw new Error("Questions must not be empty");
+			throw new Error("Quiz content must have at least one question");
 		}
 
 		this.id = id;
