@@ -4,6 +4,7 @@
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",
+    "test": "turbo run test",
     "check": "turbo run check",
     "check:write": "turbo run check:write"
   },
