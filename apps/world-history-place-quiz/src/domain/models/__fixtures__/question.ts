@@ -1,4 +1,6 @@
-export const mockQuestion = {
+import type { QuestionProps } from "../question";
+
+export const validQuestion: QuestionProps = {
 	id: "question-1",
 	statement: "Test Question",
 	choices: [
@@ -10,27 +12,27 @@ export const mockQuestion = {
 	explanation: "Test Explanation",
 };
 
-export const mockInvalidQuestionWithEmptyId = {
-	...mockQuestion,
+export const invalidQuestionWithEmptyId: QuestionProps = {
+	...validQuestion,
 	id: "",
 };
 
-export const mockInvalidQuestionWithEmptyStatement = {
-	...mockQuestion,
+export const invalidQuestionWithEmptyStatement: QuestionProps = {
+	...validQuestion,
 	statement: "",
 };
 
-export const mockInvalidQuestionWithEmptyChoices = {
-	...mockQuestion,
+export const invalidQuestionWithEmptyChoices: QuestionProps = {
+	...validQuestion,
 	choices: [],
 };
 
-export const mockInvalidQuestionWithOutOfRangeCorrectChoice = {
-	...mockQuestion,
+export const invalidQuestionWithOutOfRangeCorrectChoice: QuestionProps = {
+	...validQuestion,
 	correctChoice: { value: 3, text: "Choice 4" },
 };
 
-export const mockInvalidQuestionWithEmptyExplanation = {
-	...mockQuestion,
+export const invalidQuestionWithEmptyExplanation: QuestionProps = {
+	...validQuestion,
 	explanation: "",
 };

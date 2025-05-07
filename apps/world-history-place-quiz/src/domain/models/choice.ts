@@ -1,3 +1,9 @@
+export interface ChoiceProps {
+	id: string;
+	value: number;
+	text: string;
+}
+
 export class Choice {
 	private readonly id: string;
 	private readonly value: number;
@@ -19,8 +25,8 @@ export class Choice {
 		this.text = text;
 	}
 
-	static create(id: string, value: number, text: string): Choice {
-		return new Choice(id, value, text);
+	static create(props: ChoiceProps): Choice {
+		return new Choice(props.id, props.value, props.text);
 	}
 
 	getId(): string {

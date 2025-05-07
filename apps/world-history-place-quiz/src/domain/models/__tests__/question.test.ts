@@ -1,71 +1,55 @@
 import { describe, expect, it } from "vitest";
 import {
-	mockInvalidQuestionWithEmptyChoices,
-	mockInvalidQuestionWithEmptyExplanation,
-	mockInvalidQuestionWithEmptyId,
-	mockInvalidQuestionWithEmptyStatement,
-	mockInvalidQuestionWithOutOfRangeCorrectChoice,
-	mockQuestion,
+	invalidQuestionWithEmptyChoices,
+	invalidQuestionWithEmptyExplanation,
+	invalidQuestionWithEmptyId,
+	invalidQuestionWithEmptyStatement,
+	invalidQuestionWithOutOfRangeCorrectChoice,
+	validQuestion,
 } from "../__fixtures__/question";
 import { Question } from "../question";
 
 describe("Question", () => {
 	describe("create", () => {
 		it("should create a valid question", () => {
-			const { id, statement, choices, correctChoice, explanation } =
-				mockQuestion;
-			const question = Question.create(
-				id,
-				statement,
-				choices,
-				correctChoice,
-				explanation,
-			);
+			const question = Question.create(validQuestion);
 
-			expect(question.getId()).toBe(id);
-			expect(question.getStatement()).toBe(statement);
-			expect(question.getChoices()).toHaveLength(choices.length);
-			expect(question.getCorrectChoice().getValue()).toBe(correctChoice.value);
-			expect(question.getExplanation()).toBe(explanation);
+			expect(question.getId()).toBe(validQuestion.id);
+			expect(question.getStatement()).toBe(validQuestion.statement);
+			expect(question.getChoices()).toHaveLength(validQuestion.choices.length);
+			expect(question.getCorrectChoice().getValue()).toBe(
+				validQuestion.correctChoice.value,
+			);
+			expect(question.getExplanation()).toBe(validQuestion.explanation);
 		});
 
 		it("should throw error when id is empty", () => {
-			const { id, statement, choices, correctChoice, explanation } =
-				mockInvalidQuestionWithEmptyId;
-			expect(() =>
-				Question.create(id, statement, choices, correctChoice, explanation),
-			).toThrow("Question id must not be empty");
+			expect(() => Question.create(invalidQuestionWithEmptyId)).toThrow(
+				"Question id must not be empty",
+			);
 		});
 
 		it("should throw error when statement is empty", () => {
-			const { id, statement, choices, correctChoice, explanation } =
-				mockInvalidQuestionWithEmptyStatement;
-			expect(() =>
-				Question.create(id, statement, choices, correctChoice, explanation),
-			).toThrow("Question statement must not be empty");
+			expect(() => Question.create(invalidQuestionWithEmptyStatement)).toThrow(
+				"Question statement must not be empty",
+			);
 		});
 
 		it("should throw error when choices are empty", () => {
-			const { id, statement, choices, correctChoice, explanation } =
-				mockInvalidQuestionWithEmptyChoices;
-			expect(() =>
-				Question.create(id, statement, choices, correctChoice, explanation),
-			).toThrow("Question must have at least one choice");
+			expect(() => Question.create(invalidQuestionWithEmptyChoices)).toThrow(
+				"Question must have at least one choice",
+			);
 		});
 
 		it("should throw error when correct choice value is out of range", () => {
-			const { id, statement, choices, correctChoice, explanation } =
-				mockInvalidQuestionWithOutOfRangeCorrectChoice;
 			expect(() =>
-				Question.create(id, statement, choices, correctChoice, explanation),
+				Question.create(invalidQuestionWithOutOfRangeCorrectChoice),
 			).toThrow("Correct choice value must be within choices range");
 		});
 
 		it("should throw error when explanation is empty", () => {
-			const { id, statement, choices, correctChoice, explanation } =
-				mockInvalidQuestionWithEmptyExplanation;
 			expect(() =>
-				Question.create(id, statement, choices, correctChoice, explanation),
+				Question.create(invalidQuestionWithEmptyExplanation),
 			).toThrow("Question explanation must not be empty");
 		});
 	});

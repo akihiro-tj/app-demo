@@ -1,5 +1,13 @@
 import { Choice } from "./choice";
 
+export interface QuestionProps {
+	id: string;
+	statement: string;
+	choices: ChoiceData[];
+	correctChoice: ChoiceData;
+	explanation: string;
+}
+
 interface ChoiceData {
 	value: number;
 	text: string;
@@ -42,22 +50,26 @@ export class Question {
 		this.explanation = explanation;
 	}
 
-	static create(
-		id: string,
-		statement: string,
-		choiceData: ChoiceData[],
-		correctChoiceData: ChoiceData,
-		explanation: string,
-	): Question {
-		const choices = choiceData.map((choice) =>
-			Choice.create(`${id}-${choice.value}`, choice.value, choice.text),
+	static create(props: QuestionProps): Question {
+		const choices = props.choices.map((choice) =>
+			Choice.create({
+				id: `${props.id}-${choice.value}`,
+				value: choice.value,
+				text: choice.text,
+			}),
 		);
-		const correctChoice = Choice.create(
-			`${id}-${correctChoiceData.value}`,
-			correctChoiceData.value,
-			correctChoiceData.text,
+		const correctChoice = Choice.create({
+			id: `${props.id}-${props.correctChoice.value}`,
+			value: props.correctChoice.value,
+			text: props.correctChoice.text,
+		});
+		return new Question(
+			props.id,
+			props.statement,
+			choices,
+			correctChoice,
+			props.explanation,
 		);
-		return new Question(id, statement, choices, correctChoice, explanation);
 	}
 
 	getId(): string {

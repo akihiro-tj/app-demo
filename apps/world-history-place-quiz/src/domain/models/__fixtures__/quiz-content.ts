@@ -1,4 +1,6 @@
-export const mockQuizContent = {
+import type { QuizContentProps } from "../quiz-content";
+
+export const validQuizContent: QuizContentProps = {
 	id: "quiz-1",
 	title: "Test Quiz",
 	questions: [
@@ -11,17 +13,17 @@ export const mockQuizContent = {
 	],
 };
 
-export const mockInvalidQuizContentWithEmptyId = {
-	...mockQuizContent,
+export const invalidQuizContentWithEmptyId: QuizContentProps = {
+	...validQuizContent,
 	id: "",
 };
 
-export const mockInvalidQuizContentWithEmptyTitle = {
-	...mockQuizContent,
+export const invalidQuizContentWithEmptyTitle: QuizContentProps = {
+	...validQuizContent,
 	title: "",
 };
 
-export const mockInvalidQuizContentWithEmptyQuestions = {
-	...mockQuizContent,
+export const invalidQuizContentWithEmptyQuestions: QuizContentProps = {
+	...validQuizContent,
 	questions: [],
 };

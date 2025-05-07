@@ -1,9 +1,9 @@
-export const mockMetaInfo = {
+export const validMetaInfo = {
 	title: "Test Quiz",
 };
-export const mockInvalidMetaInfo = {};
+export const invalidMetaInfo = {};
 
-export const mockQuestions = [
+export const validQuestions = [
 	{
 		statement: "Test Question",
 		choices: ["A", "B", "C"],
@@ -12,5 +12,5 @@ export const mockQuestions = [
 	},
 ];
 
-export const mockOrder = ["content1", "content2"];
-export const mockInvalidOrder = "content1";
+export const validOrder = ["content1", "content2"];
+export const invalidOrder = "content1";

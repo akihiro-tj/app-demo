@@ -1,5 +1,11 @@
 import { Question } from "./question";
 
+export interface QuizContentProps {
+	id: string;
+	title: string;
+	questions: QuestionData[];
+}
+
 interface QuestionData {
 	statement: string;
 	choices: string[];
@@ -28,12 +34,8 @@ export class QuizContent {
 		this.questions = questions;
 	}
 
-	static create(
-		id: string,
-		title: string,
-		questionData: QuestionData[],
-	): QuizContent {
-		const questions = questionData.map((question, index) => {
+	static create(props: QuizContentProps): QuizContent {
+		const questions = props.questions.map((question, index) => {
 			const choices = question.choices.map((choice, index) => ({
 				value: index,
 				text: choice,
@@ -42,15 +44,15 @@ export class QuizContent {
 				value: question.correctChoice,
 				text: question.choices[question.correctChoice] ?? "",
 			};
-			return Question.create(
-				`${id}-${index}`,
-				question.statement,
+			return Question.create({
+				id: `${props.id}-${index}`,
+				statement: question.statement,
 				choices,
 				correctChoice,
-				question.explanation,
-			);
+				explanation: question.explanation,
+			});
 		});
-		return new QuizContent(id, title, questions);
+		return new QuizContent(props.id, props.title, questions);
 	}
 
 	getId(): string {

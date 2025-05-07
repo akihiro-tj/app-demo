@@ -1,20 +1,22 @@
-export const mockChoice = {
+import type { ChoiceProps } from "../choice";
+
+export const validChoice: ChoiceProps = {
 	id: "choice-1",
 	value: 0,
 	text: "Test Choice",
 };
 
-export const mockInvalidChoiceWithEmptyId = {
-	...mockChoice,
+export const invalidChoiceWithEmptyId: ChoiceProps = {
+	...validChoice,
 	id: "",
 };
 
-export const mockInvalidChoiceWithNegativeValue = {
-	...mockChoice,
+export const invalidChoiceWithNegativeValue: ChoiceProps = {
+	...validChoice,
 	value: -1,
 };
 
-export const mockInvalidChoiceWithEmptyText = {
-	...mockChoice,
+export const invalidChoiceWithEmptyText: ChoiceProps = {
+	...validChoice,
 	text: "",
 };
