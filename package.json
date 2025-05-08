@@ -2,7 +2,7 @@
   "name": "app-demo",
   "private": true,
   "scripts": {
-    "build": "turbo run build",
+    "build": "turbo run test && turbo run build",
     "dev": "turbo run dev",
     "test": "turbo run test",
     "check": "turbo run check",
