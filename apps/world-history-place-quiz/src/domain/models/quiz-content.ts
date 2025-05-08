@@ -35,9 +35,9 @@ export class QuizContent {
 	}
 
 	static create(props: QuizContentProps): QuizContent {
-		const questions = props.questions.map((question, index) => {
-			const choices = question.choices.map((choice, index) => ({
-				value: index,
+		const questions = props.questions.map((question, qi) => {
+			const choices = question.choices.map((choice, ci) => ({
+				value: ci,
 				text: choice,
 			}));
 			const correctChoice = {
@@ -45,7 +45,7 @@ export class QuizContent {
 				text: question.choices[question.correctChoice] ?? "",
 			};
 			return Question.create({
-				id: `${props.id}-${index}`,
+				id: `${props.id}-${qi}`,
 				statement: question.statement,
 				choices,
 				correctChoice,
