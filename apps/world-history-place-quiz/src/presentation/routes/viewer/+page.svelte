@@ -1,6 +1,7 @@
 <script lang="ts">
 import { Deck, type MapViewState } from "@deck.gl/core";
 import { onMount } from "svelte";
+import { createViewerState } from "./helpers/viewer-state.svelte";
 import { getLandTileLayer } from "./layers/land-tile";
 import { getRegionTileLayer } from "./layers/region-tile";
 import { canvasStyle, mainColumnStyle } from "./styles";
@@ -17,13 +18,17 @@ const INITIAL_VIEW_STATE: MapViewState = {
 
 const { data } = $props();
 const { geoFeatures } = data;
+const viewerState = createViewerState(geoFeatures);
 
 const render = () => {
 	new Deck({
 		canvas: deckCanvas,
 		initialViewState: INITIAL_VIEW_STATE,
 		controller: true,
-		layers: [getLandTileLayer(), getRegionTileLayer(geoFeatures)],
+		layers: [
+			getLandTileLayer(),
+			getRegionTileLayer(viewerState.filteredGeoFeatures),
+		],
 	});
 };
 
