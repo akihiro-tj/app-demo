@@ -11,7 +11,6 @@ describe("QuizContent", () => {
 	describe("create", () => {
 		it("should create a valid quiz content", () => {
 			const quizContent = QuizContent.create(validQuizContent);
-
 			expect(quizContent.getId()).toBe(validQuizContent.id);
 			expect(quizContent.getTitle()).toBe(validQuizContent.title);
 			expect(quizContent.getQuestions()).toHaveLength(

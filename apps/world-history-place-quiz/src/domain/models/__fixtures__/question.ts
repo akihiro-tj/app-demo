@@ -3,12 +3,8 @@ import type { QuestionProps } from "../question";
 export const validQuestion: QuestionProps = {
 	id: "question-1",
 	statement: "Test Question",
-	choices: [
-		{ value: 0, text: "Choice 1" },
-		{ value: 1, text: "Choice 2" },
-		{ value: 2, text: "Choice 3" },
-	],
-	correctChoice: { value: 0, text: "Choice 1" },
+	choices: ["A", "B", "C"],
+	correctChoice: 0,
 	explanation: "Test Explanation",
 };
 
@@ -22,17 +18,12 @@ export const invalidQuestionWithEmptyStatement: QuestionProps = {
 	statement: "",
 };
 
-export const invalidQuestionWithEmptyChoices: QuestionProps = {
+export const invalidQuestionWithEmptyExplanation: QuestionProps = {
 	...validQuestion,
-	choices: [],
+	explanation: "",
 };
 
 export const invalidQuestionWithOutOfRangeCorrectChoice: QuestionProps = {
 	...validQuestion,
-	correctChoice: { value: 3, text: "Choice 4" },
-};
-
-export const invalidQuestionWithEmptyExplanation: QuestionProps = {
-	...validQuestion,
-	explanation: "",
+	correctChoice: 3,
 };

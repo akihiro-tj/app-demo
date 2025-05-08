@@ -47,14 +47,12 @@ describe("QuizContent Service", () => {
 						choices: [
 							{
 								id: "choice-1",
-								value: "A",
-								text: "Choice 1",
+								text: "A",
 							},
 						],
 						correctChoice: {
 							id: "choice-1",
-							value: "A",
-							text: "Choice 1",
+							text: "A",
 						},
 						explanation: "Test explanation",
 						imagePath: "/content/content-1/q1.png",
@@ -107,14 +105,12 @@ describe("QuizContent Service", () => {
 						choices: [
 							{
 								id: "choice-1",
-								value: "A",
-								text: "Choice 1",
+								text: "A",
 							},
 						],
 						correctChoice: {
 							id: "choice-1",
-							value: "A",
-							text: "Choice 1",
+							text: "A",
 						},
 						explanation: "Test explanation",
 						imagePath: "/content/content-1/q1.png",

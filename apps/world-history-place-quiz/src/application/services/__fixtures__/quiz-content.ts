@@ -7,11 +7,9 @@ import { vi } from "vitest";
 export const createMockChoice = (): Choice => {
 	return {
 		id: "choice-1",
-		value: "A",
-		text: "Choice 1",
+		text: "A",
 		getId: vi.fn().mockReturnValue("choice-1"),
-		getValue: vi.fn().mockReturnValue("A"),
-		getText: vi.fn().mockReturnValue("Choice 1"),
+		getText: vi.fn().mockReturnValue("A"),
 	} as unknown as Choice;
 };
 

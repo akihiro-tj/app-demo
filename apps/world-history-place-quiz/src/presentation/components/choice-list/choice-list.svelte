@@ -7,9 +7,9 @@ import { listStyle } from "./styles";
 export interface ChoiceListProps {
 	id: string;
 	choices: ChoiceViewModel[];
-	correctChoice: ChoiceViewModel["value"];
-	selectedChoice?: ChoiceViewModel["value"];
-	isAnswered?: boolean;
+	correctChoice: ChoiceViewModel["id"];
+	selectedChoice?: ChoiceViewModel["id"];
+	hasAnswered?: boolean;
 	onClickChoice: ChoiceClickEventHandler;
 }
 
@@ -25,7 +25,7 @@ const {
 	choices,
 	correctChoice,
 	selectedChoice,
-	isAnswered,
+	hasAnswered,
 	onClickChoice,
 }: ChoiceListProps = $props();
 
@@ -38,14 +38,14 @@ const handleClickChoice: MouseEventHandler<HTMLButtonElement> = (e) => {
 
 <ul class={listStyle}>
   {#each choices as choice (choice.id)}
-    {@const isSelected = choice.value === selectedChoice}
-    {@const isCorrect = choice.value === correctChoice}
+    {@const isSelected = choice.id === selectedChoice}
+    {@const isCorrect = choice.id === correctChoice}
     <li>
       <Choice
-        data-id={choice.value}
-        disabled={isAnswered}
+        data-id={choice.id}
+        disabled={hasAnswered}
         onclick={handleClickChoice}
-        isCorrect={isAnswered && (isSelected || isCorrect) ? isCorrect : undefined}
+        isCorrect={hasAnswered && (isSelected || isCorrect) ? isCorrect : undefined}
       >
         {choice.text}
       </Choice>

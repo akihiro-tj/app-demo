@@ -3,14 +3,9 @@ import { Choice } from "./choice";
 export interface QuestionProps {
 	id: string;
 	statement: string;
-	choices: ChoiceData[];
-	correctChoice: ChoiceData;
+	choices: string[];
+	correctChoice: number;
 	explanation: string;
-}
-
-interface ChoiceData {
-	value: number;
-	text: string;
 }
 
 export class Question {
@@ -33,12 +28,6 @@ export class Question {
 		if (!statement) {
 			throw new Error("Question statement must not be empty");
 		}
-		if (choices.length === 0) {
-			throw new Error("Question must have at least one choice");
-		}
-		if (correctChoice.getValue() >= choices.length) {
-			throw new Error("Correct choice value must be within choices range");
-		}
 		if (!explanation) {
 			throw new Error("Question explanation must not be empty");
 		}
@@ -51,18 +40,16 @@ export class Question {
 	}
 
 	static create(props: QuestionProps): Question {
-		const choices = props.choices.map((choice) =>
+		const choices = props.choices.map((choice, index) =>
 			Choice.create({
-				id: `${props.id}-${choice.value}`,
-				value: choice.value,
-				text: choice.text,
+				id: `${props.id}-${index}`,
+				text: choice,
 			}),
 		);
-		const correctChoice = Choice.create({
-			id: `${props.id}-${props.correctChoice.value}`,
-			value: props.correctChoice.value,
-			text: props.correctChoice.text,
-		});
+		const correctChoice = choices[props.correctChoice];
+		if (!correctChoice) {
+			throw new Error("Correct choice must be within choices range");
+		}
 		return new Question(
 			props.id,
 			props.statement,
