@@ -74,7 +74,6 @@ function mapQuestionToViewModel(
 function mapChoiceToViewModel(choice: Choice): ChoiceViewModel {
 	return {
 		id: choice.getId(),
-		value: choice.getValue(),
 		text: choice.getText(),
 	};
 }

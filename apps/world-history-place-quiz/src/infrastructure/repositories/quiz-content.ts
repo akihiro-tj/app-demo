@@ -36,7 +36,11 @@ export class FileQuizContentRepository implements IQuizContentRepository {
 			),
 		];
 
-		return QuizContent.create(contentId, metaInfo.title, questions);
+		return QuizContent.create({
+			id: contentId,
+			title: metaInfo.title,
+			questions,
+		});
 	}
 
 	async findAll(): Promise<QuizContent[]> {
