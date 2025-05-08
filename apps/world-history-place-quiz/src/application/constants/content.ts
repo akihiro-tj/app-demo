@@ -1,1 +1,1 @@
-export const CONTENT_PATH = "./contents";
+export const QUIZ_CONTENT_PATH = "./contents/quiz";
