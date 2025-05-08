@@ -7,7 +7,7 @@
       "outputs": [".svelte-kit/**", "dist", ".vercel/**"]
     },
     "test": {
-      "dependsOn": ["build"]
+      "dependsOn": ["^test"]
     },
     "dev": {
       "cache": false,
