@@ -5,6 +5,7 @@ import ChoiceList, {
 } from "@/presentation/components/choice-list/choice-list.svelte";
 import { visuallyHidden } from "styled-system/patterns";
 import { fade } from "svelte/transition";
+import { createQuizState } from "./helpers/quiz-state.svelte";
 import {
 	choiceListContainerStyle,
 	headingContainerStyle,
@@ -31,29 +32,20 @@ const { title, path, questions } = data.content;
 
 const metaInfo = generateMetaInfo({ title, path });
 
-let answers = $state(new Map<string, number>());
+const quizState = createQuizState(questions);
 
-const currentQuestionIndex = $derived(answers.size);
+const handleClickChoice: ChoiceClickEventHandler = (e) =>
+	quizState.setAnswer(e.choiceListId, e.choiceId);
 
-const correctCount = $derived(
-	questions.reduce((count, question) => {
-		const answer = answers.get(question.id);
-		return count + (answer === question.correctChoice.value ? 1 : 0);
-	}, 0),
-);
-
-const isQuestionVisible = (questionIndex: number) =>
-	questionIndex <= currentQuestionIndex;
-
-const isQuestionResultVisible = (questionId: string) =>
-	answers.get(questionId) !== undefined;
-
-const isTotalResultVisible = () => currentQuestionIndex === questions.length;
-
-const handleClickChoice: ChoiceClickEventHandler = (e) => {
-	const questionId = e.choiceListId;
-	const choiceId = e.choiceId;
-	answers = new Map(answers).set(questionId, Number(choiceId));
+const getCorrectText = (isCorrect: boolean | undefined) => {
+	switch (isCorrect) {
+		case true:
+			return "正解";
+		case false:
+			return "不正解";
+		default:
+			return "";
+	}
 };
 </script>
 
@@ -71,9 +63,10 @@ const handleClickChoice: ChoiceClickEventHandler = (e) => {
   </div>
   <div>
     {#each questions as question, qi (question.id)}
-      {#if isQuestionVisible(qi)}
+      {@const questionState = quizState.getQuestionState(qi)}
+      {#if questionState && questionState.isVisible}
         <section
-          class={questionStyle({ showBorder: isQuestionResultVisible(question.id) })}
+          class={questionStyle({ showBorder: questionState.selectedChoice !== undefined })}
           in:fade
         >
           <div class={headingContainerStyle}>
@@ -92,18 +85,17 @@ const handleClickChoice: ChoiceClickEventHandler = (e) => {
             <ChoiceList
               id={question.id}
               choices={question.choices}
-              correctChoice={question.correctChoice.value}
-              selectedChoice={answers.get(question.id)}
-              isAnswered={answers.has(question.id)}
+              correctChoice={question.correctChoice.id}
+              selectedChoice={questionState.selectedChoice}
+              hasAnswered={questionState.selectedChoice !== undefined}
               onClickChoice={handleClickChoice}
             />
           </div>
-          {#if isQuestionResultVisible(question.id)}
-            {@const isCorrect = answers.get(question.id) === question.correctChoice.value}
+          {#if questionState.selectedChoice !== undefined}
             <div in:fade>
               <div class={resultTextContainerStyle}>
-                <p class={resultTextStyle({ isCorrect })}>
-                  {isCorrect ? "正解" : "不正解"}
+                <p class={resultTextStyle({ isCorrect: questionState.isCorrect })}>
+                  {getCorrectText(questionState.isCorrect)}
                 </p>
               </div>
               <p class={visuallyHidden()}>{question.correctChoice.text}が正解です。</p>
@@ -113,14 +105,14 @@ const handleClickChoice: ChoiceClickEventHandler = (e) => {
         </section>
       {/if}
     {/each}
-    {#if isTotalResultVisible()}
+    {#if quizState.isTotalResultVisible}
       <section class={totalResultStyle} in:fade>
         <div class={headingContainerStyle}>
           <h2 class={questionNumberStyle}>結果</h2>
         </div>
         <p class={totalResultContainerStyle}>
           <span class={totalResultValueStyle}>
-            {correctCount} / {questions.length} 問
+            {quizState.correctCount} / {questions.length} 問
           </span>
           <span>正解</span>
         </p>
