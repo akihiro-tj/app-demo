@@ -10,7 +10,7 @@ export const mockQuestions: QuestionViewModel[] = [
 		],
 		correctChoice: { id: "q1-1", text: "B" },
 		explanation: "Explanation 1",
-		imagePath: "/content/q1.png",
+		imagePath: "/quiz/q1.png",
 	},
 	{
 		id: "q2",
@@ -22,7 +22,7 @@ export const mockQuestions: QuestionViewModel[] = [
 		],
 		correctChoice: { id: "q2-2", text: "C" },
 		explanation: "Explanation 2",
-		imagePath: "/content/q2.png",
+		imagePath: "/quiz/q2.png",
 	},
 	{
 		id: "q3",
@@ -34,6 +34,6 @@ export const mockQuestions: QuestionViewModel[] = [
 		],
 		correctChoice: { id: "q3-2", text: "C" },
 		explanation: "Explanation 3",
-		imagePath: "/content/q3.png",
+		imagePath: "/quiz/q3.png",
 	},
 ];
