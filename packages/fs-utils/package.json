@@ -2,6 +2,9 @@
 	"name": "@app-demo/fs-utils",
 	"version": "1.0.0",
 	"description": "",
+	"types": "./dist/index.d.ts",
+	"main": "./dist/index.js",
+	"module": "./dist/index.mjs",
 	"exports": {
 		".": {
 			"types": "./dist/index.d.ts",
