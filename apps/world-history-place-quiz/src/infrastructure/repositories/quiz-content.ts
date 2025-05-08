@@ -1,4 +1,3 @@
-import { ValidationError } from "@/domain/errors/validation-error";
 import { QuizContent } from "@/domain/models/quiz-content";
 import type { IQuizContentRepository } from "@/domain/repositories/quiz-content";
 import { metaInfoSchema } from "@/domain/schemas/meta-info";
@@ -6,7 +5,7 @@ import { orderSchema } from "@/domain/schemas/order";
 import { questionSchema } from "@/domain/schemas/question";
 import { FsUtils } from "@app-demo/fs-utils";
 import { z } from "zod";
-
+import { validateSchema } from "./helpers/validate-schema";
 export class FileQuizContentRepository implements IQuizContentRepository {
 	private readonly fsUtils: FsUtils;
 
@@ -28,12 +27,8 @@ export class FileQuizContentRepository implements IQuizContentRepository {
 		];
 
 		const [metaInfo, questions] = [
-			this.validateSchema(metaInfoSchema, rawMetaInfo, metaInfoFilePath),
-			this.validateSchema(
-				z.array(questionSchema),
-				rawQuestions,
-				questionsFilePath,
-			),
+			validateSchema(metaInfoSchema, rawMetaInfo, metaInfoFilePath),
+			validateSchema(z.array(questionSchema), rawQuestions, questionsFilePath),
 		];
 
 		return QuizContent.create({
@@ -46,7 +41,7 @@ export class FileQuizContentRepository implements IQuizContentRepository {
 	async findAll(): Promise<QuizContent[]> {
 		const orderFilePath = `${this.dataPath}/order.yaml`;
 		const rawOrder = this.fsUtils.loadYaml(orderFilePath);
-		const order = this.validateSchema(orderSchema, rawOrder, orderFilePath);
+		const order = validateSchema(orderSchema, rawOrder, orderFilePath);
 
 		const contents = await Promise.all(
 			order.map((contentId) => this.find(contentId)),
@@ -60,17 +55,5 @@ export class FileQuizContentRepository implements IQuizContentRepository {
 		});
 
 		return sortedContents;
-	}
-
-	private validateSchema<T>(
-		schema: z.ZodSchema<T>,
-		data: unknown,
-		filePath: string,
-	): T {
-		const result = schema.safeParse(data);
-		if (!result.success) {
-			throw new ValidationError(`Invalid data: '${filePath}'`, [result.error]);
-		}
-		return result.data;
 	}
 }
