@@ -8,4 +8,8 @@ export default defineConfig({
 			allow: ["styled-system"],
 		},
 	},
+	test: {
+		include: ["src/**/*.test.ts"],
+		environment: "jsdom",
+	},
 });

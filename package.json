@@ -4,6 +4,7 @@
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",
+    "test": "turbo run test",
     "check": "turbo run check",
     "check:write": "turbo run check:write"
   },
@@ -15,5 +16,10 @@
   "packageManager": "pnpm@9.0.0",
   "engines": {
     "node": ">=18"
-  }
+  },
+  "pnpm": {
+		"onlyBuiltDependencies": [
+			"esbuild"
+		]
+	}
 }

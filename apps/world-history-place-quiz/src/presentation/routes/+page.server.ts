@@ -1,13 +1,11 @@
-import { CONTENT_PATH } from "@/application/constants/content.constant";
-import { GetQuizContentUseCase } from "@/application/usecases/get-quiz-content.usecase";
-import { FileQuizContentRepository } from "@/infrastructure/repositories/quiz-content.repository";
+import { QUIZ_CONTENT_PATH } from "@/application/constants/content";
+import { getAllQuizContents } from "@/application/services/quiz-content";
+import { FileQuizContentRepository } from "@/infrastructure/repositories/quiz-content";
 
 export async function load() {
-	const quizContentRepository = new FileQuizContentRepository(CONTENT_PATH);
-	const getQuizContentUseCase = new GetQuizContentUseCase(
-		quizContentRepository,
+	const quizContentRepository = new FileQuizContentRepository(
+		QUIZ_CONTENT_PATH,
 	);
-	const contents = await getQuizContentUseCase.executeGetAll();
-
+	const contents = await getAllQuizContents(quizContentRepository);
 	return { contents };
 }
