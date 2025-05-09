@@ -1,42 +1,46 @@
 export interface GeoFeatureProps {
 	id: string;
-	type: string;
+	category: string;
 }
 
-export enum GeoFeatureType {
+export enum GeoFeatureCategory {
 	MOUNTAIN = "mountain",
 	ISLAND = "island",
 }
 
 export class GeoFeature {
 	private readonly id: string;
-	private readonly type: GeoFeatureType;
+	private readonly category: GeoFeatureCategory;
 
-	private constructor(id: string, type: string) {
+	private constructor(id: string, category: string) {
 		if (!id) {
 			throw new Error("GeoFeature id must not be empty");
 		}
-		if (!this.isGeoFeatureType(type)) {
-			throw new Error("Invalid GeoFeature type");
+		if (!this.isGeoFeatureCategory(category)) {
+			throw new Error("Invalid GeoFeature category");
 		}
 
 		this.id = id;
-		this.type = type;
+		this.category = category;
 	}
 
 	static create(props: GeoFeatureProps): GeoFeature {
-		return new GeoFeature(props.id, props.type);
+		return new GeoFeature(props.id, props.category);
 	}
 
-	private isGeoFeatureType(type: string): type is GeoFeatureType {
-		return Object.values(GeoFeatureType).includes(type as GeoFeatureType);
+	private isGeoFeatureCategory(
+		category: string,
+	): category is GeoFeatureCategory {
+		return Object.values(GeoFeatureCategory).includes(
+			category as GeoFeatureCategory,
+		);
 	}
 
 	getId(): string {
 		return this.id;
 	}
 
-	getType(): GeoFeatureType {
-		return this.type;
+	getCategory(): GeoFeatureCategory {
+		return this.category;
 	}
 }

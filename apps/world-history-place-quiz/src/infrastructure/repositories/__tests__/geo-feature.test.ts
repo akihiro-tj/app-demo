@@ -1,5 +1,5 @@
 import { ValidationError } from "@/domain/errors/validation-error";
-import { GeoFeature, GeoFeatureType } from "@/domain/models/geo-feature";
+import { GeoFeature, GeoFeatureCategory } from "@/domain/models/geo-feature";
 import { FsUtils } from "@app-demo/fs-utils";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import {
@@ -34,7 +34,7 @@ describe("FileGeoFeatureRepository", () => {
 
 			expect(results[0]).toBeInstanceOf(GeoFeature);
 			expect(results[0]?.getId()).toBe(validGeoFeature.id);
-			expect(results[0]?.getType()).toBe(GeoFeatureType.MOUNTAIN);
+			expect(results[0]?.getCategory()).toBe(GeoFeatureCategory.MOUNTAIN);
 		});
 
 		it("should throw ValidationError when invalid geo feature data is provided", async () => {

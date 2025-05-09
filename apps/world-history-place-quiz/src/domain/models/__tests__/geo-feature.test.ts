@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
 	invalidGeoFeatureWithEmptyId,
-	invalidGeoFeatureWithInvalidType,
+	invalidGeoFeatureWithInvalidCategory,
 	validGeoFeature,
 } from "../__fixtures__/geo-feature";
 import { GeoFeature } from "../geo-feature";
@@ -11,7 +11,7 @@ describe("GeoFeature", () => {
 		it("should create a valid geo feature", () => {
 			const geoFeature = GeoFeature.create(validGeoFeature);
 			expect(geoFeature.getId()).toBe(validGeoFeature.id);
-			expect(geoFeature.getType()).toBe(validGeoFeature.type);
+			expect(geoFeature.getCategory()).toBe(validGeoFeature.category);
 		});
 
 		it("should throw error when id is empty", () => {
@@ -20,10 +20,10 @@ describe("GeoFeature", () => {
 			);
 		});
 
-		it("should throw error when type is invalid", () => {
-			expect(() => GeoFeature.create(invalidGeoFeatureWithInvalidType)).toThrow(
-				"Invalid GeoFeature type",
-			);
+		it("should throw error when category is invalid", () => {
+			expect(() =>
+				GeoFeature.create(invalidGeoFeatureWithInvalidCategory),
+			).toThrow("Invalid GeoFeature category");
 		});
 	});
 });
