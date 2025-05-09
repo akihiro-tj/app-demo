@@ -1,8 +1,8 @@
-import { type GeoFeatureProps, GeoFeatureType } from "../geo-feature";
+import { GeoFeatureCategory, type GeoFeatureProps } from "../geo-feature";
 
 export const validGeoFeature: GeoFeatureProps = {
 	id: "ピレネー山脈",
-	type: GeoFeatureType.MOUNTAIN,
+	category: GeoFeatureCategory.MOUNTAIN,
 };
 
 export const invalidGeoFeatureWithEmptyId: GeoFeatureProps = {
@@ -10,7 +10,7 @@ export const invalidGeoFeatureWithEmptyId: GeoFeatureProps = {
 	id: "",
 };
 
-export const invalidGeoFeatureWithInvalidType: GeoFeatureProps = {
+export const invalidGeoFeatureWithInvalidCategory: GeoFeatureProps = {
 	...validGeoFeature,
-	type: "invalid-type",
+	category: "invalid-category",
 };

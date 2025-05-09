@@ -12,11 +12,13 @@ export class FileGeoFeatureRepository implements IGeoFeatureRepository {
 	}
 
 	async findAll(): Promise<GeoFeature[]> {
-		const geoFeatureTypes = this.fsUtils.getDirNames(this.dataPath);
-		const geoFeatures = geoFeatureTypes.flatMap((type) => {
-			const fileNames = this.fsUtils.getFileNames(`${this.dataPath}/${type}`);
+		const geoFeatureCategories = this.fsUtils.getDirNames(this.dataPath);
+		const geoFeatures = geoFeatureCategories.flatMap((category) => {
+			const fileNames = this.fsUtils.getFileNames(
+				`${this.dataPath}/${category}`,
+			);
 			return fileNames.map((fileName) => {
-				const filePath = `${this.dataPath}/${type}/${fileName}`;
+				const filePath = `${this.dataPath}/${category}/${fileName}`;
 				const rawGeoFeature = this.fsUtils.loadYaml(filePath);
 				const geoFeature = validateSchema(
 					geoFeatureSchema,
@@ -25,7 +27,7 @@ export class FileGeoFeatureRepository implements IGeoFeatureRepository {
 				);
 				return GeoFeature.create({
 					id: geoFeature.id,
-					type,
+					category,
 				});
 			});
 		});

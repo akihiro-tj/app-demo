@@ -1,5 +1,8 @@
 import { ValidationError } from "@/domain/errors/validation-error";
-import { type GeoFeature, GeoFeatureType } from "@/domain/models/geo-feature";
+import {
+	type GeoFeature,
+	GeoFeatureCategory,
+} from "@/domain/models/geo-feature";
 import type { IGeoFeatureRepository } from "@/domain/repositories/geo-feature";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import {
@@ -26,7 +29,7 @@ describe("GeoFeature Service", () => {
 			const result = await getGeoFeatures(mockGeoFeatureRepository);
 			expect(result[0]).toEqual({
 				id: "test-geo-feature",
-				type: GeoFeatureType.MOUNTAIN,
+				category: GeoFeatureCategory.MOUNTAIN,
 			});
 		});
 

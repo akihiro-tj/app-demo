@@ -22,6 +22,6 @@ export async function getGeoFeatures(
 function mapGeoFeatureToViewModel(geoFeature: GeoFeature): GeoFeatureViewModel {
 	return {
 		id: geoFeature.getId(),
-		type: geoFeature.getType(),
+		category: geoFeature.getCategory(),
 	};
 }

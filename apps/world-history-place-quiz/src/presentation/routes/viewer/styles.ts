@@ -11,3 +11,15 @@ export const canvasStyle = css({
 	h: "full",
 	bg: "slate.400",
 });
+
+export const filterContainerStyle = css({
+	position: "absolute",
+	top: "4",
+	left: "4",
+	w: "80",
+	h: "80",
+	p: "4",
+	bg: "white",
+	borderRadius: "md",
+	boxShadow: "md",
+});
