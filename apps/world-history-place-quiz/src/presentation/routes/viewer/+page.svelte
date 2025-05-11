@@ -97,33 +97,33 @@ const handleFilterChange: ChangeEventHandler<HTMLInputElement> = (e) => {
 
 <main class={mainColumnStyle}>
 	<canvas bind:this={deckCanvas} class={canvasStyle}></canvas>
-    <div class={filterPanelStyle({ visible: viewerState.isFilterPanelVisible })}>
-    <div class={filterCloseButtonContainerStyle}>
-      <button class={filterCloseButtonStyle} onclick={viewerState.hideFilterPanel}>
-        <X size="100%" />
-      </button>
-    </div>
-    {#each viewerState.filterGroups as filterGroup}
-      <div class={filterGroupContainerStyle}>
-        <div class={filterGroupHeadingContainerStyle}>
-          <h3 class={filterGroupHeadingStyle}>{filterGroup.label}</h3>
-        </div>
-        <div class={filterContainerStyle}>
-          {#each Object.entries(filterGroup.filter) as [category, isVisible]}
-            <label class={filterLabelStyle}>
-              <input
-                class={filterInputStyle}
-                data-id={category}
-                type="checkbox"
-                checked={isVisible}
-                onchange={handleFilterChange}
-            />
-              {GEO_FEATURE_CATEGORY_NAMES[category as GeoFeatureCategory]}
-            </label>
-          {/each}
-        </div>
+  <div class={filterPanelStyle({ visible: viewerState.isFilterPanelVisible })}>
+  <div class={filterCloseButtonContainerStyle}>
+    <button class={filterCloseButtonStyle} onclick={viewerState.hideFilterPanel}>
+      <X size="100%" />
+    </button>
+  </div>
+  {#each viewerState.filterGroups as filterGroup}
+    <div class={filterGroupContainerStyle}>
+      <div class={filterGroupHeadingContainerStyle}>
+        <h3 class={filterGroupHeadingStyle}>{filterGroup.label}</h3>
       </div>
-    {/each}
+      <div class={filterContainerStyle}>
+        {#each Object.entries(filterGroup.filter) as [category, isVisible]}
+          <label class={filterLabelStyle}>
+            <input
+              class={filterInputStyle}
+              data-id={category}
+              type="checkbox"
+              checked={isVisible}
+              onchange={handleFilterChange}
+          />
+            {GEO_FEATURE_CATEGORY_NAMES[category as GeoFeatureCategory]}
+          </label>
+        {/each}
+      </div>
+    </div>
+  {/each}
   </div>
   {#if !viewerState.isFilterPanelVisible}
     <button
