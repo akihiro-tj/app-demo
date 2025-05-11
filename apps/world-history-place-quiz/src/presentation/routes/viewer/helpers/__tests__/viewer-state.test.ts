@@ -10,12 +10,12 @@ describe("createViewerState", () => {
 		viewerState = createViewerState(mockGeoFeatures);
 	});
 
-	describe("isFilterContainerVisible", () => {
-		it("should return the filter container visible", () => {
-			viewerState.showFilterContainer();
-			expect(viewerState.isFilterContainerVisible).toBe(true);
-			viewerState.hideFilterContainer();
-			expect(viewerState.isFilterContainerVisible).toBe(false);
+	describe("isFilterPanelVisible", () => {
+		it("should return the filter panel visible", () => {
+			viewerState.showFilterPanel();
+			expect(viewerState.isFilterPanelVisible).toBe(true);
+			viewerState.hideFilterPanel();
+			expect(viewerState.isFilterPanelVisible).toBe(false);
 		});
 	});
 

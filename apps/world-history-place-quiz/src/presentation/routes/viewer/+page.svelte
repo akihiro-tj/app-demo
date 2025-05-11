@@ -97,9 +97,9 @@ const handleFilterChange: ChangeEventHandler<HTMLInputElement> = (e) => {
 
 <main class={mainColumnStyle}>
 	<canvas bind:this={deckCanvas} class={canvasStyle}></canvas>
-  <div class={filterPanelStyle({ visible: viewerState.isFilterContainerVisible })}>
+    <div class={filterPanelStyle({ visible: viewerState.isFilterPanelVisible })}>
     <div class={filterCloseButtonContainerStyle}>
-      <button class={filterCloseButtonStyle} onclick={viewerState.hideFilterContainer}>
+      <button class={filterCloseButtonStyle} onclick={viewerState.hideFilterPanel}>
         <X size="100%" />
       </button>
     </div>
@@ -125,10 +125,10 @@ const handleFilterChange: ChangeEventHandler<HTMLInputElement> = (e) => {
       </div>
     {/each}
   </div>
-  {#if !viewerState.isFilterContainerVisible}
+  {#if !viewerState.isFilterPanelVisible}
     <button
       class={filterOpenButtonStyle}
-      onclick={viewerState.showFilterContainer}
+      onclick={viewerState.showFilterPanel}
     >
       <Funnel size="100%" />
     </button>
