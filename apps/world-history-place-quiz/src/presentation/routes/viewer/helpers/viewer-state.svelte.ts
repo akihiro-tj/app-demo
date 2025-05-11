@@ -25,7 +25,7 @@ type Filter = {
 export const createViewerState = (
 	geoFeatures: GeoFeatureViewModel[],
 ): ViewerState => {
-	let isFilterContainerVisible = $state(true);
+	let isFilterContainerVisible = $state(window.innerWidth > 768);
 
 	const filterGroups = $state<FilterGroup[]>([
 		{
