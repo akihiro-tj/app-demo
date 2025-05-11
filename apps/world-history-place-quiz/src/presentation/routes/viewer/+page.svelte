@@ -1,12 +1,20 @@
 <script lang="ts">
 import { GeoFeatureCategory } from "@/domain/models/geo-feature";
 import { Deck, Layer, type MapViewState } from "@deck.gl/core";
+import { Funnel, X } from "@lucide/svelte";
 import { onMount } from "svelte";
 import type { ChangeEventHandler } from "svelte/elements";
 import { createViewerState } from "./helpers/viewer-state.svelte";
 import { getLandTileLayer } from "./layers/land-tile";
 import { getRegionTileLayer } from "./layers/region-tile";
-import { canvasStyle, filterContainerStyle, mainColumnStyle } from "./styles";
+import {
+	canvasStyle,
+	filterContainerStyle,
+	filterCloseButtonContainerStyle,
+	filterCloseButtonStyle,
+	filterOpenButtonStyle,
+	mainColumnStyle,
+} from "./styles";
 
 const INITIAL_VIEW_STATE: MapViewState = {
 	longitude: 18.382992,
@@ -83,22 +91,35 @@ const handleFilterChange: ChangeEventHandler<HTMLInputElement> = (e) => {
 
 <main class={mainColumnStyle}>
 	<canvas bind:this={deckCanvas} class={canvasStyle}></canvas>
-	<div class={filterContainerStyle}>
-		{#each viewerState.filterGroups as filterGroup}
-			<div>
-				<h3>{filterGroup.label}</h3>
-				{#each Object.entries(filterGroup.filter) as [category, isVisible]}
+  <div class={filterContainerStyle({ visible: viewerState.isFilterContainerVisible })}>
+    <div class={filterCloseButtonContainerStyle}>
+      <button class={filterCloseButtonStyle} onclick={viewerState.hideFilterContainer}>
+        <X size="100%" />
+      </button>
+    </div>
+    {#each viewerState.filterGroups as filterGroup}
+      <div>
+        <h3>{filterGroup.label}</h3>
+        {#each Object.entries(filterGroup.filter) as [category, isVisible]}
           <label>
             <input
               data-id={category}
               type="checkbox"
               checked={isVisible}
               onchange={handleFilterChange}
-					/>
-					{GEO_FEATURE_CATEGORY_NAMES[category as GeoFeatureCategory]}
-				</label>
-				{/each}
-			</div>
-		{/each}
-	</div>
+          />
+          {GEO_FEATURE_CATEGORY_NAMES[category as GeoFeatureCategory]}
+        </label>
+        {/each}
+      </div>
+    {/each}
+  </div>
+  {#if !viewerState.isFilterContainerVisible}
+    <button
+      class={filterOpenButtonStyle}
+      onclick={viewerState.showFilterContainer}
+    >
+      <Funnel size="100%" />
+    </button>
+  {/if}
 </main>

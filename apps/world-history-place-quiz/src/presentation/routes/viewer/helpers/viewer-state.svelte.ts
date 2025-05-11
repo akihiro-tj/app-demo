@@ -2,8 +2,11 @@ import { GeoFeatureCategory } from "@/domain/models/geo-feature";
 import type { GeoFeatureViewModel } from "@/presentation/models/geo-feature";
 
 interface ViewerState {
+	isFilterContainerVisible: boolean;
 	filterGroups: FilterGroup[];
 	geoFeaturesByCategory: GeoFeaturesByCategory;
+	showFilterContainer: () => void;
+	hideFilterContainer: () => void;
 	updateFilter: (category: GeoFeatureCategory, isVisible: boolean) => void;
 }
 
@@ -22,6 +25,8 @@ type Filter = {
 export const createViewerState = (
 	geoFeatures: GeoFeatureViewModel[],
 ): ViewerState => {
+	let isFilterContainerVisible = $state(true);
+
 	const filterGroups = $state<FilterGroup[]>([
 		{
 			id: "terrain",
@@ -57,11 +62,20 @@ export const createViewerState = (
 	);
 
 	return {
+		get isFilterContainerVisible(): boolean {
+			return isFilterContainerVisible;
+		},
 		get filterGroups(): FilterGroup[] {
 			return filterGroups;
 		},
 		get geoFeaturesByCategory(): GeoFeaturesByCategory {
 			return filteredGeoFeaturesByCategory;
+		},
+		showFilterContainer: () => {
+			isFilterContainerVisible = true;
+		},
+		hideFilterContainer: () => {
+			isFilterContainerVisible = false;
 		},
 		updateFilter: (category: GeoFeatureCategory, isVisible: boolean) => {
 			const targetFilterGroup = filterGroups.find((group) =>

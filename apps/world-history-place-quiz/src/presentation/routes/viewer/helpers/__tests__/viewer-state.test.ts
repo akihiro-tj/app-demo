@@ -10,6 +10,15 @@ describe("createViewerState", () => {
 		viewerState = createViewerState(mockGeoFeatures);
 	});
 
+	describe("isFilterContainerVisible", () => {
+		it("should return the filter container visible", () => {
+			viewerState.showFilterContainer();
+			expect(viewerState.isFilterContainerVisible).toBe(true);
+			viewerState.hideFilterContainer();
+			expect(viewerState.isFilterContainerVisible).toBe(false);
+		});
+	});
+
 	describe("filterGroups", () => {
 		it("should return the filter groups", () => {
 			viewerState.updateFilter(GeoFeatureCategory.MOUNTAIN, true);

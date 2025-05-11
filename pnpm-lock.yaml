@@ -41,6 +41,9 @@ importers:
       '@loaders.gl/pmtiles':
         specifier: ^4.3.3
         version: 4.3.3(@loaders.gl/core@4.3.3)
+      '@lucide/svelte':
+        specifier: ^0.509.0
+        version: 0.509.0(svelte@5.28.2)
       '@sveltejs/adapter-auto':
         specifier: ^4.0.0
         version: 4.0.0(@sveltejs/kit@2.20.8(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.28.2)(vite@6.3.5(@types/node@22.15.16)(lightningcss@1.25.1)))(svelte@5.28.2)(vite@6.3.5(@types/node@22.15.16)(lightningcss@1.25.1)))
@@ -580,6 +583,11 @@ packages:
     resolution: {integrity: sha512-PPNR9xBLfhBd4Fw69Ai5cUzIJZFCYg3DiYGeR8mA8ik9tuseH+hEBUSsmzU4RFP53xkPLLYvzXjVyiBzfbsjZg==}
     peerDependencies:
       '@loaders.gl/core': ^4.3.0
+
+  '@lucide/svelte@0.509.0':
+    resolution: {integrity: sha512-rG/oNz5HiuG+9xZawNxD08x5sIgvfIcFVDx7J2YAOHNK9+zDAro/DAhWLOdmE0eag5CYzxwAWh8LVowXpZvW/g==}
+    peerDependencies:
+      svelte: ^5
 
   '@luma.gl/constants@9.1.9':
     resolution: {integrity: sha512-yc9fml04OeTTcwK+7gmDMxoLQ67j4ZiAFXjmYvPomYyBVzS0NZxTDuwcCBmnxjLOiroOZW8FRRrVc/yOiFug2w==}
@@ -2814,6 +2822,10 @@ snapshots:
       '@loaders.gl/loader-utils': 4.3.3(@loaders.gl/core@4.3.3)
       jszip: 3.10.1
       md5: 2.3.0
+
+  '@lucide/svelte@0.509.0(svelte@5.28.2)':
+    dependencies:
+      svelte: 5.28.2
 
   '@luma.gl/constants@9.1.9': {}
 
