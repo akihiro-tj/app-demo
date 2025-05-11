@@ -93,3 +93,7 @@ export const filterLabelStyle = css({
 	userSelect: "none",
 	cursor: "pointer",
 });
+
+export const filterInputStyle = css({
+	cursor: "pointer",
+});

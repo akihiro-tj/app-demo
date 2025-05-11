@@ -15,6 +15,7 @@ import {
 	filterGroupContainerStyle,
 	filterGroupHeadingContainerStyle,
 	filterGroupHeadingStyle,
+	filterInputStyle,
 	filterLabelStyle,
 	filterOpenButtonStyle,
 	filterPanelStyle,
@@ -111,6 +112,7 @@ const handleFilterChange: ChangeEventHandler<HTMLInputElement> = (e) => {
           {#each Object.entries(filterGroup.filter) as [category, isVisible]}
             <label class={filterLabelStyle}>
               <input
+                class={filterInputStyle}
                 data-id={category}
                 type="checkbox"
                 checked={isVisible}
