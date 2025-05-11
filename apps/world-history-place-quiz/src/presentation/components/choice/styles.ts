@@ -7,9 +7,11 @@ export const buttonStyle = cva({
 		borderRadius: "sm",
 		bg: "slate.50",
 		fontWeight: "bold",
-		_hover: {
-			bg: "slate.100",
-			cursor: "pointer",
+		cursor: "pointer",
+		"@media (hover: hover)": {
+			_hover: {
+				bg: "slate.100",
+			},
 		},
 		_disabled: {
 			pointerEvents: "none",
