@@ -61,7 +61,6 @@ export const filterOpenButtonStyle = css({
 	justifyContent: "center",
 	w: "14",
 	h: "14",
-	p: "3",
 	bg: "white",
 	borderRadius: "full",
 	boxShadow: "md",

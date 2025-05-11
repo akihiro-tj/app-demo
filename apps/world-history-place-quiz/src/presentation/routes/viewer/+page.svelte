@@ -130,7 +130,7 @@ const handleFilterChange: ChangeEventHandler<HTMLInputElement> = (e) => {
       class={filterOpenButtonStyle}
       onclick={viewerState.showFilterPanel}
     >
-      <Funnel size="100%" />
+      <Funnel size={32} />
     </button>
   {/if}
 </main>
