@@ -9,10 +9,15 @@ import { getLandTileLayer } from "./layers/land-tile";
 import { getRegionTileLayer } from "./layers/region-tile";
 import {
 	canvasStyle,
-	filterContainerStyle,
 	filterCloseButtonContainerStyle,
 	filterCloseButtonStyle,
+	filterContainerStyle,
+	filterGroupContainerStyle,
+	filterGroupHeadingContainerStyle,
+	filterGroupHeadingStyle,
+	filterLabelStyle,
 	filterOpenButtonStyle,
+	filterPanelStyle,
 	mainColumnStyle,
 } from "./styles";
 
@@ -91,26 +96,30 @@ const handleFilterChange: ChangeEventHandler<HTMLInputElement> = (e) => {
 
 <main class={mainColumnStyle}>
 	<canvas bind:this={deckCanvas} class={canvasStyle}></canvas>
-  <div class={filterContainerStyle({ visible: viewerState.isFilterContainerVisible })}>
+  <div class={filterPanelStyle({ visible: viewerState.isFilterContainerVisible })}>
     <div class={filterCloseButtonContainerStyle}>
       <button class={filterCloseButtonStyle} onclick={viewerState.hideFilterContainer}>
         <X size="100%" />
       </button>
     </div>
     {#each viewerState.filterGroups as filterGroup}
-      <div>
-        <h3>{filterGroup.label}</h3>
-        {#each Object.entries(filterGroup.filter) as [category, isVisible]}
-          <label>
-            <input
-              data-id={category}
-              type="checkbox"
-              checked={isVisible}
-              onchange={handleFilterChange}
-          />
-          {GEO_FEATURE_CATEGORY_NAMES[category as GeoFeatureCategory]}
-        </label>
-        {/each}
+      <div class={filterGroupContainerStyle}>
+        <div class={filterGroupHeadingContainerStyle}>
+          <h3 class={filterGroupHeadingStyle}>{filterGroup.label}</h3>
+        </div>
+        <div class={filterContainerStyle}>
+          {#each Object.entries(filterGroup.filter) as [category, isVisible]}
+            <label class={filterLabelStyle}>
+              <input
+                data-id={category}
+                type="checkbox"
+                checked={isVisible}
+                onchange={handleFilterChange}
+            />
+              {GEO_FEATURE_CATEGORY_NAMES[category as GeoFeatureCategory]}
+            </label>
+          {/each}
+        </div>
       </div>
     {/each}
   </div>

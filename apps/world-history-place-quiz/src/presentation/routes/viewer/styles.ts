@@ -12,7 +12,7 @@ export const canvasStyle = css({
 	bg: "slate.400",
 });
 
-export const filterContainerStyle = cva({
+export const filterPanelStyle = cva({
 	base: {
 		transitionProperty: "all",
 		transitionDuration: "normal",
@@ -65,5 +65,31 @@ export const filterOpenButtonStyle = css({
 	bg: "white",
 	borderRadius: "full",
 	boxShadow: "md",
+	cursor: "pointer",
+});
+
+export const filterGroupContainerStyle = css({
+	mb: "3",
+});
+
+export const filterGroupHeadingContainerStyle = css({
+	mb: "1",
+});
+
+export const filterGroupHeadingStyle = css({
+	fontSize: "xl",
+	fontWeight: "bold",
+});
+
+export const filterContainerStyle = css({
+	display: "flex",
+	flexWrap: "wrap",
+	columnGap: "4",
+	rowGap: "1",
+});
+
+export const filterLabelStyle = css({
+	fontSize: "lg",
+	userSelect: "none",
 	cursor: "pointer",
 });
