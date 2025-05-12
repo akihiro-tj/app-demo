@@ -3,18 +3,19 @@ import { TileLayer } from "@deck.gl/geo-layers";
 import type { TileLayer as TileLayerType } from "@deck.gl/geo-layers";
 import { GeoJsonLayer } from "@deck.gl/layers";
 import { PMTilesTileSource } from "@loaders.gl/pmtiles";
-import { COLOR_TRANSPARENT } from "./constants";
-import { COLOR_FOREGROUND } from "./constants";
-import { ADMIN_TILE_SOURCE_URL } from "./constants";
-
-const LAND_TILE_LAYER_ID = "land-tile-layer";
+import {
+	COLOR_FOREGROUND,
+	COLOR_TRANSPARENT,
+	LAND_TILE_LAYER_ID,
+} from "./constants";
+import { LAND_TILE_SOURCE_URL } from "./constants";
 
 export const getLandTileLayer = (): TileLayerType => {
-	const adminTileSource = new PMTilesTileSource(ADMIN_TILE_SOURCE_URL, {});
+	const landTileSource = new PMTilesTileSource(LAND_TILE_SOURCE_URL, {});
 
 	return new TileLayer({
 		id: LAND_TILE_LAYER_ID,
-		getTileData: adminTileSource.getTileData,
+		getTileData: landTileSource.getTileData,
 		renderSubLayers: (props) => {
 			const bbox = props.tile.boundingBox;
 			return new GeoJsonLayer({

@@ -2,10 +2,13 @@ import { GeoFeatureCategory } from "@/domain/models/geo-feature";
 import type { Color } from "@deck.gl/core";
 import { hexToRgb } from "../helpers/hex-to-rgb";
 
-export const ADMIN_TILE_SOURCE_URL =
-	"/viewer/tiles/ne_50m_admin_0_countries--z10_z0.pmtiles";
-export const REGION_TILE_SOURCE_URL =
-	"/viewer/tiles/ne_50m_geography_regions_polys--z10_z0.pmtiles";
+export const LAND_TILE_SOURCE_URL = "/viewer/tiles/land.pmtiles";
+export const MOUNTAIN_TILE_SOURCE_URL = "/viewer/tiles/mountain.pmtiles";
+export const ISLAND_TILE_SOURCE_URL = "/viewer/tiles/island.pmtiles";
+
+export const LAND_TILE_LAYER_ID = "land-tile-layer";
+export const MOUNTAIN_TILE_LAYER_ID = "mountain-tile-layer";
+export const ISLAND_TILE_LAYER_ID = "island-tile-layer";
 
 export const COLOR_TRANSPARENT: Color = [0, 0, 0, 0];
 export const COLOR_FOREGROUND: Color = hexToRgb("#f1f5f9");

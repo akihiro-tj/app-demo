@@ -5,6 +5,7 @@ import { Funnel, X } from "@lucide/svelte";
 import { onMount } from "svelte";
 import type { ChangeEventHandler } from "svelte/elements";
 import { createViewerState } from "./helpers/viewer-state.svelte";
+import { getIslandTileLayer } from "./layers/island-tile";
 import { getLandTileLayer } from "./layers/land-tile";
 import { getMountainTileLayer } from "./layers/mountain-tile";
 import {
@@ -47,11 +48,12 @@ const viewerState = createViewerState();
 const render = () => {
 	const landTileLayer = getLandTileLayer();
 	const mountainTileLayer = getMountainTileLayer(viewerState.selectGeoFeature);
+	const islandTileLayer = getIslandTileLayer(viewerState.selectGeoFeature);
 	deck = new Deck({
 		canvas: deckCanvas,
 		initialViewState: INITIAL_VIEW_STATE,
 		controller: true,
-		layers: [landTileLayer, mountainTileLayer],
+		layers: [landTileLayer, mountainTileLayer, islandTileLayer],
 	});
 };
 
@@ -73,6 +75,9 @@ const updateLayers = (category: GeoFeatureCategory) => {
 					...layers,
 					getMountainTileLayer(viewerState.selectGeoFeature),
 				];
+				break;
+			case GeoFeatureCategory.ISLAND:
+				layers = [...layers, getIslandTileLayer(viewerState.selectGeoFeature)];
 				break;
 		}
 	}
