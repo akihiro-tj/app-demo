@@ -1,25 +1,27 @@
 <script lang="ts">
 import { GeoFeatureCategory } from "@/domain/models/geo-feature";
-import { Deck, Layer, type MapViewState } from "@deck.gl/core";
+import { Deck, type MapViewState } from "@deck.gl/core";
 import { Funnel, X } from "@lucide/svelte";
 import { onMount } from "svelte";
 import type { ChangeEventHandler } from "svelte/elements";
 import { createViewerState } from "./helpers/viewer-state.svelte";
 import { getLandTileLayer } from "./layers/land-tile";
-import { getRegionTileLayer } from "./layers/region-tile";
+import { getMountainTileLayer } from "./layers/mountain-tile";
 import {
 	canvasStyle,
-	filterCloseButtonContainerStyle,
-	filterCloseButtonStyle,
 	filterContainerStyle,
 	filterGroupContainerStyle,
 	filterGroupHeadingContainerStyle,
 	filterGroupHeadingStyle,
 	filterInputStyle,
 	filterLabelStyle,
-	filterOpenButtonStyle,
-	filterPanelStyle,
+	filterPanelOpenButtonStyle,
+	infoPanelHeadingContainerStyle,
+	infoPanelHeadingStyle,
 	mainColumnStyle,
+	sidePanelCloseButtonContainerStyle,
+	sidePanelCloseButtonStyle,
+	sidePanelStyle,
 } from "./styles";
 
 const INITIAL_VIEW_STATE: MapViewState = {
@@ -40,23 +42,16 @@ let deck: Deck;
 
 const { data } = $props();
 const { geoFeatures } = data;
-const viewerState = createViewerState(geoFeatures);
+const viewerState = createViewerState();
 
 const render = () => {
 	const landTileLayer = getLandTileLayer();
-	const mountainTileLayer = getRegionTileLayer(
-		GeoFeatureCategory.MOUNTAIN,
-		viewerState.geoFeaturesByCategory[GeoFeatureCategory.MOUNTAIN],
-	);
-	const islandTileLayer = getRegionTileLayer(
-		GeoFeatureCategory.ISLAND,
-		viewerState.geoFeaturesByCategory[GeoFeatureCategory.ISLAND],
-	);
+	const mountainTileLayer = getMountainTileLayer(viewerState.selectGeoFeature);
 	deck = new Deck({
 		canvas: deckCanvas,
 		initialViewState: INITIAL_VIEW_STATE,
 		controller: true,
-		layers: [landTileLayer, mountainTileLayer, islandTileLayer],
+		layers: [landTileLayer, mountainTileLayer],
 	});
 };
 
@@ -64,22 +59,22 @@ onMount(() => {
 	render();
 });
 
-const updateLayers = (category: GeoFeatureCategory, isVisible: boolean) => {
-	// TODO: Resolve type error
-	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-	let layers = deck.props.layers.filter((layer: any) => layer.id !== category);
+const updateLayers = (category: GeoFeatureCategory) => {
+	const isVisible = viewerState.filter[category];
+	let layers = deck.props.layers.filter(
+		// TODO: Resolve type error
+		// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+		(layer: any) => layer.id !== `${category}-tile-layer`,
+	);
 	if (isVisible) {
-		let newLayer: Layer;
 		switch (category) {
 			case GeoFeatureCategory.MOUNTAIN:
-			case GeoFeatureCategory.ISLAND:
-				newLayer = getRegionTileLayer(
-					category,
-					viewerState.geoFeaturesByCategory[category],
-				);
+				layers = [
+					...layers,
+					getMountainTileLayer(viewerState.selectGeoFeature),
+				];
 				break;
 		}
-		layers = [...layers, newLayer];
 	}
 	deck.setProps({ layers });
 };
@@ -87,9 +82,8 @@ const updateLayers = (category: GeoFeatureCategory, isVisible: boolean) => {
 const handleFilterChange: ChangeEventHandler<HTMLInputElement> = (e) => {
 	const target = e.currentTarget;
 	const category = target.getAttribute("data-id") as GeoFeatureCategory;
-	const isVisible = target.checked;
-	viewerState.updateFilter(category, isVisible);
-	updateLayers(category, isVisible);
+	viewerState.updateFilter(category, target.checked);
+	updateLayers(category);
 };
 </script>
 
@@ -97,40 +91,53 @@ const handleFilterChange: ChangeEventHandler<HTMLInputElement> = (e) => {
 
 <main class={mainColumnStyle}>
 	<canvas bind:this={deckCanvas} class={canvasStyle}></canvas>
-  <div class={filterPanelStyle({ visible: viewerState.isFilterPanelVisible })}>
-  <div class={filterCloseButtonContainerStyle}>
-    <button class={filterCloseButtonStyle} onclick={viewerState.hideFilterPanel}>
-      <X size="100%" />
-    </button>
-  </div>
-  {#each viewerState.filterGroups as filterGroup}
-    <div class={filterGroupContainerStyle}>
-      <div class={filterGroupHeadingContainerStyle}>
-        <h3 class={filterGroupHeadingStyle}>{filterGroup.label}</h3>
-      </div>
-      <div class={filterContainerStyle}>
-        {#each Object.entries(filterGroup.filter) as [category, isVisible]}
-          <label class={filterLabelStyle}>
-            <input
-              class={filterInputStyle}
-              data-id={category}
-              type="checkbox"
-              checked={isVisible}
-              onchange={handleFilterChange}
-          />
-            {GEO_FEATURE_CATEGORY_NAMES[category as GeoFeatureCategory]}
-          </label>
-        {/each}
-      </div>
+
+  <div class={sidePanelStyle({ visible: viewerState.isFilterPanelVisible })}>
+    <div class={sidePanelCloseButtonContainerStyle}>
+      <button class={sidePanelCloseButtonStyle} onclick={viewerState.hideFilterPanel}>
+        <X size="100%" />
+      </button>
     </div>
-  {/each}
+    {#each viewerState.filterGroups as filterGroup}
+      <div class={filterGroupContainerStyle}>
+        <div class={filterGroupHeadingContainerStyle}>
+          <h3 class={filterGroupHeadingStyle}>{filterGroup.label}</h3>
+        </div>
+        <div class={filterContainerStyle}>
+          {#each Object.entries(filterGroup.filter) as [category, isVisible]}
+            <label class={filterLabelStyle}>
+              <input
+                class={filterInputStyle}
+                data-id={category}
+                type="checkbox"
+                checked={isVisible}
+                onchange={handleFilterChange}
+            />
+              {GEO_FEATURE_CATEGORY_NAMES[category as GeoFeatureCategory]}
+            </label>
+          {/each}
+        </div>
+      </div>
+    {/each}
   </div>
+
+  <div class={sidePanelStyle({ visible: viewerState.selectedGeoFeatureId !== null })}>
+    <div class={sidePanelCloseButtonContainerStyle}>
+      <button class={sidePanelCloseButtonStyle} onclick={viewerState.unselectGeoFeature}>
+        <X size="100%" />
+      </button>
+    </div>
+    <div class={infoPanelHeadingContainerStyle}>
+      <h3 class={infoPanelHeadingStyle}>{viewerState.selectedGeoFeatureId}</h3>
+    </div>
+  </div>
+
   {#if !viewerState.isFilterPanelVisible}
     <button
-      class={filterOpenButtonStyle}
+      class={filterPanelOpenButtonStyle}
       onclick={viewerState.showFilterPanel}
     >
-      <Funnel size={32} />
+      <Funnel size={24} />
     </button>
   {/if}
 </main>

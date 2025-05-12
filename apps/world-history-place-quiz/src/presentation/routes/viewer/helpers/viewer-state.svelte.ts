@@ -1,13 +1,15 @@
 import { GeoFeatureCategory } from "@/domain/models/geo-feature";
-import type { GeoFeatureViewModel } from "@/presentation/models/geo-feature";
 
 interface ViewerState {
 	isFilterPanelVisible: boolean;
+	selectedGeoFeatureId: string | null;
 	filterGroups: FilterGroup[];
-	geoFeaturesByCategory: GeoFeaturesByCategory;
+	filter: Filter;
 	showFilterPanel: () => void;
 	hideFilterPanel: () => void;
 	updateFilter: (category: GeoFeatureCategory, isVisible: boolean) => void;
+	selectGeoFeature: (geoFeatureId: string) => void;
+	unselectGeoFeature: () => void;
 }
 
 interface FilterGroup {
@@ -16,16 +18,11 @@ interface FilterGroup {
 	filter: Filter;
 }
 
-type GeoFeaturesByCategory = Record<GeoFeatureCategory, GeoFeatureViewModel[]>;
+type Filter = Record<GeoFeatureCategory, boolean>;
 
-type Filter = {
-	[key in GeoFeatureCategory]: boolean;
-};
-
-export const createViewerState = (
-	geoFeatures: GeoFeatureViewModel[],
-): ViewerState => {
+export const createViewerState = (): ViewerState => {
 	let isFilterPanelVisible = $state(window.innerWidth > 768);
+	let selectedGeoFeatureId = $state<string | null>(null);
 
 	const filterGroups = $state<FilterGroup[]>([
 		{
@@ -38,41 +35,29 @@ export const createViewerState = (
 		},
 	]);
 
-	const allFilter = $derived<Filter>(
+	const flattenedFilter = $derived<Filter>(
 		filterGroups.reduce(
 			(acc, group) => Object.assign(acc, group.filter),
 			{} as Filter,
 		),
 	);
 
-	const geoFeaturesByCategory = $derived<GeoFeaturesByCategory>(
-		geoFeatures.reduce((acc, feature) => {
-			acc[feature.category] = [...(acc[feature.category] ?? []), feature];
-			return acc;
-		}, {} as GeoFeaturesByCategory),
-	);
-
-	const filteredGeoFeaturesByCategory = $derived<GeoFeaturesByCategory>(
-		Object.values(GeoFeatureCategory).reduce((acc, category) => {
-			acc[category] = geoFeaturesByCategory[category].filter(
-				(feature) => allFilter[feature.category],
-			);
-			return acc;
-		}, {} as GeoFeaturesByCategory),
-	);
-
 	return {
 		get isFilterPanelVisible(): boolean {
 			return isFilterPanelVisible;
 		},
+		get selectedGeoFeatureId(): string | null {
+			return selectedGeoFeatureId;
+		},
 		get filterGroups(): FilterGroup[] {
 			return filterGroups;
 		},
-		get geoFeaturesByCategory(): GeoFeaturesByCategory {
-			return filteredGeoFeaturesByCategory;
+		get filter(): Filter {
+			return flattenedFilter;
 		},
 		showFilterPanel: () => {
 			isFilterPanelVisible = true;
+			selectedGeoFeatureId = null;
 		},
 		hideFilterPanel: () => {
 			isFilterPanelVisible = false;
@@ -86,6 +71,13 @@ export const createViewerState = (
 			}
 			const targetFilter = targetFilterGroup.filter;
 			targetFilter[category] = isVisible;
+		},
+		selectGeoFeature: (geoFeatureId: string) => {
+			selectedGeoFeatureId = geoFeatureId;
+			isFilterPanelVisible = false;
+		},
+		unselectGeoFeature: () => {
+			selectedGeoFeatureId = null;
 		},
 	};
 };

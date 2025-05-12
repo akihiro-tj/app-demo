@@ -12,7 +12,7 @@ export const canvasStyle = css({
 	bg: "slate.400",
 });
 
-export const filterPanelStyle = cva({
+export const sidePanelStyle = cva({
 	base: {
 		transitionProperty: "all",
 		transitionDuration: "normal",
@@ -38,29 +38,29 @@ export const filterPanelStyle = cva({
 	},
 });
 
-export const filterCloseButtonContainerStyle = css({
+export const sidePanelCloseButtonContainerStyle = css({
 	display: "flex",
 	justifyContent: "flex-end",
 });
 
-export const filterCloseButtonStyle = css({
+export const sidePanelCloseButtonStyle = css({
 	display: "flex",
 	alignItems: "center",
 	justifyContent: "center",
-	w: "10",
-	h: "10",
+	w: "9",
+	h: "9",
 	cursor: "pointer",
 });
 
-export const filterOpenButtonStyle = css({
+export const filterPanelOpenButtonStyle = css({
 	position: "absolute",
 	bottom: "4",
-	right: "4",
+	left: "4",
 	display: "flex",
 	alignItems: "center",
 	justifyContent: "center",
-	w: "14",
-	h: "14",
+	w: "12",
+	h: "12",
 	bg: "white",
 	borderRadius: "full",
 	boxShadow: "md",
@@ -95,4 +95,13 @@ export const filterLabelStyle = css({
 
 export const filterInputStyle = css({
 	cursor: "pointer",
+});
+
+export const infoPanelHeadingContainerStyle = css({
+	mb: "1",
+});
+
+export const infoPanelHeadingStyle = css({
+	fontSize: "xl",
+	fontWeight: "bold",
 });
