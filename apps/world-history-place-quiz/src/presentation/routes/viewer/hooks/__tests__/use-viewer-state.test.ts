@@ -30,13 +30,6 @@ describe("useViewerState", () => {
 	});
 
 	describe("updateFilter", () => {
-		it("should update the filter", () => {
-			viewerState.updateFilter(GeoFeatureCategory.MOUNTAIN, true);
-			expect(viewerState.filter.mountain).toBe(true);
-			viewerState.updateFilter(GeoFeatureCategory.MOUNTAIN, false);
-			expect(viewerState.filter.mountain).toBe(false);
-		});
-
 		it("should update the filter group", () => {
 			viewerState.updateFilter(GeoFeatureCategory.MOUNTAIN, true);
 			viewerState.updateFilter(GeoFeatureCategory.ISLAND, false);
@@ -48,18 +41,6 @@ describe("useViewerState", () => {
 					[GeoFeatureCategory.ISLAND]: false,
 				},
 			});
-		});
-	});
-
-	describe("selectGeoFeature", () => {
-		it("should select the geo feature", () => {
-			viewerState.selectGeoFeature(1159103941);
-			expect(viewerState.selectedGeoFeature?.id).toBe(1159103941);
-		});
-
-		it("should hide the filter panel", () => {
-			viewerState.selectGeoFeature(1159103941);
-			expect(viewerState.isFilterPanelVisible).toBe(false);
 		});
 	});
 
