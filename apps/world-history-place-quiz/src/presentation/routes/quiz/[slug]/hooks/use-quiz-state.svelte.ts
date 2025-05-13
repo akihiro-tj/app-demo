@@ -13,7 +13,7 @@ interface QuestionState {
 	isCorrect: boolean | undefined;
 }
 
-export const createQuizState = (questions: QuestionViewModel[]): QuizState => {
+export const useQuizState = (questions: QuestionViewModel[]): QuizState => {
 	let answers = $state(new Map<string, string>());
 
 	const currentQuestionIndex = $derived(answers.size);

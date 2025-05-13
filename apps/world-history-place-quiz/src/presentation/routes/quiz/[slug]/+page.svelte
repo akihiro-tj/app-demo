@@ -5,7 +5,7 @@ import ChoiceList, {
 } from "@/presentation/components/choice-list/choice-list.svelte";
 import { visuallyHidden } from "styled-system/patterns";
 import { fade } from "svelte/transition";
-import { createQuizState } from "./helpers/quiz-state.svelte";
+import { useQuizState } from "./hooks/use-quiz-state.svelte";
 import {
 	choiceListContainerStyle,
 	headingContainerStyle,
@@ -32,7 +32,7 @@ const { title, path, questions } = data.content;
 
 const metaInfo = generateMetaInfo({ title, path });
 
-const quizState = createQuizState(questions);
+const quizState = useQuizState(questions);
 
 const handleClickChoice: ChoiceClickEventHandler = (e) =>
 	quizState.setAnswer(e.choiceListId, e.choiceId);
