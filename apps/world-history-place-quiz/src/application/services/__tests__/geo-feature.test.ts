@@ -28,7 +28,8 @@ describe("GeoFeature Service", () => {
 
 			const result = await getGeoFeatures(mockGeoFeatureRepository);
 			expect(result[0]).toEqual({
-				id: "test-geo-feature",
+				id: 1159103941,
+				name: "ピレネー山脈",
 				category: GeoFeatureCategory.MOUNTAIN,
 			});
 		});

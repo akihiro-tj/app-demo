@@ -27,6 +27,7 @@ export class FileGeoFeatureRepository implements IGeoFeatureRepository {
 				);
 				return GeoFeature.create({
 					id: geoFeature.id,
+					name: geoFeature.name,
 					category,
 				});
 			});

@@ -8,7 +8,7 @@ import { PMTilesTileSource } from "@loaders.gl/pmtiles";
 import { ISLAND_TILE_LAYER_ID, ISLAND_TILE_SOURCE_URL } from "./constants";
 
 export const getIslandTileLayer = (
-	onClick: (geoFeatureId: string) => void,
+	onClick: (geoFeatureId: number) => void,
 ): TileLayerType => {
 	const islandTileSource = new PMTilesTileSource(ISLAND_TILE_SOURCE_URL, {});
 
@@ -16,7 +16,7 @@ export const getIslandTileLayer = (
 		id: ISLAND_TILE_LAYER_ID,
 		getTileData: islandTileSource.getTileData,
 		onClick: (info) => {
-			onClick(info.object.properties.NAME_JA);
+			onClick(info.object.properties.NE_ID);
 		},
 		renderSubLayers: (props) => {
 			const bbox = props.tile.boundingBox;

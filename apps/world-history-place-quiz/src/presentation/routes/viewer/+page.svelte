@@ -43,7 +43,7 @@ let deck: Deck;
 
 const { data } = $props();
 const { geoFeatures } = data;
-const viewerState = createViewerState();
+const viewerState = createViewerState(geoFeatures);
 
 const render = () => {
 	const landTileLayer = getLandTileLayer();
@@ -126,14 +126,14 @@ const handleFilterChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     {/each}
   </div>
 
-  <div class={sidePanelStyle({ visible: viewerState.selectedGeoFeatureId !== null })}>
+  <div class={sidePanelStyle({ visible: viewerState.selectedGeoFeature !== null })}>
     <div class={sidePanelCloseButtonContainerStyle}>
       <button class={sidePanelCloseButtonStyle} onclick={viewerState.unselectGeoFeature}>
         <X size="100%" />
       </button>
     </div>
     <div class={infoPanelHeadingContainerStyle}>
-      <h3 class={infoPanelHeadingStyle}>{viewerState.selectedGeoFeatureId}</h3>
+      <h3 class={infoPanelHeadingStyle}>{viewerState.selectedGeoFeature?.name}</h3>
     </div>
   </div>
 

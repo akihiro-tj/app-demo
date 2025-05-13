@@ -8,9 +8,11 @@ import { vi } from "vitest";
 export const createMockGeoFeatures = (): GeoFeature[] => {
 	return [
 		{
-			id: "test-geo-feature",
+			id: 1159103941,
+			name: "ピレネー山脈",
 			category: GeoFeatureCategory.MOUNTAIN,
-			getId: vi.fn().mockReturnValue("test-geo-feature"),
+			getId: vi.fn().mockReturnValue(1159103941),
+			getName: vi.fn().mockReturnValue("ピレネー山脈"),
 			getCategory: vi.fn().mockReturnValue(GeoFeatureCategory.MOUNTAIN),
 		} as unknown as GeoFeature,
 	];

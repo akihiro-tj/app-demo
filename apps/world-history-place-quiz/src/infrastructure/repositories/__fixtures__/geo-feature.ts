@@ -1,5 +1,6 @@
 export const validGeoFeature = {
-	id: "test-geo-feature",
+	id: 1159103941,
+	name: "ピレネー山脈",
 };
 
 export const invalidGeoFeature = {};

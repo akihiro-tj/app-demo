@@ -1,5 +1,6 @@
 import { z } from "zod";
 
 export const geoFeatureSchema = z.object({
-	id: z.string(),
+	id: z.number(),
+	name: z.string(),
 });

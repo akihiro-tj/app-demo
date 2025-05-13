@@ -1,12 +1,12 @@
 import { GeoFeatureCategory } from "@/domain/models/geo-feature";
 import { beforeEach, describe, expect, it } from "vitest";
+import { mockGeoFeatures } from "../__fixtures__/geo-feature";
 import { createViewerState } from "../viewer-state.svelte";
-
 describe("createViewerState", () => {
 	let viewerState: ReturnType<typeof createViewerState>;
 
 	beforeEach(() => {
-		viewerState = createViewerState();
+		viewerState = createViewerState(mockGeoFeatures);
 	});
 
 	describe("showFilterPanel", () => {
@@ -17,7 +17,7 @@ describe("createViewerState", () => {
 
 		it("should unselect the geo feature", () => {
 			viewerState.showFilterPanel();
-			expect(viewerState.selectedGeoFeatureId).toBeNull();
+			expect(viewerState.selectedGeoFeature).toBeNull();
 		});
 	});
 
@@ -52,12 +52,12 @@ describe("createViewerState", () => {
 
 	describe("selectGeoFeature", () => {
 		it("should select the geo feature", () => {
-			viewerState.selectGeoFeature("pyrenees");
-			expect(viewerState.selectedGeoFeatureId).toBe("pyrenees");
+			viewerState.selectGeoFeature(1159103941);
+			expect(viewerState.selectedGeoFeature?.id).toBe(1159103941);
 		});
 
 		it("should hide the filter panel", () => {
-			viewerState.selectGeoFeature("pyrenees");
+			viewerState.selectGeoFeature(1159103941);
 			expect(viewerState.isFilterPanelVisible).toBe(false);
 		});
 	});
@@ -65,7 +65,7 @@ describe("createViewerState", () => {
 	describe("unselectGeoFeature", () => {
 		it("should unselect the geo feature", () => {
 			viewerState.unselectGeoFeature();
-			expect(viewerState.selectedGeoFeatureId).toBeNull();
+			expect(viewerState.selectedGeoFeature).toBeNull();
 		});
 	});
 });

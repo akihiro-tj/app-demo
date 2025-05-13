@@ -34,6 +34,7 @@ describe("FileGeoFeatureRepository", () => {
 
 			expect(results[0]).toBeInstanceOf(GeoFeature);
 			expect(results[0]?.getId()).toBe(validGeoFeature.id);
+			expect(results[0]?.getName()).toBe(validGeoFeature.name);
 			expect(results[0]?.getCategory()).toBe(GeoFeatureCategory.MOUNTAIN);
 		});
 

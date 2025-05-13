@@ -8,7 +8,7 @@ import { PMTilesTileSource } from "@loaders.gl/pmtiles";
 import { MOUNTAIN_TILE_LAYER_ID, MOUNTAIN_TILE_SOURCE_URL } from "./constants";
 
 export const getMountainTileLayer = (
-	onClick: (geoFeatureId: string) => void,
+	onClick: (geoFeatureId: number) => void,
 ): TileLayerType => {
 	const mountainTileSource = new PMTilesTileSource(
 		MOUNTAIN_TILE_SOURCE_URL,
@@ -19,7 +19,7 @@ export const getMountainTileLayer = (
 		id: MOUNTAIN_TILE_LAYER_ID,
 		getTileData: mountainTileSource.getTileData,
 		onClick: (info) => {
-			onClick(info.object.properties.NAME_JA);
+			onClick(info.object.properties.NE_ID);
 		},
 		renderSubLayers: (props) => {
 			const bbox = props.tile.boundingBox;

@@ -1,5 +1,6 @@
 export interface GeoFeatureProps {
-	id: string;
+	id: number;
+	name: string;
 	category: string;
 }
 
@@ -9,10 +10,11 @@ export enum GeoFeatureCategory {
 }
 
 export class GeoFeature {
-	private readonly id: string;
+	private readonly id: number;
+	private readonly name: string;
 	private readonly category: GeoFeatureCategory;
 
-	private constructor(id: string, category: string) {
+	private constructor(id: number, name: string, category: string) {
 		if (!id) {
 			throw new Error("GeoFeature id must not be empty");
 		}
@@ -21,11 +23,12 @@ export class GeoFeature {
 		}
 
 		this.id = id;
+		this.name = name;
 		this.category = category;
 	}
 
 	static create(props: GeoFeatureProps): GeoFeature {
-		return new GeoFeature(props.id, props.category);
+		return new GeoFeature(props.id, props.name, props.category);
 	}
 
 	private isGeoFeatureCategory(
@@ -36,8 +39,12 @@ export class GeoFeature {
 		);
 	}
 
-	getId(): string {
+	getId(): number {
 		return this.id;
+	}
+
+	getName(): string {
+		return this.name;
 	}
 
 	getCategory(): GeoFeatureCategory {

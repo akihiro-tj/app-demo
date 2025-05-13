@@ -1,14 +1,15 @@
 import { GeoFeatureCategory } from "@/domain/models/geo-feature";
+import type { GeoFeatureViewModel } from "@/presentation/models/geo-feature";
 
 interface ViewerState {
 	isFilterPanelVisible: boolean;
-	selectedGeoFeatureId: string | null;
+	selectedGeoFeature: GeoFeatureViewModel | null;
 	filterGroups: FilterGroup[];
 	filter: Filter;
 	showFilterPanel: () => void;
 	hideFilterPanel: () => void;
 	updateFilter: (category: GeoFeatureCategory, isVisible: boolean) => void;
-	selectGeoFeature: (geoFeatureId: string) => void;
+	selectGeoFeature: (geoFeatureId: number) => void;
 	unselectGeoFeature: () => void;
 }
 
@@ -20,9 +21,11 @@ interface FilterGroup {
 
 type Filter = Record<GeoFeatureCategory, boolean>;
 
-export const createViewerState = (): ViewerState => {
+export const createViewerState = (
+	geoFeatures: GeoFeatureViewModel[],
+): ViewerState => {
 	let isFilterPanelVisible = $state(window.innerWidth > 768);
-	let selectedGeoFeatureId = $state<string | null>(null);
+	let selectedGeoFeature = $state<GeoFeatureViewModel | null>(null);
 
 	const filterGroups = $state<FilterGroup[]>([
 		{
@@ -46,8 +49,8 @@ export const createViewerState = (): ViewerState => {
 		get isFilterPanelVisible(): boolean {
 			return isFilterPanelVisible;
 		},
-		get selectedGeoFeatureId(): string | null {
-			return selectedGeoFeatureId;
+		get selectedGeoFeature(): GeoFeatureViewModel | null {
+			return selectedGeoFeature;
 		},
 		get filterGroups(): FilterGroup[] {
 			return filterGroups;
@@ -57,7 +60,7 @@ export const createViewerState = (): ViewerState => {
 		},
 		showFilterPanel: () => {
 			isFilterPanelVisible = true;
-			selectedGeoFeatureId = null;
+			selectedGeoFeature = null;
 		},
 		hideFilterPanel: () => {
 			isFilterPanelVisible = false;
@@ -72,12 +75,14 @@ export const createViewerState = (): ViewerState => {
 			const targetFilter = targetFilterGroup.filter;
 			targetFilter[category] = isVisible;
 		},
-		selectGeoFeature: (geoFeatureId: string) => {
-			selectedGeoFeatureId = geoFeatureId;
+		selectGeoFeature: (geoFeatureId: number) => {
+			selectedGeoFeature =
+				geoFeatures.find((geoFeature) => geoFeature.id === geoFeatureId) ??
+				null;
 			isFilterPanelVisible = false;
 		},
 		unselectGeoFeature: () => {
-			selectedGeoFeatureId = null;
+			selectedGeoFeature = null;
 		},
 	};
 };
