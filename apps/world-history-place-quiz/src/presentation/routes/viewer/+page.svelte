@@ -4,7 +4,7 @@ import { Deck, type MapViewState } from "@deck.gl/core";
 import { Funnel, X } from "@lucide/svelte";
 import { onMount } from "svelte";
 import type { ChangeEventHandler } from "svelte/elements";
-import { createViewerState } from "./helpers/viewer-state.svelte";
+import { useViewerState } from "./hooks/use-viewer-state.svelte";
 import { getIslandTileLayer } from "./layers/island-tile";
 import { getLandTileLayer } from "./layers/land-tile";
 import { getMountainTileLayer } from "./layers/mountain-tile";
@@ -43,7 +43,7 @@ let deck: Deck;
 
 const { data } = $props();
 const { geoFeatures } = data;
-const viewerState = createViewerState(geoFeatures);
+const viewerState = useViewerState(geoFeatures);
 
 const render = () => {
 	const landTileLayer = getLandTileLayer();
