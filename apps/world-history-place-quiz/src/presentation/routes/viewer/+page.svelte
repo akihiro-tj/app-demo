@@ -54,6 +54,15 @@ const render = () => {
 		initialViewState: INITIAL_VIEW_STATE,
 		controller: true,
 		layers: [landTileLayer, mountainTileLayer, islandTileLayer],
+		getCursor: (state) => {
+			if (state.isHovering) {
+				return "pointer";
+			}
+			if (state.isDragging) {
+				return "grabbing";
+			}
+			return "grab";
+		},
 	});
 };
 
