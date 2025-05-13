@@ -14,6 +14,9 @@ export const COLOR_TRANSPARENT: Color = [0, 0, 0, 0];
 export const COLOR_FOREGROUND: Color = hexToRgb("#f1f5f9");
 export const COLOR_BACKGROUND: Color = hexToRgb("#94a3b8");
 
+export const COLOR_MOUNTAIN: Color = hexToRgb("#14b8a6");
+export const COLOR_ISLAND: Color = hexToRgb("#f43f5e");
+
 export const GEO_FEATURE_COLORS: Record<GeoFeatureCategory, Color> = {
 	[GeoFeatureCategory.MOUNTAIN]: [0, 255, 0],
 	[GeoFeatureCategory.ISLAND]: [0, 0, 255],

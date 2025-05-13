@@ -1,3 +1,4 @@
+import type { Color } from "@deck.gl/core";
 import { ClipExtension } from "@deck.gl/extensions";
 import {
 	TileLayer,
@@ -5,7 +6,12 @@ import {
 } from "@deck.gl/geo-layers";
 import { GeoJsonLayer } from "@deck.gl/layers";
 import { PMTilesTileSource } from "@loaders.gl/pmtiles";
-import { ISLAND_TILE_LAYER_ID, ISLAND_TILE_SOURCE_URL } from "./constants";
+import {
+	COLOR_ISLAND,
+	FILL_OPACITY,
+	ISLAND_TILE_LAYER_ID,
+	ISLAND_TILE_SOURCE_URL,
+} from "./constants";
 
 export const getIslandTileLayer = (
 	onClick: (geoFeatureId: number) => void,
@@ -25,8 +31,8 @@ export const getIslandTileLayer = (
 				data: props.data,
 				extensions: [new ClipExtension()],
 				clipBounds: [bbox[0][0], bbox[0][1], bbox[1][0], bbox[1][1]],
-				getFillColor: [0, 0, 255],
-				getLineColor: [0, 0, 255],
+				getFillColor: [...COLOR_ISLAND, 255 * FILL_OPACITY] as Color,
+				getLineColor: COLOR_ISLAND,
 				lineWidthMinPixels: 3,
 				pickable: true,
 			});

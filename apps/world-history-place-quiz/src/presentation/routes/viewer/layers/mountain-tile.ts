@@ -1,3 +1,4 @@
+import type { Color } from "@deck.gl/core";
 import { ClipExtension } from "@deck.gl/extensions";
 import {
 	TileLayer,
@@ -5,7 +6,12 @@ import {
 } from "@deck.gl/geo-layers";
 import { GeoJsonLayer } from "@deck.gl/layers";
 import { PMTilesTileSource } from "@loaders.gl/pmtiles";
-import { MOUNTAIN_TILE_LAYER_ID, MOUNTAIN_TILE_SOURCE_URL } from "./constants";
+import {
+	COLOR_MOUNTAIN,
+	FILL_OPACITY,
+	MOUNTAIN_TILE_LAYER_ID,
+	MOUNTAIN_TILE_SOURCE_URL,
+} from "./constants";
 
 export const getMountainTileLayer = (
 	onClick: (geoFeatureId: number) => void,
@@ -28,8 +34,8 @@ export const getMountainTileLayer = (
 				data: props.data,
 				extensions: [new ClipExtension()],
 				clipBounds: [bbox[0][0], bbox[0][1], bbox[1][0], bbox[1][1]],
-				getFillColor: [0, 255, 0],
-				getLineColor: [0, 255, 0],
+				getFillColor: [...COLOR_MOUNTAIN, 255 * FILL_OPACITY] as Color,
+				getLineColor: COLOR_MOUNTAIN,
 				lineWidthMinPixels: 3,
 				pickable: true,
 			});
