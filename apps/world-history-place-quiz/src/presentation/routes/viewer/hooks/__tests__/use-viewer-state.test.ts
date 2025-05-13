@@ -1,7 +1,8 @@
 import { GeoFeatureCategory } from "@/domain/models/geo-feature";
 import { beforeEach, describe, expect, it } from "vitest";
 import { mockGeoFeatures } from "../__fixtures__/geo-feature";
-import { createViewerState } from "../viewer-state.svelte";
+import { createViewerState } from "../use-viewer-state.svelte";
+
 describe("createViewerState", () => {
 	let viewerState: ReturnType<typeof createViewerState>;
 
