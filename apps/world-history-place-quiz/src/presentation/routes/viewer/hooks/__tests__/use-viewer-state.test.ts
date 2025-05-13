@@ -1,13 +1,13 @@
 import { GeoFeatureCategory } from "@/domain/models/geo-feature";
 import { beforeEach, describe, expect, it } from "vitest";
 import { mockGeoFeatures } from "../__fixtures__/geo-feature";
-import { createViewerState } from "../use-viewer-state.svelte";
+import { useViewerState } from "../use-viewer-state.svelte";
 
-describe("createViewerState", () => {
-	let viewerState: ReturnType<typeof createViewerState>;
+describe("useViewerState", () => {
+	let viewerState: ReturnType<typeof useViewerState>;
 
 	beforeEach(() => {
-		viewerState = createViewerState(mockGeoFeatures);
+		viewerState = useViewerState(mockGeoFeatures);
 	});
 
 	describe("showFilterPanel", () => {

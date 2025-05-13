@@ -21,7 +21,7 @@ interface FilterGroup {
 
 type Filter = Record<GeoFeatureCategory, boolean>;
 
-export const createViewerState = (
+export const useViewerState = (
 	geoFeatures: GeoFeatureViewModel[],
 ): ViewerState => {
 	let isFilterPanelVisible = $state(window.innerWidth > 768);
