@@ -1,15 +1,18 @@
 import { GeoFeatureCategory } from "@/domain/models/geo-feature";
 import type { GeoFeatureViewModel } from "@/presentation/models/geo-feature";
+import type { Deck, Layer } from "@deck.gl/core";
+import { getIslandTileLayer } from "../layers/island-tile";
+import { getLandTileLayer } from "../layers/land-tile";
+import { getMountainTileLayer } from "../layers/mountain-tile";
 
 interface ViewerState {
 	isFilterPanelVisible: boolean;
 	selectedGeoFeature: GeoFeatureViewModel | null;
 	filterGroups: FilterGroup[];
-	filter: Filter;
+	layers: Layer[];
 	showFilterPanel: () => void;
 	hideFilterPanel: () => void;
 	updateFilter: (category: GeoFeatureCategory, isVisible: boolean) => void;
-	selectGeoFeature: (geoFeatureId: number) => void;
 	unselectGeoFeature: () => void;
 }
 
@@ -22,6 +25,7 @@ interface FilterGroup {
 type Filter = Record<GeoFeatureCategory, boolean>;
 
 export const useViewerState = (
+	deck: Deck | undefined,
 	geoFeatures: GeoFeatureViewModel[],
 ): ViewerState => {
 	let isFilterPanelVisible = $state(window.innerWidth > 768);
@@ -45,6 +49,30 @@ export const useViewerState = (
 		),
 	);
 
+	const updateGeoFeature = (geoFeatureId: number) => {
+		selectedGeoFeature =
+			geoFeatures.find((geoFeature) => geoFeature.id === geoFeatureId) ?? null;
+		isFilterPanelVisible = false;
+	};
+
+	const layers = $derived<Layer[]>([
+		getLandTileLayer(),
+		getMountainTileLayer(
+			flattenedFilter[GeoFeatureCategory.MOUNTAIN],
+			updateGeoFeature,
+		),
+		getIslandTileLayer(
+			flattenedFilter[GeoFeatureCategory.ISLAND],
+			updateGeoFeature,
+		),
+	]);
+
+	$effect(() => {
+		if (deck) {
+			deck.setProps({ layers });
+		}
+	});
+
 	return {
 		get isFilterPanelVisible(): boolean {
 			return isFilterPanelVisible;
@@ -55,8 +83,8 @@ export const useViewerState = (
 		get filterGroups(): FilterGroup[] {
 			return filterGroups;
 		},
-		get filter(): Filter {
-			return flattenedFilter;
+		get layers(): Layer[] {
+			return layers;
 		},
 		showFilterPanel: () => {
 			isFilterPanelVisible = true;
@@ -74,12 +102,6 @@ export const useViewerState = (
 			}
 			const targetFilter = targetFilterGroup.filter;
 			targetFilter[category] = isVisible;
-		},
-		selectGeoFeature: (geoFeatureId: number) => {
-			selectedGeoFeature =
-				geoFeatures.find((geoFeature) => geoFeature.id === geoFeatureId) ??
-				null;
-			isFilterPanelVisible = false;
 		},
 		unselectGeoFeature: () => {
 			selectedGeoFeature = null;

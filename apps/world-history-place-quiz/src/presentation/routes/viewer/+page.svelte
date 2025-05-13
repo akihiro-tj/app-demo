@@ -5,9 +5,6 @@ import { Funnel, X } from "@lucide/svelte";
 import { onMount } from "svelte";
 import type { ChangeEventHandler } from "svelte/elements";
 import { useViewerState } from "./hooks/use-viewer-state.svelte";
-import { getIslandTileLayer } from "./layers/island-tile";
-import { getLandTileLayer } from "./layers/land-tile";
-import { getMountainTileLayer } from "./layers/mountain-tile";
 import {
 	canvasStyle,
 	filterContainerStyle,
@@ -39,21 +36,18 @@ const GEO_FEATURE_CATEGORY_NAMES: Record<GeoFeatureCategory, string> = {
 };
 
 let deckCanvas: HTMLCanvasElement;
-let deck: Deck;
+let deck: Deck | undefined;
 
 const { data } = $props();
 const { geoFeatures } = data;
-const viewerState = useViewerState(geoFeatures);
+const viewerState = useViewerState(deck, geoFeatures);
 
 const render = () => {
-	const landTileLayer = getLandTileLayer();
-	const mountainTileLayer = getMountainTileLayer(viewerState.selectGeoFeature);
-	const islandTileLayer = getIslandTileLayer(viewerState.selectGeoFeature);
 	deck = new Deck({
 		canvas: deckCanvas,
 		initialViewState: INITIAL_VIEW_STATE,
 		controller: true,
-		layers: [landTileLayer, mountainTileLayer, islandTileLayer],
+		layers: viewerState.layers,
 		getCursor: (state) => {
 			if (state.isHovering) {
 				return "pointer";
@@ -70,34 +64,10 @@ onMount(() => {
 	render();
 });
 
-const updateLayers = (category: GeoFeatureCategory) => {
-	const isVisible = viewerState.filter[category];
-	let layers = deck.props.layers.filter(
-		// TODO: Resolve type error
-		// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-		(layer: any) => layer.id !== `${category}-tile-layer`,
-	);
-	if (isVisible) {
-		switch (category) {
-			case GeoFeatureCategory.MOUNTAIN:
-				layers = [
-					...layers,
-					getMountainTileLayer(viewerState.selectGeoFeature),
-				];
-				break;
-			case GeoFeatureCategory.ISLAND:
-				layers = [...layers, getIslandTileLayer(viewerState.selectGeoFeature)];
-				break;
-		}
-	}
-	deck.setProps({ layers });
-};
-
 const handleFilterChange: ChangeEventHandler<HTMLInputElement> = (e) => {
 	const target = e.currentTarget;
 	const category = target.getAttribute("data-id") as GeoFeatureCategory;
 	viewerState.updateFilter(category, target.checked);
-	updateLayers(category);
 };
 </script>
 
