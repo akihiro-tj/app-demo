@@ -14,6 +14,7 @@ import {
 } from "./constants";
 
 export const getIslandTileLayer = (
+	isVisible: boolean,
 	onClick: (geoFeatureId: number) => void,
 ): TileLayerType => {
 	const islandTileSource = new PMTilesTileSource(ISLAND_TILE_SOURCE_URL, {});
@@ -21,6 +22,7 @@ export const getIslandTileLayer = (
 	return new TileLayer({
 		id: ISLAND_TILE_LAYER_ID,
 		getTileData: islandTileSource.getTileData,
+		visible: isVisible,
 		onClick: (info) => {
 			onClick(info.object.properties.NE_ID);
 		},

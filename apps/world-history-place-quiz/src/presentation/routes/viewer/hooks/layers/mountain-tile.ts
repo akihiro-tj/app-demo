@@ -14,6 +14,7 @@ import {
 } from "./constants";
 
 export const getMountainTileLayer = (
+	isVisible: boolean,
 	onClick: (geoFeatureId: number) => void,
 ): TileLayerType => {
 	const mountainTileSource = new PMTilesTileSource(
@@ -24,6 +25,7 @@ export const getMountainTileLayer = (
 	return new TileLayer({
 		id: MOUNTAIN_TILE_LAYER_ID,
 		getTileData: mountainTileSource.getTileData,
+		visible: isVisible,
 		onClick: (info) => {
 			onClick(info.object.properties.NE_ID);
 		},
