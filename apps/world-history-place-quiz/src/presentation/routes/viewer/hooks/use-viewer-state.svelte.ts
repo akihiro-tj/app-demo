@@ -1,6 +1,6 @@
 import { GeoFeatureCategory } from "@/domain/models/geo-feature";
 import type { GeoFeatureViewModel } from "@/presentation/models/geo-feature";
-import type { Deck, Layer } from "@deck.gl/core";
+import type { Layer } from "@deck.gl/core";
 import { getIslandTileLayer } from "./layers/island-tile";
 import { getLandTileLayer } from "./layers/land-tile";
 import { getMountainTileLayer } from "./layers/mountain-tile";
@@ -25,7 +25,6 @@ interface FilterGroup {
 type Filter = Record<GeoFeatureCategory, boolean>;
 
 export const useViewerState = (
-	deck: Deck | undefined,
 	geoFeatures: GeoFeatureViewModel[],
 ): ViewerState => {
 	let isFilterPanelVisible = $state(window.innerWidth > 768);
@@ -66,12 +65,6 @@ export const useViewerState = (
 			updateGeoFeature,
 		),
 	]);
-
-	$effect(() => {
-		if (deck) {
-			deck.setProps({ layers });
-		}
-	});
 
 	return {
 		get isFilterPanelVisible(): boolean {

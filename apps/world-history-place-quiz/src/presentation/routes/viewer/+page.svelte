@@ -40,7 +40,7 @@ let deck: Deck | undefined;
 
 const { data } = $props();
 const { geoFeatures } = data;
-const viewerState = useViewerState(deck, geoFeatures);
+const viewerState = useViewerState(geoFeatures);
 
 const render = () => {
 	deck = new Deck({
@@ -62,6 +62,12 @@ const render = () => {
 
 onMount(() => {
 	render();
+});
+
+$effect(() => {
+	if (deck) {
+		deck.setProps({ layers: viewerState.layers });
+	}
 });
 
 const handleFilterChange: ChangeEventHandler<HTMLInputElement> = (e) => {
