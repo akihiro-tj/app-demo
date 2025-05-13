@@ -5,7 +5,7 @@ import ChoiceList, {
 } from "@/presentation/components/choice-list/choice-list.svelte";
 import { visuallyHidden } from "styled-system/patterns";
 import { fade } from "svelte/transition";
-import { createQuizState } from "./helpers/quiz-state.svelte";
+import { createQuizState } from "./hooks/use-quiz-state.svelte";
 import {
 	choiceListContainerStyle,
 	headingContainerStyle,

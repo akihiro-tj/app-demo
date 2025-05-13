@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it } from "vitest";
 import { mockQuestions } from "../__fixtures__/question";
-import { createQuizState } from "../quiz-state.svelte";
+import { createQuizState } from "../use-quiz-state.svelte";
 
 describe("createQuizState", () => {
 	let quizState: ReturnType<typeof createQuizState>;
