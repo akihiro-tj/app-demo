@@ -1,9 +1,9 @@
 import { GeoFeatureCategory } from "@/domain/models/geo-feature";
 import type { GeoFeatureViewModel } from "@/presentation/models/geo-feature";
 import type { Deck, Layer } from "@deck.gl/core";
-import { getIslandTileLayer } from "../layers/island-tile";
-import { getLandTileLayer } from "../layers/land-tile";
-import { getMountainTileLayer } from "../layers/mountain-tile";
+import { getIslandTileLayer } from "./layers/island-tile";
+import { getLandTileLayer } from "./layers/land-tile";
+import { getMountainTileLayer } from "./layers/mountain-tile";
 
 interface ViewerState {
 	isFilterPanelVisible: boolean;

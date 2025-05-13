@@ -1,6 +1,6 @@
 import { GeoFeatureCategory } from "@/domain/models/geo-feature";
 import type { Color } from "@deck.gl/core";
-import { hexToRgb } from "../helpers/hex-to-rgb";
+import { hexToRgb } from "../../helpers/hex-to-rgb";
 
 export const LAND_TILE_SOURCE_URL = "/viewer/tiles/land.pmtiles";
 export const MOUNTAIN_TILE_SOURCE_URL = "/viewer/tiles/mountain.pmtiles";

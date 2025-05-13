@@ -49,11 +49,11 @@ const render = () => {
 		controller: true,
 		layers: viewerState.layers,
 		getCursor: (state) => {
-			if (state.isHovering) {
-				return "pointer";
-			}
 			if (state.isDragging) {
 				return "grabbing";
+			}
+			if (state.isHovering) {
+				return "pointer";
 			}
 			return "grab";
 		},
