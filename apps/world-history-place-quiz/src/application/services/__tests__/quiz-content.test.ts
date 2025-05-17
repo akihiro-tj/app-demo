@@ -38,7 +38,7 @@ describe("QuizContent Service", () => {
 
 			expect(result).toEqual({
 				id: "content-1",
-				path: "/quiz/content-1",
+				path: "/content-1",
 				title: "Test Quiz",
 				questions: [
 					{
@@ -55,7 +55,7 @@ describe("QuizContent Service", () => {
 							text: "A",
 						},
 						explanation: "Test explanation",
-						imagePath: "/quiz/content-1/q1.png",
+						imagePath: "/content-1/q1.png",
 					},
 				],
 				totalQuestions: 1,
@@ -96,7 +96,7 @@ describe("QuizContent Service", () => {
 			expect(result).toHaveLength(1);
 			expect(result[0]).toEqual({
 				id: "content-1",
-				path: "/quiz/content-1",
+				path: "/content-1",
 				title: "Test Quiz",
 				questions: [
 					{
@@ -113,7 +113,7 @@ describe("QuizContent Service", () => {
 							text: "A",
 						},
 						explanation: "Test explanation",
-						imagePath: "/quiz/content-1/q1.png",
+						imagePath: "/content-1/q1.png",
 					},
 				],
 				totalQuestions: 1,
