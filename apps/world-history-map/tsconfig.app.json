@@ -1,4 +1,5 @@
 {
+	"composite": true,
 	"extends": "@tsconfig/svelte/tsconfig.json",
 	"compilerOptions": {
 		"target": "ESNext",
