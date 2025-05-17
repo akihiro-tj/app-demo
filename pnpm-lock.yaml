@@ -20,6 +20,9 @@ importers:
 
   apps/world-history-map:
     devDependencies:
+      '@app-demo/biome-config':
+        specifier: workspace:*
+        version: link:../../packages/biome-config
       '@sveltejs/vite-plugin-svelte':
         specifier: ^5.0.3
         version: 5.0.3(svelte@5.28.2)(vite@6.3.5(@types/node@22.15.16)(lightningcss@1.25.1))
