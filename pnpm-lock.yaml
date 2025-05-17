@@ -18,6 +18,27 @@ importers:
         specifier: 5.7.3
         version: 5.7.3
 
+  apps/world-history-map:
+    devDependencies:
+      '@sveltejs/vite-plugin-svelte':
+        specifier: ^5.0.3
+        version: 5.0.3(svelte@5.28.2)(vite@6.3.5(@types/node@22.15.16)(lightningcss@1.25.1))
+      '@tsconfig/svelte':
+        specifier: ^5.0.4
+        version: 5.0.4
+      svelte:
+        specifier: ^5.28.1
+        version: 5.28.2
+      svelte-check:
+        specifier: ^4.1.6
+        version: 4.1.7(picomatch@4.0.2)(svelte@5.28.2)(typescript@5.8.3)
+      typescript:
+        specifier: ~5.8.3
+        version: 5.8.3
+      vite:
+        specifier: ^6.3.5
+        version: 6.3.5(@types/node@22.15.16)(lightningcss@1.25.1)
+
   apps/world-history-place-quiz:
     dependencies:
       '@deck.gl/core':
@@ -871,6 +892,9 @@ packages:
 
   '@ts-morph/common@0.25.0':
     resolution: {integrity: sha512-kMnZz+vGGHi4GoHnLmMhGNjm44kGtKUXGnOvrKmMwAuvNjM/PgKVGfUnL7IDvK7Jb2QQ82jq3Zmp04Gy+r3Dkg==}
+
+  '@tsconfig/svelte@5.0.4':
+    resolution: {integrity: sha512-BV9NplVgLmSi4mwKzD8BD/NQ8erOY/nUE/GpgWe2ckx+wIQF5RyRirn/QsSSCPeulVpc3RA/iJt6DpfTIZps0Q==}
 
   '@turf/boolean-clockwise@5.1.5':
     resolution: {integrity: sha512-FqbmEEOJ4rU4/2t7FKx0HUWmjFEVqR+NJrFP7ymGSjja2SQ7Q91nnBihGuT+yuHHl6ElMjQ3ttsB/eTmyCycxA==}
@@ -3231,6 +3255,8 @@ snapshots:
       minimatch: 9.0.5
       path-browserify: 1.0.1
       tinyglobby: 0.2.12
+
+  '@tsconfig/svelte@5.0.4': {}
 
   '@turf/boolean-clockwise@5.1.5':
     dependencies:
