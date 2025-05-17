@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    {
+      "source": "/viewer/:path*",
+      "destination": "/apps/viewer/:path*"
+    },
+    {
+      "source": "/quiz/:path*",
+      "destination": "/apps/world-history-place-quiz/:path*"
+    }
+  ]
+}
