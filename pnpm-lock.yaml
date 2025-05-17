@@ -36,6 +36,9 @@ importers:
       '@app-demo/typescript-config':
         specifier: workspace:*
         version: link:../../packages/typescript-config
+      '@pandacss/dev':
+        specifier: ^0.53.0
+        version: 0.53.6(jsdom@26.1.0)(typescript@5.8.3)
       '@sveltejs/adapter-vercel':
         specifier: ^5.6.3
         version: 5.7.2(@sveltejs/kit@2.20.8(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.28.2)(vite@6.3.5(@types/node@22.15.16)(lightningcss@1.25.1)))(svelte@5.28.2)(vite@6.3.5(@types/node@22.15.16)(lightningcss@1.25.1)))(rollup@4.40.2)
@@ -3439,7 +3442,7 @@ snapshots:
       '@vue/shared': 3.4.19
       estree-walker: 2.0.2
       magic-string: 0.30.17
-      postcss: 8.4.49
+      postcss: 8.5.3
       source-map-js: 1.2.1
 
   '@vue/compiler-ssr@3.4.19':
