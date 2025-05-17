@@ -43,7 +43,7 @@ export async function getAllQuizContents(
 function mapQuizContentToViewModel(content: QuizContent): QuizContentViewModel {
 	return {
 		id: content.getId(),
-		path: `/quiz/${content.getId()}`,
+		path: `/${content.getId()}`,
 		title: content.getTitle(),
 		questions: content
 			.getQuestions()
@@ -67,7 +67,7 @@ function mapQuestionToViewModel(
 			.map((choice) => mapChoiceToViewModel(choice)),
 		correctChoice: mapChoiceToViewModel(question.getCorrectChoice()),
 		explanation: question.getExplanation(),
-		imagePath: `/quiz/${contentId}/q${questionIndex + 1}.png`,
+		imagePath: `/${contentId}/q${questionIndex + 1}.png`,
 	};
 }
 
