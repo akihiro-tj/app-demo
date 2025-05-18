@@ -1,11 +1,11 @@
 {
-  "name": "@app-demo/biome-config",
-  "version": "0.0.0",
-  "private": true,
-  "exports": {
-    "./base": "./base.jsonc"
-  },
-  "publishConfig": {
-    "access": "public"
-  }
+	"name": "@world-history-map/biome-config",
+	"version": "0.0.0",
+	"private": true,
+	"exports": {
+		"./base": "./base.jsonc"
+	},
+	"publishConfig": {
+		"access": "public"
+	}
 }

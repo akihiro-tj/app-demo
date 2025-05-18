@@ -1,5 +1,5 @@
 {
-	"name": "@app-demo/svelte-config",
+	"name": "@world-history-map/svelte-config",
 	"version": "0.0.0",
 	"private": true,
 	"exports": {
@@ -16,8 +16,8 @@
 		"check:write": "biome check --write src"
 	},
 	"devDependencies": {
-		"@app-demo/biome-config": "workspace:*",
-		"@app-demo/typescript-config": "workspace:*",
+		"@world-history-map/biome-config": "workspace:*",
+		"@world-history-map/typescript-config": "workspace:*",
 		"@biomejs/biome": "1.9.4",
 		"tsup": "^8.4.0",
 		"typescript": "^5.8.2"
@@ -27,7 +27,5 @@
 		"@sveltejs/kit": "^2.16.0",
 		"@sveltejs/vite-plugin-svelte": "^5.0.0"
 	},
-	"files": [
-		"dist"
-	]
+	"files": ["dist"]
 }
