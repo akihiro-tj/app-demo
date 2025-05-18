@@ -1,4 +1,5 @@
 <script lang="ts">
+import { base } from "$app/paths";
 import Header from "@/components/header/header.svelte";
 import {
 	CursorState,
@@ -29,6 +30,8 @@ import {
 	sidePanelCloseButtonStyle,
 	sidePanelStyle,
 } from "./page.styles";
+
+const baseUrl = `${SITE_ORIGIN}${base}`;
 
 let deckCanvas: HTMLCanvasElement;
 let deck: Deck | undefined;
@@ -74,8 +77,8 @@ const handleFilterChange: ChangeEventHandler<HTMLInputElement> = (e) => {
   <title>{SITE_NAME}</title>
   <meta property="og:title" content={SITE_NAME} />
   <meta property="og:type" content="article" />
-  <meta property="og:url" content={SITE_ORIGIN} />
-  <meta property="og:image" content={`${SITE_ORIGIN}/og-image.png`} />
+  <meta property="og:url" content={baseUrl} />
+  <meta property="og:image" content={`${baseUrl}/og-image.png`} />
   <meta property="og:description" content="" />
   <meta property="og:site_name" content={SITE_NAME} />
   <meta property="og:locale" content="ja_JP" />
