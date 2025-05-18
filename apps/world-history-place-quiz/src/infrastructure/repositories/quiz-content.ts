@@ -14,7 +14,7 @@ export class FileQuizContentRepository implements IQuizContentRepository {
 	}
 
 	async find(contentId: string): Promise<QuizContent> {
-		const contentPath = `${this.dataPath}/${contentId}`;
+		const contentPath = `${this.dataPath}/quiz/${contentId}`;
 
 		const [metaInfoFilePath, questionsFilePath] = [
 			`${contentPath}/meta.yaml`,
