@@ -1,15 +1,7 @@
+import { baseConfig } from "@app-demo/vite-config";
 import { sveltekit } from "@sveltejs/kit/vite";
 import { defineConfig } from "vite";
 
 export default defineConfig({
-	plugins: [sveltekit()],
-	server: {
-		fs: {
-			allow: ["styled-system"],
-		},
-	},
-	test: {
-		include: ["src/**/*.test.ts"],
-		environment: "jsdom",
-	},
+	plugins: [sveltekit(), baseConfig()],
 });
