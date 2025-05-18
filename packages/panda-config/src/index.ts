@@ -1,1 +1,1 @@
-export { pandaConfig } from "./panda.config";
+export { baseConfig } from "./panda.config";

@@ -1,4 +1,4 @@
-import { defineConfig, defineGlobalStyles } from "@pandacss/dev";
+import { type Config, defineGlobalStyles } from "@pandacss/dev";
 
 const globalCss = defineGlobalStyles({
 	html: {
@@ -7,7 +7,7 @@ const globalCss = defineGlobalStyles({
 	},
 });
 
-export const pandaConfig = defineConfig({
+export const baseConfig: Config = {
 	// Whether to use css reset
 	preflight: true,
 
@@ -26,4 +26,4 @@ export const pandaConfig = defineConfig({
 	outdir: "styled-system",
 
 	globalCss,
-});
+};
