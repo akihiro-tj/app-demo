@@ -11,7 +11,7 @@ import {
 } from "../__fixtures__/quiz-content";
 import { FileQuizContentRepository } from "../quiz-content";
 
-const mockDataPath = "/test/data/path";
+const mockDataPath = "/contents";
 
 vi.mock("@app-demo/fs-utils");
 
@@ -38,10 +38,10 @@ describe("FileQuizContentRepository", () => {
 			expect(result).toBeInstanceOf(QuizContent);
 			expect(result.getId()).toBe(contentId);
 			expect(mockFsUtils.loadYaml).toHaveBeenCalledWith(
-				`${mockDataPath}/${contentId}/meta.yaml`,
+				`${mockDataPath}/quiz/${contentId}/meta.yaml`,
 			);
 			expect(mockFsUtils.loadYaml).toHaveBeenCalledWith(
-				`${mockDataPath}/${contentId}/questions.yaml`,
+				`${mockDataPath}/quiz/${contentId}/questions.yaml`,
 			);
 		});
 
