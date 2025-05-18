@@ -54,6 +54,9 @@ importers:
       '@app-demo/biome-config':
         specifier: workspace:*
         version: link:../../packages/biome-config
+      '@app-demo/panda-config':
+        specifier: workspace:*
+        version: link:../../packages/panda-config
       '@app-demo/svelte-config':
         specifier: workspace:*
         version: link:../../packages/svelte-config
@@ -133,6 +136,9 @@ importers:
       '@app-demo/fs-utils':
         specifier: workspace:*
         version: link:../../packages/fs-utils
+      '@app-demo/panda-config':
+        specifier: workspace:*
+        version: link:../../packages/panda-config
       '@app-demo/svelte-config':
         specifier: workspace:*
         version: link:../../packages/svelte-config
