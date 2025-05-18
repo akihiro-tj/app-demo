@@ -4,14 +4,13 @@
 	"version": "0.0.1",
 	"type": "module",
 	"scripts": {
-		"dev": "vite dev",
-		"build": "vite build",
+		"dev": "svelte-kit sync || echo '' && panda codegen && vite",
+		"build": "svelte-kit sync || echo '' && panda codegen && vite build",
 		"test": "vitest --run",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json && biome check src",
 		"check:write": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json && biome check --write src",
 		"test:ui": "vitest --ui --coverage",
-		"preview": "vite preview",
-		"prepare": "svelte-kit sync || echo '' && panda codegen"
+		"preview": "vite preview"
 	},
 	"dependencies": {
 		"@deck.gl/core": "^9.1.11",
