@@ -1,5 +1,5 @@
 import type { Layer } from "@deck.gl/core";
-import { GeoFeatureCategory } from "../constants";
+import { GeoFeatureCategory } from "../../constants";
 import { getIslandTileLayer } from "./layers/island-tile";
 import { getLandTileLayer } from "./layers/land-tile";
 import { getMountainTileLayer } from "./layers/mountain-tile";
