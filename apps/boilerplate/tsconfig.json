@@ -1,0 +1,6 @@
+{
+	"extends": [
+		"@app-demo/typescript-config/svelte-kit.json",
+		"./.svelte-kit/tsconfig.json"
+	]
+}
