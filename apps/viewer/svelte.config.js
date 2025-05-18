@@ -16,6 +16,9 @@ const config = {
 			"styled-system": "./styled-system/*",
 			"@/*": "./src/*",
 		},
+		paths: {
+			base: "/viewer",
+		},
 	},
 };
 
