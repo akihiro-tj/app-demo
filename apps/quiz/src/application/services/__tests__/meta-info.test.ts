@@ -1,7 +1,10 @@
+import { base } from "$app/paths";
 import { OGType } from "@/application/constants/meta-info";
 import { SITE_NAME, SITE_ORIGIN } from "@/application/constants/site";
 import { describe, expect, it } from "vitest";
 import { generateMetaInfo } from "../meta-info";
+
+const baseUrl = `${SITE_ORIGIN}${base}`;
 
 describe("generateMetaInfo", () => {
 	it("should generate meta info for top page when no options are provided", () => {
@@ -11,8 +14,8 @@ describe("generateMetaInfo", () => {
 			title: SITE_NAME,
 			ogTitle: SITE_NAME,
 			ogType: OGType.Website,
-			ogURL: SITE_ORIGIN,
-			ogImage: `${SITE_ORIGIN}/og-image.png`,
+			ogURL: baseUrl,
+			ogImage: `${baseUrl}/og-image.png`,
 		});
 	});
 
@@ -25,8 +28,8 @@ describe("generateMetaInfo", () => {
 			title: `${title} | ${SITE_NAME}`,
 			ogTitle: `${title} | ${SITE_NAME}`,
 			ogType: OGType.Article,
-			ogURL: `${SITE_ORIGIN}${path}`,
-			ogImage: `${SITE_ORIGIN}${path}/og-image.png`,
+			ogURL: `${baseUrl}${path}`,
+			ogImage: `${baseUrl}${path}/og-image.png`,
 		});
 	});
 });
