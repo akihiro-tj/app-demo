@@ -8,7 +8,7 @@
     },
     "build": {
       "dependsOn": ["^build"],
-      "outputs": [".svelte-kit/**", "dist", ".vercel/**"]
+      "outputs": [".svelte-kit/**", "dist/**", ".vercel/**"]
     },
     "test": {
       "dependsOn": ["^build"]
