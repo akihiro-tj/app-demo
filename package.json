@@ -1,5 +1,5 @@
 {
-	"name": "app-demo",
+	"name": "world-history-map",
 	"private": true,
 	"scripts": {
 		"build": "turbo run build",

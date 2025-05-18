@@ -1,4 +1,4 @@
-import { baseConfig } from "@app-demo/svelte-config";
+import { baseConfig } from "@world-history-map/svelte-config";
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {

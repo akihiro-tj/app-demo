@@ -26,12 +26,12 @@
 		"zod": "^3.24.2"
 	},
 	"devDependencies": {
-		"@app-demo/biome-config": "workspace:*",
-		"@app-demo/fs-utils": "workspace:*",
-		"@app-demo/panda-config": "workspace:*",
-		"@app-demo/svelte-config": "workspace:*",
-		"@app-demo/typescript-config": "workspace:*",
-		"@app-demo/vite-config": "workspace:*",
+		"@world-history-map/biome-config": "workspace:*",
+		"@world-history-map/fs-utils": "workspace:*",
+		"@world-history-map/panda-config": "workspace:*",
+		"@world-history-map/svelte-config": "workspace:*",
+		"@world-history-map/typescript-config": "workspace:*",
+		"@world-history-map/vite-config": "workspace:*",
 		"@pandacss/dev": "^0.53.0",
 		"@sveltejs/adapter-vercel": "^5.6.3",
 		"@vitest/coverage-v8": "3.1.1",
