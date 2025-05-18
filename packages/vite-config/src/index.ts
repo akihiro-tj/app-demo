@@ -1,1 +1,1 @@
-export { worldHistoryMap } from "./vite.config";
+export { baseConfig } from "./vite.config";

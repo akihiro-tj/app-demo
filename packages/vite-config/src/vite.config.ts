@@ -1,6 +1,6 @@
 import type { Plugin } from "vite";
 
-export function worldHistoryMap(): Plugin {
+export function baseConfig(): Plugin {
 	return {
 		name: "vite-config",
 		config(config) {
