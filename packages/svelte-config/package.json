@@ -1,0 +1,33 @@
+{
+	"name": "@app-demo/svelte-config",
+	"version": "0.0.0",
+	"private": true,
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"require": "./dist/index.js",
+			"import": "./dist/index.mjs"
+		}
+	},
+	"scripts": {
+		"dev": "tsup src/index.ts --format esm --dts --watch",
+		"build": "tsup src/index.ts --format cjs,esm --dts",
+		"check": "biome check src",
+		"check:write": "biome check --write src"
+	},
+	"devDependencies": {
+		"@app-demo/biome-config": "workspace:*",
+		"@app-demo/typescript-config": "workspace:*",
+		"@biomejs/biome": "1.9.4",
+		"tsup": "^8.4.0",
+		"typescript": "^5.8.2"
+	},
+	"dependencies": {
+		"@sveltejs/adapter-auto": "^4.0.0",
+		"@sveltejs/kit": "^2.16.0",
+		"@sveltejs/vite-plugin-svelte": "^5.0.0"
+	},
+	"files": [
+		"dist"
+	]
+}
