@@ -1,4 +1,4 @@
-import { GeoFeatureCategory } from "@/routes/constants";
+import { GeoFeatureCategory } from "@/constants";
 import { beforeEach, describe, expect, it } from "vitest";
 import { useViewerState } from "../use-viewer-state.svelte";
 

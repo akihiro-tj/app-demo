@@ -1,8 +1,7 @@
 import type { MapViewState } from "@deck.gl/core";
 
-// TODO: Replace this with the actual site name
 export const SITE_NAME = "世界史地図";
-export const SITE_ORIGIN = "https://world-history-place-quiz.vercel.app";
+export const SITE_ORIGIN = "https://world-history-map-viewer.vercel.app";
 
 export enum GeoFeatureCategory {
 	MOUNTAIN = "mountain",

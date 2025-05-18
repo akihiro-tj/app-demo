@@ -1,4 +1,4 @@
-import { GeoFeatureCategory } from "@/routes/constants";
+import { GeoFeatureCategory } from "@/constants";
 import type { Color } from "@deck.gl/core";
 import { hexToRgb } from "../../utils/hex-to-rgb";
 
