@@ -1,3 +1,4 @@
+import { base } from "$app/paths";
 import { OGType } from "@/application/constants/meta-info";
 import { SITE_NAME, SITE_ORIGIN } from "@/application/constants/site";
 
@@ -14,6 +15,8 @@ interface MetaInfoOptions {
 	path?: string;
 }
 
+const baseUrl = `${SITE_ORIGIN}${base}`;
+
 export function generateMetaInfo(options: MetaInfoOptions = {}): MetaInfo {
 	const { title, path } = options;
 	const isTopPage = !title && !path;
@@ -22,9 +25,9 @@ export function generateMetaInfo(options: MetaInfoOptions = {}): MetaInfo {
 		title: isTopPage ? SITE_NAME : `${title} | ${SITE_NAME}`,
 		ogTitle: isTopPage ? SITE_NAME : `${title} | ${SITE_NAME}`,
 		ogType: isTopPage ? OGType.Website : OGType.Article,
-		ogURL: isTopPage ? SITE_ORIGIN : `${SITE_ORIGIN}${path}`,
+		ogURL: isTopPage ? baseUrl : `${baseUrl}${path}`,
 		ogImage: isTopPage
-			? `${SITE_ORIGIN}/og-image.png`
-			: `${SITE_ORIGIN}${path}/og-image.png`,
+			? `${baseUrl}/og-image.png`
+			: `${baseUrl}${path}/og-image.png`,
 	};
 }
