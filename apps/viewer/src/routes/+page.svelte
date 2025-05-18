@@ -1,17 +1,17 @@
 <script lang="ts">
 import Header from "@/components/header/header.svelte";
+import {
+	CursorState,
+	GEO_FEATURE_CATEGORY_NAMES,
+	type GeoFeatureCategory,
+	INITIAL_VIEW_STATE,
+	SITE_NAME,
+	SITE_ORIGIN,
+} from "@/constants";
 import { Deck } from "@deck.gl/core";
 import { Funnel, X } from "@lucide/svelte";
 import { onMount } from "svelte";
 import type { ChangeEventHandler } from "svelte/elements";
-import {
-	CursorState,
-	GEO_FEATURE_CATEGORY_NAMES,
-	GeoFeatureCategory,
-	INITIAL_VIEW_STATE,
-	SITE_NAME,
-	SITE_ORIGIN,
-} from "./constants";
 import { useViewerState } from "./hooks/use-viewer-state.svelte";
 import {
 	canvasStyle,

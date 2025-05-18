@@ -1,5 +1,5 @@
 <script>
-import { SITE_NAME } from "@/routes/constants";
+import { SITE_NAME } from "@/constants";
 import { headerStyle, titleContainerStyle, titleStyle } from "./header.styles";
 </script>
 
