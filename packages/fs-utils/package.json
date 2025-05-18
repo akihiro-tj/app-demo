@@ -10,11 +10,11 @@
 		}
 	},
 	"scripts": {
-		"build": "tsup src/index.ts --format cjs,esm --dts",
 		"dev": "tsup src/index.ts --format esm --dts --watch",
+		"build": "tsup src/index.ts --format cjs,esm --dts",
+		"test": "vitest run && exit 0",
 		"check": "biome check src",
 		"check:write": "biome check --write src",
-		"test": "vitest run && exit 0",
 		"test:watch": "vitest",
 		"test:coverage": "vitest run --coverage"
 	},

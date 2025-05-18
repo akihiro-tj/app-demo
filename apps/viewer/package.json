@@ -6,13 +6,12 @@
 	"scripts": {
 		"dev": "vite",
 		"build": "vite build",
-		"preview": "vite preview",
 		"test": "vitest --run",
-		"test:ui": "vitest --ui --coverage",
-		"prepare": "svelte-kit sync || echo '' && panda codegen",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json && biome check src",
 		"check:write": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json && biome check --write src",
-		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
+		"test:ui": "vitest --ui --coverage",
+		"preview": "vite preview",
+		"prepare": "svelte-kit sync || echo '' && panda codegen"
 	},
 	"dependencies": {
 		"@deck.gl/core": "^9.1.11",

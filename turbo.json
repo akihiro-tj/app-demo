@@ -2,16 +2,16 @@
   "$schema": "https://turbo.build/schema.json",
   "ui": "tui",
   "tasks": {
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
     "build": {
       "dependsOn": ["^build"],
       "outputs": [".svelte-kit/**", "dist", ".vercel/**"]
     },
     "test": {
       "dependsOn": ["^build"]
-    },
-    "dev": {
-      "cache": false,
-      "persistent": true
     },
     "check": {
       "dependsOn": ["^check"]
