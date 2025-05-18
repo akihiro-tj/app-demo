@@ -27,7 +27,6 @@
 	},
 	"devDependencies": {
 		"@app-demo/biome-config": "workspace:*",
-		"@app-demo/panda-config": "workspace:*",
 		"@app-demo/svelte-config": "workspace:*",
 		"@app-demo/typescript-config": "workspace:*",
 		"@app-demo/vite-config": "workspace:*",
