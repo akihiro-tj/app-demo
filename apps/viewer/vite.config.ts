@@ -1,4 +1,4 @@
-import { baseConfig } from "@app-demo/vite-config";
+import { baseConfig } from "@world-history-map/vite-config";
 import { sveltekit } from "@sveltejs/kit/vite";
 import { defineConfig } from "vite";
 

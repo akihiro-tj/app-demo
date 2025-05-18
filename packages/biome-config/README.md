@@ -1,3 +1,3 @@
-# `@app-demo/biome-config`
+# `@world-history-map/biome-config`
 
 Collection of internal biome configurations.

@@ -1,6 +1,6 @@
 import { ValidationError } from "@/domain/errors/validation-error";
 import { QuizContent } from "@/domain/models/quiz-content";
-import { FsUtils } from "@app-demo/fs-utils";
+import { FsUtils } from "@world-history-map/fs-utils";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import {
 	invalidMetaInfo,
@@ -13,7 +13,7 @@ import { FileQuizContentRepository } from "../quiz-content";
 
 const mockDataPath = "/contents";
 
-vi.mock("@app-demo/fs-utils");
+vi.mock("@world-history-map/fs-utils");
 
 describe("FileQuizContentRepository", () => {
 	let repository: FileQuizContentRepository;

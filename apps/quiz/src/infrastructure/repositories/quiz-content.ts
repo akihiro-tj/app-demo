@@ -3,7 +3,7 @@ import type { IQuizContentRepository } from "@/domain/repositories/quiz-content"
 import { metaInfoSchema } from "@/domain/schemas/meta-info";
 import { orderSchema } from "@/domain/schemas/order";
 import { questionSchema } from "@/domain/schemas/question";
-import { FsUtils } from "@app-demo/fs-utils";
+import { FsUtils } from "@world-history-map/fs-utils";
 import { z } from "zod";
 import { validateSchema } from "./helpers/validate-schema";
 export class FileQuizContentRepository implements IQuizContentRepository {

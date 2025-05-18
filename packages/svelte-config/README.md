@@ -1,3 +1,3 @@
-# `@app-demo/svelte-config`
+# `@world-history-map/svelte-config`
 
 Collection of internal svelte configurations.
