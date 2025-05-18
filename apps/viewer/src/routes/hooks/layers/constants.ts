@@ -1,10 +1,11 @@
+import { base } from "$app/paths";
 import { GeoFeatureCategory } from "@/constants";
 import type { Color } from "@deck.gl/core";
 import { hexToRgb } from "../../utils/hex-to-rgb";
 
-export const LAND_TILE_SOURCE_URL = `${import.meta.env.BASE_URL}/tiles/land.pmtiles`;
-export const MOUNTAIN_TILE_SOURCE_URL = `${import.meta.env.BASE_URL}/tiles/mountain.pmtiles`;
-export const ISLAND_TILE_SOURCE_URL = `${import.meta.env.BASE_URL}/tiles/island.pmtiles`;
+export const LAND_TILE_SOURCE_URL = `${base}/tiles/land.pmtiles`;
+export const MOUNTAIN_TILE_SOURCE_URL = `${base}/tiles/mountain.pmtiles`;
+export const ISLAND_TILE_SOURCE_URL = `${base}/tiles/island.pmtiles`;
 
 export const LAND_TILE_LAYER_ID = "land-tile-layer";
 export const MOUNTAIN_TILE_LAYER_ID = "mountain-tile-layer";
