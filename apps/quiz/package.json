@@ -1,7 +1,7 @@
 {
 	"name": "quiz",
 	"private": true,
-	"version": "0.0.1",
+	"version": "0.0.0",
 	"type": "module",
 	"scripts": {
 		"dev": "svelte-kit sync || echo '' && panda codegen && vite",
@@ -21,6 +21,7 @@
 	},
 	"devDependencies": {
 		"@world-history-map/biome-config": "workspace:*",
+		"@world-history-map/content-manager": "workspace:*",
 		"@world-history-map/fs-utils": "workspace:*",
 		"@world-history-map/panda-config": "workspace:*",
 		"@world-history-map/svelte-config": "workspace:*",

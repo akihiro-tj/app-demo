@@ -1,7 +1,7 @@
-import { ValidationError } from "@/domain/errors/validation-error";
-import { QuizContent } from "@/domain/models/quiz-content";
 import { FsUtils } from "@world-history-map/fs-utils";
 import { beforeEach, describe, expect, it, vi } from "vitest";
+import { ValidationError } from "../../../domain/errors/validation-error";
+import { QuizContent } from "../../../domain/models/quiz-content";
 import {
 	invalidMetaInfo,
 	invalidOrder,
