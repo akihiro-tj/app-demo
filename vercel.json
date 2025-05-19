@@ -4,5 +4,12 @@
 	"buildCommand": "turbo run test && turbo run build",
 	"outputDirectory": ".svelte-kit",
 	"installCommand": "pnpm install",
-	"devCommand": "turbo run dev"
+	"devCommand": "turbo run dev",
+	"git": {
+		"deploymentEnabled": {
+			"dev": false,
+			"main": true,
+			"production": true
+		}
+	}
 }
