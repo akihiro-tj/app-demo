@@ -1,7 +1,9 @@
-import type { Choice } from "@/domain/models/choice";
-import type { Question } from "@/domain/models/question";
-import type { QuizContent } from "@/domain/models/quiz-content";
-import type { IQuizContentRepository } from "@/domain/repositories/quiz-content";
+import type {
+	Choice,
+	IQuizContentRepository,
+	Question,
+	QuizContent,
+} from "@world-history-map/content-manager/domain";
 import { vi } from "vitest";
 
 export const createMockChoice = (): Choice => {

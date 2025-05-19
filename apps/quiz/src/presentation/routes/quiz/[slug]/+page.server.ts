@@ -3,7 +3,7 @@ import {
 	getAllQuizContents,
 	getQuizContent,
 } from "@/application/services/quiz-content.js";
-import { FileQuizContentRepository } from "@/infrastructure/repositories/quiz-content.js";
+import { FileQuizContentRepository } from "@world-history-map/content-manager/infrastructure";
 import type { EntryGenerator } from "./$types.js";
 
 const quizContentRepository = new FileQuizContentRepository(CONTENT_PATH);

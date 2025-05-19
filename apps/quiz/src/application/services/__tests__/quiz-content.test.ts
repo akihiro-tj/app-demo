@@ -1,8 +1,10 @@
-import { ValidationError } from "@/domain/errors/validation-error";
-import type { Choice } from "@/domain/models/choice";
-import type { Question } from "@/domain/models/question";
-import type { QuizContent } from "@/domain/models/quiz-content";
-import type { IQuizContentRepository } from "@/domain/repositories/quiz-content";
+import {
+	type Choice,
+	type IQuizContentRepository,
+	type Question,
+	type QuizContent,
+	ValidationError,
+} from "@world-history-map/content-manager/domain";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import {
 	createMockChoice,
