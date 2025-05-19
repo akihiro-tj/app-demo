@@ -1,5 +1,5 @@
-import { ValidationError } from "@/domain/errors/validation-error";
 import type { z } from "zod";
+import { ValidationError } from "../../../domain/errors/validation-error";
 
 export const validateSchema = <T>(
 	schema: z.ZodSchema<T>,
