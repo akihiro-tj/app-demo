@@ -1,26 +1,27 @@
+import path from "node:path";
 import { FsUtils } from "@world-history-map/fs-utils";
 import { z } from "zod";
-
 import { QuizContent } from "../../domain/models/quiz-content";
 import type { IQuizContentRepository } from "../../domain/repositories/quiz-content";
 import { metaInfoSchema } from "../../domain/schemas/meta-info";
 import { orderSchema } from "../../domain/schemas/order";
 import { questionSchema } from "../../domain/schemas/question";
+import { QUIZ_CONTENTS_DIR_PATH } from "./constants";
 import { validateSchema } from "./helpers/validate-schema";
 
 export class FileQuizContentRepository implements IQuizContentRepository {
 	private readonly fsUtils: FsUtils;
 
-	constructor(private readonly dataPath: string) {
+	constructor() {
 		this.fsUtils = new FsUtils();
 	}
 
 	async find(contentId: string): Promise<QuizContent> {
-		const contentPath = `${this.dataPath}/quiz/${contentId}`;
+		const contentPath = path.join(QUIZ_CONTENTS_DIR_PATH, contentId);
 
 		const [metaInfoFilePath, questionsFilePath] = [
-			`${contentPath}/meta.yaml`,
-			`${contentPath}/questions.yaml`,
+			path.join(contentPath, "meta.yaml"),
+			path.join(contentPath, "questions.yaml"),
 		];
 
 		const [rawMetaInfo, rawQuestions] = [
@@ -41,7 +42,7 @@ export class FileQuizContentRepository implements IQuizContentRepository {
 	}
 
 	async findAll(): Promise<QuizContent[]> {
-		const orderFilePath = `${this.dataPath}/order.yaml`;
+		const orderFilePath = path.join(QUIZ_CONTENTS_DIR_PATH, "order.yaml");
 		const rawOrder = this.fsUtils.loadYaml(orderFilePath);
 		const order = validateSchema(orderSchema, rawOrder, orderFilePath);
 

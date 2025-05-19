@@ -1,4 +1,3 @@
-import { CONTENT_PATH } from "@/application/constants/content.js";
 import {
 	getAllQuizContents,
 	getQuizContent,
@@ -6,7 +5,7 @@ import {
 import { FileQuizContentRepository } from "@world-history-map/content-manager/infrastructure";
 import type { EntryGenerator } from "./$types.js";
 
-const quizContentRepository = new FileQuizContentRepository(CONTENT_PATH);
+const quizContentRepository = new FileQuizContentRepository();
 
 export async function load({ params }) {
 	const content = await getQuizContent(quizContentRepository, params.slug);
