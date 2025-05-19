@@ -1,3 +1,4 @@
+import path from "node:path";
 import { FsUtils } from "@world-history-map/fs-utils";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { ValidationError } from "../../../domain/errors/validation-error";
@@ -9,9 +10,8 @@ import {
 	validOrder,
 	validQuestions,
 } from "../__fixtures__/quiz-content";
+import { QUIZ_CONTENTS_DIR_PATH } from "../constants";
 import { FileQuizContentRepository } from "../quiz-content";
-
-const mockDataPath = "/contents";
 
 vi.mock("@world-history-map/fs-utils");
 
@@ -22,7 +22,7 @@ describe("FileQuizContentRepository", () => {
 	beforeEach(() => {
 		mockFsUtils = new FsUtils();
 		vi.mocked(FsUtils).mockImplementation(() => mockFsUtils);
-		repository = new FileQuizContentRepository(mockDataPath);
+		repository = new FileQuizContentRepository();
 	});
 
 	describe("find", () => {
@@ -38,10 +38,10 @@ describe("FileQuizContentRepository", () => {
 			expect(result).toBeInstanceOf(QuizContent);
 			expect(result.getId()).toBe(contentId);
 			expect(mockFsUtils.loadYaml).toHaveBeenCalledWith(
-				`${mockDataPath}/quiz/${contentId}/meta.yaml`,
+				path.join(QUIZ_CONTENTS_DIR_PATH, contentId, "meta.yaml"),
 			);
 			expect(mockFsUtils.loadYaml).toHaveBeenCalledWith(
-				`${mockDataPath}/quiz/${contentId}/questions.yaml`,
+				path.join(QUIZ_CONTENTS_DIR_PATH, contentId, "questions.yaml"),
 			);
 		});
 
@@ -69,7 +69,7 @@ describe("FileQuizContentRepository", () => {
 			expect(results[0]?.getId()).toBe(validOrder[0]);
 			expect(results[1]?.getId()).toBe(validOrder[1]);
 			expect(mockFsUtils.loadYaml).toHaveBeenCalledWith(
-				`${mockDataPath}/order.yaml`,
+				path.join(QUIZ_CONTENTS_DIR_PATH, "order.yaml"),
 			);
 		});
 
