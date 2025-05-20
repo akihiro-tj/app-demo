@@ -1,8 +1,7 @@
 import { base } from "$app/paths";
-import { OGType } from "@/application/constants/meta-info";
 import { appConfig } from "@world-history-map/app-config";
 import { describe, expect, it } from "vitest";
-import { generateMetaInfo } from "../meta-info";
+import { OGType, generateMetaInfo } from "../meta-info";
 
 const baseUrl = `${appConfig.origin}${base}`;
 

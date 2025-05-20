@@ -1,8 +1,8 @@
 <script lang="ts">
-import { generateMetaInfo } from "@/application/services/meta-info";
 import ChoiceList, {
 	type ChoiceClickEventHandler,
 } from "@/presentation/components/choice-list/choice-list.svelte";
+import { generateMetaInfo } from "@/presentation/helpers/meta-info";
 import { visuallyHidden } from "styled-system/patterns";
 import { fade } from "svelte/transition";
 import { useQuizState } from "./hooks/use-quiz-state.svelte";

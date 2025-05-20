@@ -1,5 +1,4 @@
 import { base } from "$app/paths";
-import { OGType } from "@/application/constants/meta-info";
 import { appConfig } from "@world-history-map/app-config";
 
 interface MetaInfo {
@@ -13,6 +12,11 @@ interface MetaInfo {
 interface MetaInfoOptions {
 	title?: string;
 	path?: string;
+}
+
+export enum OGType {
+	Article = "article",
+	Website = "website",
 }
 
 const baseUrl = `${appConfig.origin}${base}`;
