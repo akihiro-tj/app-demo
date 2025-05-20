@@ -1,18 +1,18 @@
 import { base } from "$app/paths";
 import { OGType } from "@/application/constants/meta-info";
-import { SITE_NAME, SITE_ORIGIN } from "@/application/constants/site";
+import { appConfig } from "@world-history-map/app-config";
 import { describe, expect, it } from "vitest";
 import { generateMetaInfo } from "../meta-info";
 
-const baseUrl = `${SITE_ORIGIN}${base}`;
+const baseUrl = `${appConfig.origin}${base}`;
 
 describe("generateMetaInfo", () => {
 	it("should generate meta info for top page when no options are provided", () => {
 		const result = generateMetaInfo();
 
 		expect(result).toEqual({
-			title: SITE_NAME,
-			ogTitle: SITE_NAME,
+			title: appConfig.name,
+			ogTitle: appConfig.name,
 			ogType: OGType.Website,
 			ogURL: baseUrl,
 			ogImage: `${baseUrl}/og-image.png`,
@@ -25,8 +25,8 @@ describe("generateMetaInfo", () => {
 		const result = generateMetaInfo({ title, path });
 
 		expect(result).toEqual({
-			title: `${title} | ${SITE_NAME}`,
-			ogTitle: `${title} | ${SITE_NAME}`,
+			title: `${title} | ${appConfig.name}`,
+			ogTitle: `${title} | ${appConfig.name}`,
 			ogType: OGType.Article,
 			ogURL: `${baseUrl}${path}`,
 			ogImage: `${baseUrl}${path}/og-image.png`,

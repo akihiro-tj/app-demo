@@ -6,11 +6,10 @@ import {
 	GEO_FEATURE_CATEGORY_NAMES,
 	type GeoFeatureCategory,
 	INITIAL_VIEW_STATE,
-	SITE_NAME,
-	SITE_ORIGIN,
 } from "@/constants";
 import { Deck } from "@deck.gl/core";
 import { Funnel, X } from "@lucide/svelte";
+import { appConfig } from "@world-history-map/app-config";
 import { onMount } from "svelte";
 import type { ChangeEventHandler } from "svelte/elements";
 import { useViewerState } from "./hooks/use-viewer-state.svelte";
@@ -31,7 +30,7 @@ import {
 	sidePanelStyle,
 } from "./page.styles";
 
-const baseUrl = `${SITE_ORIGIN}${base}`;
+const baseUrl = `${appConfig.origin}${base}`;
 
 let deckCanvas: HTMLCanvasElement;
 let deck: Deck | undefined;
@@ -74,18 +73,18 @@ const handleFilterChange: ChangeEventHandler<HTMLInputElement> = (e) => {
 </script>
 
 <svelte:head>
-  <title>{SITE_NAME}</title>
-  <meta property="og:title" content={SITE_NAME} />
+  <title>{appConfig.name}</title>
+  <meta property="og:title" content={appConfig.name} />
   <meta property="og:type" content="article" />
   <meta property="og:url" content={baseUrl} />
   <meta property="og:image" content={`${baseUrl}/og-image.png`} />
   <meta property="og:description" content="" />
-  <meta property="og:site_name" content={SITE_NAME} />
+  <meta property="og:site_name" content={appConfig.name} />
   <meta property="og:locale" content="ja_JP" />
   <meta property="twitter:card" content="summary" />
 </svelte:head>
 
-<Header />
+<Header title={appConfig.name} />
 <main class={mainColumnStyle}>
 	<canvas bind:this={deckCanvas} class={canvasStyle}></canvas>
 

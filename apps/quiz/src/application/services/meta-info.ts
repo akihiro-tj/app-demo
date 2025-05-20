@@ -1,6 +1,6 @@
 import { base } from "$app/paths";
 import { OGType } from "@/application/constants/meta-info";
-import { SITE_NAME, SITE_ORIGIN } from "@/application/constants/site";
+import { appConfig } from "@world-history-map/app-config";
 
 interface MetaInfo {
 	title: string;
@@ -15,15 +15,15 @@ interface MetaInfoOptions {
 	path?: string;
 }
 
-const baseUrl = `${SITE_ORIGIN}${base}`;
+const baseUrl = `${appConfig.origin}${base}`;
 
 export function generateMetaInfo(options: MetaInfoOptions = {}): MetaInfo {
 	const { title, path } = options;
 	const isTopPage = !title && !path;
 
 	return {
-		title: isTopPage ? SITE_NAME : `${title} | ${SITE_NAME}`,
-		ogTitle: isTopPage ? SITE_NAME : `${title} | ${SITE_NAME}`,
+		title: isTopPage ? appConfig.name : `${title} | ${appConfig.name}`,
+		ogTitle: isTopPage ? appConfig.name : `${title} | ${appConfig.name}`,
 		ogType: isTopPage ? OGType.Website : OGType.Article,
 		ogURL: isTopPage ? baseUrl : `${baseUrl}${path}`,
 		ogImage: isTopPage
