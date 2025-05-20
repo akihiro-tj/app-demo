@@ -16,5 +16,8 @@ export const baseConfig: Config = {
 			"styled-system": "./styled-system/*",
 			"@/*": "./src/*",
 		},
+		prerender: {
+			handleHttpError: "ignore",
+		},
 	},
 };

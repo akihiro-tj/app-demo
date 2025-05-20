@@ -12,9 +12,6 @@ const config = {
 		files: {
 			routes: "src/presentation/routes",
 		},
-		prerender: {
-			handleHttpError: "ignore",
-		},
 	},
 };
 
