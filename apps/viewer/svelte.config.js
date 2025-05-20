@@ -1,4 +1,5 @@
 import { baseConfig } from "@world-history-map/svelte-config";
+import { appConfig } from "@world-history-map/app-config";
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -6,7 +7,7 @@ const config = {
 	kit: {
 		...baseConfig.kit,
 		paths: {
-			base: "/viewer",
+			base: appConfig.viewerBasePath,
 		},
 	},
 };
