@@ -1,0 +1,26 @@
+{
+	"name": "@world-history-map/app-config",
+	"version": "0.0.0",
+	"private": true,
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"require": "./dist/index.js",
+			"import": "./dist/index.mjs"
+		}
+	},
+	"scripts": {
+		"dev": "tsup src/index.ts --format esm --dts --watch",
+		"build": "tsup src/index.ts --format cjs,esm --dts",
+		"check": "biome check src",
+		"check:write": "biome check --write src"
+	},
+	"devDependencies": {
+		"@world-history-map/biome-config": "workspace:*",
+		"@world-history-map/typescript-config": "workspace:*",
+		"@biomejs/biome": "1.9.4",
+		"tsup": "^8.4.0",
+		"typescript": "^5.8.2"
+	},
+	"files": ["dist"]
+}
