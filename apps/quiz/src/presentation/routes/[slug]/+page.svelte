@@ -1,8 +1,9 @@
 <script lang="ts">
+import { base } from "$app/paths";
 import ChoiceList, {
 	type ChoiceClickEventHandler,
 } from "@/presentation/components/choice-list/choice-list.svelte";
-import { generateMetaInfo } from "@/presentation/helpers/meta-info";
+import { appConfig } from "@world-history-map/app-config";
 import { visuallyHidden } from "styled-system/patterns";
 import { fade } from "svelte/transition";
 import { useQuizState } from "./hooks/use-quiz-state.svelte";
@@ -25,12 +26,12 @@ import {
 	totalResultContainerStyle,
 	totalResultStyle,
 	totalResultValueStyle,
-} from "./styles";
+} from "./page.styles";
 
 const { data } = $props();
 const { title, path, questions } = data.content;
 
-const metaInfo = generateMetaInfo({ title, path });
+const baseUrl = `${appConfig.origin}${base}`;
 
 const quizState = useQuizState(questions);
 
@@ -50,11 +51,10 @@ const getCorrectText = (isCorrect: boolean | undefined) => {
 </script>
 
 <svelte:head>
-  <title>{metaInfo.title}</title>
-  <meta property="og:title" content={metaInfo.title} />
-  <meta property="og:type" content={metaInfo.ogType} />
-  <meta property="og:url" content={metaInfo.ogURL} />
-  <meta property="og:image" content={metaInfo.ogImage} />
+  <title>{`${title} | ${appConfig.name}`}</title>
+  <meta property="og:title" content={`${title} | ${appConfig.name}`} />
+  <meta property="og:url" content={`${baseUrl}${path}`} />
+  <meta property="og:image" content={`${baseUrl}${path}/og-image.png`} />
 </svelte:head>
 
 <main class={mainColumnStyle}>

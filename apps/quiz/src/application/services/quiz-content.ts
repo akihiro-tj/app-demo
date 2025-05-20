@@ -1,3 +1,4 @@
+import { base } from "$app/paths";
 import type { ChoiceViewModel } from "@/presentation/models/choice";
 import type { QuestionViewModel } from "@/presentation/models/question";
 import type { QuizContentViewModel } from "@/presentation/models/quiz-content";
@@ -45,7 +46,7 @@ export async function getAllQuizContents(
 function mapQuizContentToViewModel(content: QuizContent): QuizContentViewModel {
 	return {
 		id: content.getId(),
-		path: `/quiz/${content.getId()}`,
+		path: `/${content.getId()}`,
 		title: content.getTitle(),
 		questions: content
 			.getQuestions()
@@ -69,7 +70,7 @@ function mapQuestionToViewModel(
 			.map((choice) => mapChoiceToViewModel(choice)),
 		correctChoice: mapChoiceToViewModel(question.getCorrectChoice()),
 		explanation: question.getExplanation(),
-		imagePath: `/quiz/${contentId}/q${questionIndex + 1}.png`,
+		imagePath: `${base}/${contentId}/q${questionIndex + 1}.png`,
 	};
 }
 
