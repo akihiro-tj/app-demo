@@ -7,7 +7,7 @@
 	"devCommand": "turbo run dev",
 	"git": {
 		"deploymentEnabled": {
-			"dev": false,
+			"*": false,
 			"main": true,
 			"production": true
 		}
