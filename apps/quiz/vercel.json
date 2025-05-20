@@ -6,10 +6,6 @@
 	"installCommand": "pnpm install",
 	"devCommand": "turbo run dev",
 	"git": {
-		"deploymentEnabled": {
-			"dev": false,
-			"main": true,
-			"production": true
-		}
+		"deploymentEnabled": false
 	}
 }
