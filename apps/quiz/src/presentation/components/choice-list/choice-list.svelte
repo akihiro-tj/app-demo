@@ -2,7 +2,7 @@
 import type { ChoiceViewModel } from "@/presentation/models/choice";
 import type { MouseEventHandler } from "svelte/elements";
 import Choice from "../choice/choice.svelte";
-import { listStyle } from "./styles";
+import { listStyle } from "./choice-list.styles";
 
 export interface ChoiceListProps {
 	id: string;

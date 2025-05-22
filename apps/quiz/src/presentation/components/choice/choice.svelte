@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { HTMLButtonAttributes } from "svelte/elements";
-import { buttonStyle } from "./styles";
+import { buttonStyle } from "./choice.styles";
 
 export interface ChoiceProps {
 	isCorrect: boolean | undefined;

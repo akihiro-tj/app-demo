@@ -4,8 +4,8 @@
 	"version": "0.0.0",
 	"type": "module",
 	"scripts": {
-		"dev": "svelte-kit sync || echo '' && panda codegen && vite",
-		"build": "svelte-kit sync || echo '' && panda codegen && vite build",
+		"dev": "svelte-kit sync || echo '' && vite",
+		"build": "svelte-kit sync || echo '' && vite build",
 		"test": "vitest --run",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json && biome check src",
 		"check:write": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json && biome check --write src",
@@ -23,6 +23,8 @@
 		"@lucide/svelte": "^0.509.0",
 		"@sveltejs/kit": "^2.16.0",
 		"@world-history-map/app-config": "workspace:*",
+		"@world-history-map/styled-system": "workspace:*",
+		"@world-history-map/ui": "workspace:*",
 		"svelte": "^5.28.1"
 	},
 	"devDependencies": {

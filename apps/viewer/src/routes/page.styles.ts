@@ -1,4 +1,4 @@
-import { css, cva } from "styled-system/css";
+import { css, cva } from "@world-history-map/styled-system/css";
 
 export const mainColumnStyle = css({
 	position: "relative",
