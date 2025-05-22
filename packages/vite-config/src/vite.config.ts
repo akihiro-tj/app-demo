@@ -6,11 +6,9 @@ export function baseConfig(): Plugin {
 		config(config) {
 			return {
 				...config,
-				server: {
-					...config.server,
-					fs: {
-						...config.server?.fs,
-						allow: ["styled-system"],
+				build: {
+					rollupOptions: {
+						external: ["@world-history-map/styled-system"],
 					},
 				},
 				test: {

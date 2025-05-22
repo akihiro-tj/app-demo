@@ -1,4 +1,4 @@
-import { css } from "styled-system/css";
+import { css } from "@world-history-map/styled-system/css";
 
 export const listStyle = css({
 	display: "grid",

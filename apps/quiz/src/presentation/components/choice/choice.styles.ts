@@ -1,4 +1,4 @@
-import { cva } from "styled-system/css";
+import { cva } from "@world-history-map/styled-system/css";
 
 export const buttonStyle = cva({
 	base: {

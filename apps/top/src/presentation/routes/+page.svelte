@@ -4,7 +4,7 @@ import "@fontsource-variable/noto-sans-jp";
 import { appConfig } from "@world-history-map/app-config";
 import "../../app.css";
 import { base } from "$app/paths";
-import Header from "../components/header/header.svelte";
+import { Header } from "@world-history-map/ui";
 import {
 	contentItemStyle,
 	contentLinkStyle,

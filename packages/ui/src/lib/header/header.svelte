@@ -1,5 +1,5 @@
 <script lang="ts">
-import { headerStyle, titleContainerStyle, titleStyle } from "./styles";
+import { headerStyle, titleContainerStyle, titleStyle } from "./header.styles";
 
 interface HeaderProps {
 	title: string;

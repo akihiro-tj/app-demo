@@ -4,7 +4,7 @@ import ChoiceList, {
 	type ChoiceClickEventHandler,
 } from "@/presentation/components/choice-list/choice-list.svelte";
 import { appConfig } from "@world-history-map/app-config";
-import { visuallyHidden } from "styled-system/patterns";
+import { visuallyHidden } from "@world-history-map/styled-system/patterns";
 import { fade } from "svelte/transition";
 import { useQuizState } from "./hooks/use-quiz-state.svelte";
 import {

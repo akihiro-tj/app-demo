@@ -1,6 +1,5 @@
 <script lang="ts">
 import { base } from "$app/paths";
-import Header from "@/components/header/header.svelte";
 import {
 	CursorState,
 	GEO_FEATURE_CATEGORY_NAMES,
@@ -10,6 +9,7 @@ import {
 import { Deck } from "@deck.gl/core";
 import { Funnel, X } from "@lucide/svelte";
 import { appConfig } from "@world-history-map/app-config";
+import { Header } from "@world-history-map/ui";
 import { onMount } from "svelte";
 import type { ChangeEventHandler } from "svelte/elements";
 import { useViewerState } from "./hooks/use-viewer-state.svelte";

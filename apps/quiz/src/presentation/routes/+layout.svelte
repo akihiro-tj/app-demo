@@ -1,9 +1,9 @@
 <script>
 import "@fontsource-variable/inter";
 import "@fontsource-variable/noto-sans-jp";
-import Header from "@/presentation/components/header/header.svelte";
 import "../../app.css";
 import { appConfig } from "@world-history-map/app-config";
+import { Header } from "@world-history-map/ui";
 </script>
 
 <svelte:head>

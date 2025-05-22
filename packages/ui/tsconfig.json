@@ -1,0 +1,6 @@
+{
+	"extends": [
+		"@world-history-map/typescript-config/svelte-kit.json",
+		"./.svelte-kit/tsconfig.json"
+	]
+}
