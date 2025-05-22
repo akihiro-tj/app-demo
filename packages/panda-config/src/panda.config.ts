@@ -11,9 +11,6 @@ export const baseConfig: Config = {
 	// Whether to use css reset
 	preflight: true,
 
-	// Where to look for your css declarations
-	include: ["./src/**/*.{js,ts,svelte}"],
-
 	// Files to exclude
 	exclude: [],
 
@@ -22,8 +19,13 @@ export const baseConfig: Config = {
 		extend: {},
 	},
 
-	// The output directory for your css system
-	outdir: "styled-system",
-
 	globalCss,
+
+	// Where to look for your css declarations
+	// https://panda-css.com/docs/guides/component-library#include-the-src-files
+	include: [
+		"./node_modules/@world-history-map/ui/dist/**/*.{js,ts,svelte}",
+		"./src/**/*.{js,ts,svelte}",
+	],
+	importMap: "@world-history-map/styled-system",
 };

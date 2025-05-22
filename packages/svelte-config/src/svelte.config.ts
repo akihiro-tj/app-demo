@@ -13,7 +13,6 @@ export const baseConfig: Config = {
 		// See https://svelte.dev/docs/kit/adapters for more information about adapters.
 		adapter: adapter(),
 		alias: {
-			"styled-system": "./styled-system/*",
 			"@/*": "./src/*",
 		},
 		prerender: {
