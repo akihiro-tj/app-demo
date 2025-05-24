@@ -42,9 +42,16 @@ export const sidePanelStyle = cva({
 	},
 });
 
-export const sidePanelCloseButtonContainerStyle = css({
-	display: "flex",
-	justifyContent: "flex-end",
+export const sidePanelHeadingContainerStyle = css({
+	display: "grid",
+	gridTemplateColumns: "1fr 36px",
+	alignItems: "center",
+});
+
+export const sidePanelHeadingStyle = css({
+	wordBreak: "break-all",
+	fontSize: "xl",
+	fontWeight: "bold",
 });
 
 export const sidePanelCloseButtonStyle = css({
@@ -53,6 +60,8 @@ export const sidePanelCloseButtonStyle = css({
 	justifyContent: "center",
 	w: "9",
 	h: "9",
+	bg: "slate.100",
+	borderRadius: "full",
 	cursor: "pointer",
 });
 
@@ -88,8 +97,9 @@ export const drawerStyle = cva({
 	},
 });
 
-export const drawerCloseButtonContainerStyle =
-	sidePanelCloseButtonContainerStyle;
+export const drawerHeadingContainerStyle = sidePanelHeadingContainerStyle;
+
+export const drawerHeadingStyle = sidePanelHeadingStyle;
 
 export const drawerCloseButtonStyle = sidePanelCloseButtonStyle;
 
@@ -144,13 +154,4 @@ export const filterLabelStyle = css({
 
 export const filterInputStyle = css({
 	cursor: "pointer",
-});
-
-export const infoPanelHeadingContainerStyle = css({
-	mb: "1",
-});
-
-export const infoPanelHeadingStyle = css({
-	fontSize: "xl",
-	fontWeight: "bold",
 });

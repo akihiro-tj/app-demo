@@ -15,6 +15,10 @@ import type { ChangeEventHandler } from "svelte/elements";
 import { useViewerState } from "./hooks/use-viewer-state.svelte";
 import {
 	canvasStyle,
+	drawerCloseButtonStyle,
+	drawerHeadingContainerStyle,
+	drawerHeadingStyle,
+	drawerStyle,
 	filterContainerStyle,
 	filterGroupContainerStyle,
 	filterGroupHeadingContainerStyle,
@@ -22,15 +26,11 @@ import {
 	filterInputStyle,
 	filterLabelStyle,
 	filterPanelOpenButtonStyle,
-	infoPanelHeadingContainerStyle,
-	infoPanelHeadingStyle,
 	mainColumnStyle,
-	sidePanelCloseButtonContainerStyle,
 	sidePanelCloseButtonStyle,
+	sidePanelHeadingContainerStyle,
+	sidePanelHeadingStyle,
 	sidePanelStyle,
-	drawerStyle,
-	drawerCloseButtonContainerStyle,
-	drawerCloseButtonStyle,
 } from "./page.styles";
 
 const baseUrl = `${appConfig.origin}${base}`;
@@ -92,9 +92,10 @@ const handleFilterChange: ChangeEventHandler<HTMLInputElement> = (e) => {
 	<canvas bind:this={deckCanvas} class={canvasStyle}></canvas>
 
   <div class={sidePanelStyle({ visible: viewerState.isFilterPanelVisible })}>
-    <div class={sidePanelCloseButtonContainerStyle}>
+    <div class={sidePanelHeadingContainerStyle}>
+      <div class={sidePanelHeadingStyle}></div>
       <button class={sidePanelCloseButtonStyle} onclick={viewerState.hideFilterPanel}>
-        <X size="100%" />
+        <X size={24} />
       </button>
     </div>
     {#each viewerState.filterGroups as filterGroup}
@@ -121,24 +122,20 @@ const handleFilterChange: ChangeEventHandler<HTMLInputElement> = (e) => {
   </div>
 
   <div class={sidePanelStyle({ visible: viewerState.selectedGeoFeatureId !== null })}>
-    <div class={sidePanelCloseButtonContainerStyle}>
+    <div class={sidePanelHeadingContainerStyle}>
+      <h3 class={sidePanelHeadingStyle}>{viewerState.selectedGeoFeatureId}</h3>
       <button class={sidePanelCloseButtonStyle} onclick={viewerState.unselectGeoFeature}>
-        <X size="100%" />
+        <X size={24} />
       </button>
-    </div>
-    <div class={infoPanelHeadingContainerStyle}>
-      <h3 class={infoPanelHeadingStyle}>{viewerState.selectedGeoFeatureId}</h3>
     </div>
   </div>
 
   <div class={drawerStyle({ visible: viewerState.selectedGeoFeatureId !== null })}>
-    <div class={drawerCloseButtonContainerStyle}>
+    <div class={drawerHeadingContainerStyle}>
+      <h3 class={drawerHeadingStyle}>{viewerState.selectedGeoFeatureId}</h3>
       <button class={drawerCloseButtonStyle} onclick={viewerState.unselectGeoFeature}>
-        <X size="100%" />
+        <X size={24} />
       </button>
-    </div>
-    <div class={infoPanelHeadingContainerStyle}>
-      <h3 class={infoPanelHeadingStyle}>{viewerState.selectedGeoFeatureId}</h3>
     </div>
   </div>
 
