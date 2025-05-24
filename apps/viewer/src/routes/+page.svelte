@@ -91,6 +91,8 @@ const handleFilterChange: ChangeEventHandler<HTMLInputElement> = (e) => {
 <main class={mainColumnStyle}>
 	<canvas bind:this={deckCanvas} class={canvasStyle}></canvas>
 
+  <!-- PC -->
+  <!-- TODO: Create reusable component to avoid duplication -->
   <div class={sidePanelStyle({ visible: viewerState.isFilterPanelVisible })}>
     <div class={sidePanelHeadingContainerStyle}>
       <div class={sidePanelHeadingStyle}></div>
@@ -120,7 +122,6 @@ const handleFilterChange: ChangeEventHandler<HTMLInputElement> = (e) => {
       </div>
     {/each}
   </div>
-
   <div class={sidePanelStyle({ visible: viewerState.selectedGeoFeatureId !== null })}>
     <div class={sidePanelHeadingContainerStyle}>
       <h3 class={sidePanelHeadingStyle}>{viewerState.selectedGeoFeatureId}</h3>
@@ -130,6 +131,37 @@ const handleFilterChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     </div>
   </div>
 
+  <!-- SP -->
+  <!-- TODO: Create reusable component to avoid duplication -->
+  <div class={drawerStyle({ visible: viewerState.isFilterPanelVisible })}>
+    <div class={drawerHeadingContainerStyle}>
+      <div class={drawerHeadingStyle}></div>
+      <button class={drawerCloseButtonStyle} onclick={viewerState.hideFilterPanel}>
+        <X size={24} />
+      </button>
+    </div>
+    {#each viewerState.filterGroups as filterGroup}
+      <div class={filterGroupContainerStyle}>
+        <div class={filterGroupHeadingContainerStyle}>
+          <h3 class={filterGroupHeadingStyle}>{filterGroup.label}</h3>
+        </div>
+        <div class={filterContainerStyle}>
+          {#each Object.entries(filterGroup.filter) as [category, isVisible]}
+            <label class={filterLabelStyle}>
+              <input
+                class={filterInputStyle}
+                data-id={category}
+                type="checkbox"
+                checked={isVisible}
+                onchange={handleFilterChange}
+              />
+              {GEO_FEATURE_CATEGORY_NAMES[category as GeoFeatureCategory]}
+            </label>
+          {/each}
+        </div>
+      </div>
+    {/each}
+  </div>
   <div class={drawerStyle({ visible: viewerState.selectedGeoFeatureId !== null })}>
     <div class={drawerHeadingContainerStyle}>
       <h3 class={drawerHeadingStyle}>{viewerState.selectedGeoFeatureId}</h3>
