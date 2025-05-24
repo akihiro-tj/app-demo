@@ -19,12 +19,16 @@ export const sidePanelStyle = cva({
 		transitionTimingFunction: "ease-in-out",
 		position: "absolute",
 		top: "4",
+		display: "none",
 		w: "80",
 		h: "80",
 		p: "4",
 		bg: "white",
 		borderRadius: "md",
 		boxShadow: "md",
+		md: {
+			display: "block",
+		},
 	},
 	variants: {
 		visible: {
@@ -52,10 +56,49 @@ export const sidePanelCloseButtonStyle = css({
 	cursor: "pointer",
 });
 
+export const drawerStyle = cva({
+	base: {
+		transitionProperty: "all",
+		transitionDuration: "normal",
+		transitionTimingFunction: "ease-in-out",
+		position: "absolute",
+		left: "0",
+		right: "0",
+		display: "block",
+		overflowY: "scroll",
+		w: "full",
+		maxH: "50vh",
+		p: "4",
+		bg: "white",
+		borderTopRadius: "2xl",
+		boxShadow: "2xl",
+		md: {
+			display: "none",
+		},
+	},
+	variants: {
+		visible: {
+			true: {
+				bottom: "0",
+			},
+			false: {
+				bottom: "-100%",
+			},
+		},
+	},
+});
+
+export const drawerCloseButtonContainerStyle =
+	sidePanelCloseButtonContainerStyle;
+
+export const drawerCloseButtonStyle = sidePanelCloseButtonStyle;
+
 export const filterPanelOpenButtonStyle = css({
 	position: "absolute",
-	bottom: "4",
-	left: "4",
+	top: "4",
+	right: "4",
+	bottom: "auto",
+	left: "auto",
 	display: "flex",
 	alignItems: "center",
 	justifyContent: "center",
@@ -65,6 +108,12 @@ export const filterPanelOpenButtonStyle = css({
 	borderRadius: "full",
 	boxShadow: "md",
 	cursor: "pointer",
+	md: {
+		top: "auto",
+		right: "auto",
+		bottom: "4",
+		left: "4",
+	},
 });
 
 export const filterGroupContainerStyle = css({

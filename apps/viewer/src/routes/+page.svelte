@@ -28,6 +28,9 @@ import {
 	sidePanelCloseButtonContainerStyle,
 	sidePanelCloseButtonStyle,
 	sidePanelStyle,
+	drawerStyle,
+	drawerCloseButtonContainerStyle,
+	drawerCloseButtonStyle,
 } from "./page.styles";
 
 const baseUrl = `${appConfig.origin}${base}`;
@@ -108,7 +111,7 @@ const handleFilterChange: ChangeEventHandler<HTMLInputElement> = (e) => {
                 type="checkbox"
                 checked={isVisible}
                 onchange={handleFilterChange}
-            />
+              />
               {GEO_FEATURE_CATEGORY_NAMES[category as GeoFeatureCategory]}
             </label>
           {/each}
@@ -120,6 +123,17 @@ const handleFilterChange: ChangeEventHandler<HTMLInputElement> = (e) => {
   <div class={sidePanelStyle({ visible: viewerState.selectedGeoFeatureId !== null })}>
     <div class={sidePanelCloseButtonContainerStyle}>
       <button class={sidePanelCloseButtonStyle} onclick={viewerState.unselectGeoFeature}>
+        <X size="100%" />
+      </button>
+    </div>
+    <div class={infoPanelHeadingContainerStyle}>
+      <h3 class={infoPanelHeadingStyle}>{viewerState.selectedGeoFeatureId}</h3>
+    </div>
+  </div>
+
+  <div class={drawerStyle({ visible: viewerState.selectedGeoFeatureId !== null })}>
+    <div class={drawerCloseButtonContainerStyle}>
+      <button class={drawerCloseButtonStyle} onclick={viewerState.unselectGeoFeature}>
         <X size="100%" />
       </button>
     </div>
