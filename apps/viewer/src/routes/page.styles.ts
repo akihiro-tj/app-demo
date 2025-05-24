@@ -19,12 +19,16 @@ export const sidePanelStyle = cva({
 		transitionTimingFunction: "ease-in-out",
 		position: "absolute",
 		top: "4",
+		display: "none",
 		w: "80",
 		h: "80",
 		p: "4",
 		bg: "white",
 		borderRadius: "md",
 		boxShadow: "md",
+		md: {
+			display: "block",
+		},
 	},
 	variants: {
 		visible: {
@@ -38,9 +42,16 @@ export const sidePanelStyle = cva({
 	},
 });
 
-export const sidePanelCloseButtonContainerStyle = css({
-	display: "flex",
-	justifyContent: "flex-end",
+export const sidePanelHeadingContainerStyle = css({
+	display: "grid",
+	gridTemplateColumns: "1fr 36px",
+	alignItems: "center",
+});
+
+export const sidePanelHeadingStyle = css({
+	wordBreak: "break-all",
+	fontSize: "xl",
+	fontWeight: "bold",
 });
 
 export const sidePanelCloseButtonStyle = css({
@@ -49,13 +60,55 @@ export const sidePanelCloseButtonStyle = css({
 	justifyContent: "center",
 	w: "9",
 	h: "9",
+	bg: "slate.100",
+	borderRadius: "full",
 	cursor: "pointer",
 });
 
+export const drawerStyle = cva({
+	base: {
+		transitionProperty: "all",
+		transitionDuration: "normal",
+		transitionTimingFunction: "ease-in-out",
+		position: "absolute",
+		left: "0",
+		right: "0",
+		display: "block",
+		overflowY: "scroll",
+		w: "full",
+		maxH: "50vh",
+		p: "4",
+		bg: "white",
+		borderTopRadius: "2xl",
+		boxShadow: "2xl",
+		md: {
+			display: "none",
+		},
+	},
+	variants: {
+		visible: {
+			true: {
+				bottom: "0",
+			},
+			false: {
+				bottom: "-100%",
+			},
+		},
+	},
+});
+
+export const drawerHeadingContainerStyle = sidePanelHeadingContainerStyle;
+
+export const drawerHeadingStyle = sidePanelHeadingStyle;
+
+export const drawerCloseButtonStyle = sidePanelCloseButtonStyle;
+
 export const filterPanelOpenButtonStyle = css({
 	position: "absolute",
-	bottom: "4",
-	left: "4",
+	top: "4",
+	right: "4",
+	bottom: "auto",
+	left: "auto",
 	display: "flex",
 	alignItems: "center",
 	justifyContent: "center",
@@ -65,6 +118,12 @@ export const filterPanelOpenButtonStyle = css({
 	borderRadius: "full",
 	boxShadow: "md",
 	cursor: "pointer",
+	md: {
+		top: "auto",
+		right: "auto",
+		bottom: "4",
+		left: "4",
+	},
 });
 
 export const filterGroupContainerStyle = css({
@@ -95,13 +154,4 @@ export const filterLabelStyle = css({
 
 export const filterInputStyle = css({
 	cursor: "pointer",
-});
-
-export const infoPanelHeadingContainerStyle = css({
-	mb: "1",
-});
-
-export const infoPanelHeadingStyle = css({
-	fontSize: "xl",
-	fontWeight: "bold",
 });

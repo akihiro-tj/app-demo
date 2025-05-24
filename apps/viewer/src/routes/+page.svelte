@@ -15,6 +15,10 @@ import type { ChangeEventHandler } from "svelte/elements";
 import { useViewerState } from "./hooks/use-viewer-state.svelte";
 import {
 	canvasStyle,
+	drawerCloseButtonStyle,
+	drawerHeadingContainerStyle,
+	drawerHeadingStyle,
+	drawerStyle,
 	filterContainerStyle,
 	filterGroupContainerStyle,
 	filterGroupHeadingContainerStyle,
@@ -22,11 +26,10 @@ import {
 	filterInputStyle,
 	filterLabelStyle,
 	filterPanelOpenButtonStyle,
-	infoPanelHeadingContainerStyle,
-	infoPanelHeadingStyle,
 	mainColumnStyle,
-	sidePanelCloseButtonContainerStyle,
 	sidePanelCloseButtonStyle,
+	sidePanelHeadingContainerStyle,
+	sidePanelHeadingStyle,
 	sidePanelStyle,
 } from "./page.styles";
 
@@ -88,10 +91,13 @@ const handleFilterChange: ChangeEventHandler<HTMLInputElement> = (e) => {
 <main class={mainColumnStyle}>
 	<canvas bind:this={deckCanvas} class={canvasStyle}></canvas>
 
+  <!-- PC -->
+  <!-- TODO: Create reusable component to avoid duplication -->
   <div class={sidePanelStyle({ visible: viewerState.isFilterPanelVisible })}>
-    <div class={sidePanelCloseButtonContainerStyle}>
+    <div class={sidePanelHeadingContainerStyle}>
+      <div class={sidePanelHeadingStyle}></div>
       <button class={sidePanelCloseButtonStyle} onclick={viewerState.hideFilterPanel}>
-        <X size="100%" />
+        <X size={24} />
       </button>
     </div>
     {#each viewerState.filterGroups as filterGroup}
@@ -108,7 +114,7 @@ const handleFilterChange: ChangeEventHandler<HTMLInputElement> = (e) => {
                 type="checkbox"
                 checked={isVisible}
                 onchange={handleFilterChange}
-            />
+              />
               {GEO_FEATURE_CATEGORY_NAMES[category as GeoFeatureCategory]}
             </label>
           {/each}
@@ -116,15 +122,52 @@ const handleFilterChange: ChangeEventHandler<HTMLInputElement> = (e) => {
       </div>
     {/each}
   </div>
-
   <div class={sidePanelStyle({ visible: viewerState.selectedGeoFeatureId !== null })}>
-    <div class={sidePanelCloseButtonContainerStyle}>
+    <div class={sidePanelHeadingContainerStyle}>
+      <h3 class={sidePanelHeadingStyle}>{viewerState.selectedGeoFeatureId}</h3>
       <button class={sidePanelCloseButtonStyle} onclick={viewerState.unselectGeoFeature}>
-        <X size="100%" />
+        <X size={24} />
       </button>
     </div>
-    <div class={infoPanelHeadingContainerStyle}>
-      <h3 class={infoPanelHeadingStyle}>{viewerState.selectedGeoFeatureId}</h3>
+  </div>
+
+  <!-- SP -->
+  <!-- TODO: Create reusable component to avoid duplication -->
+  <div class={drawerStyle({ visible: viewerState.isFilterPanelVisible })}>
+    <div class={drawerHeadingContainerStyle}>
+      <div class={drawerHeadingStyle}></div>
+      <button class={drawerCloseButtonStyle} onclick={viewerState.hideFilterPanel}>
+        <X size={24} />
+      </button>
+    </div>
+    {#each viewerState.filterGroups as filterGroup}
+      <div class={filterGroupContainerStyle}>
+        <div class={filterGroupHeadingContainerStyle}>
+          <h3 class={filterGroupHeadingStyle}>{filterGroup.label}</h3>
+        </div>
+        <div class={filterContainerStyle}>
+          {#each Object.entries(filterGroup.filter) as [category, isVisible]}
+            <label class={filterLabelStyle}>
+              <input
+                class={filterInputStyle}
+                data-id={category}
+                type="checkbox"
+                checked={isVisible}
+                onchange={handleFilterChange}
+              />
+              {GEO_FEATURE_CATEGORY_NAMES[category as GeoFeatureCategory]}
+            </label>
+          {/each}
+        </div>
+      </div>
+    {/each}
+  </div>
+  <div class={drawerStyle({ visible: viewerState.selectedGeoFeatureId !== null })}>
+    <div class={drawerHeadingContainerStyle}>
+      <h3 class={drawerHeadingStyle}>{viewerState.selectedGeoFeatureId}</h3>
+      <button class={drawerCloseButtonStyle} onclick={viewerState.unselectGeoFeature}>
+        <X size={24} />
+      </button>
     </div>
   </div>
 
