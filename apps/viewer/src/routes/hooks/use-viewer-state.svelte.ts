@@ -1,12 +1,13 @@
 import type { Layer } from "@deck.gl/core";
 import { GeoFeatureCategory } from "../../constants";
+import type { GeoFeature } from "../types";
 import { getIslandTileLayer } from "./layers/island-tile";
 import { getLandTileLayer } from "./layers/land-tile";
 import { getMountainTileLayer } from "./layers/mountain-tile";
 
 interface ViewerState {
 	isFilterPanelVisible: boolean;
-	selectedGeoFeatureId: number | null;
+	selectedGeoFeature: GeoFeature | null;
 	filterGroups: FilterGroup[];
 	layers: Layer[];
 	showFilterPanel: () => void;
@@ -25,7 +26,7 @@ type Filter = Record<GeoFeatureCategory, boolean>;
 
 export const useViewerState = (): ViewerState => {
 	let isFilterPanelVisible = $state(window.innerWidth > 768);
-	let selectedGeoFeatureId = $state<number | null>(null);
+	let selectedGeoFeature = $state<GeoFeature | null>(null);
 
 	const filterGroups = $state<FilterGroup[]>([
 		{
@@ -45,8 +46,8 @@ export const useViewerState = (): ViewerState => {
 		),
 	);
 
-	const updateGeoFeature = (geoFeatureId: number) => {
-		selectedGeoFeatureId = geoFeatureId;
+	const updateGeoFeature = (geoFeature: GeoFeature) => {
+		selectedGeoFeature = geoFeature;
 		isFilterPanelVisible = false;
 	};
 
@@ -66,8 +67,8 @@ export const useViewerState = (): ViewerState => {
 		get isFilterPanelVisible(): boolean {
 			return isFilterPanelVisible;
 		},
-		get selectedGeoFeatureId(): number | null {
-			return selectedGeoFeatureId;
+		get selectedGeoFeature(): GeoFeature | null {
+			return selectedGeoFeature;
 		},
 		get filterGroups(): FilterGroup[] {
 			return filterGroups;
@@ -77,7 +78,7 @@ export const useViewerState = (): ViewerState => {
 		},
 		showFilterPanel: () => {
 			isFilterPanelVisible = true;
-			selectedGeoFeatureId = null;
+			selectedGeoFeature = null;
 		},
 		hideFilterPanel: () => {
 			isFilterPanelVisible = false;
@@ -93,7 +94,7 @@ export const useViewerState = (): ViewerState => {
 			targetFilter[category] = isVisible;
 		},
 		unselectGeoFeature: () => {
-			selectedGeoFeatureId = null;
+			selectedGeoFeature = null;
 		},
 	};
 };

@@ -122,9 +122,9 @@ const handleFilterChange: ChangeEventHandler<HTMLInputElement> = (e) => {
       </div>
     {/each}
   </div>
-  <div class={sidePanelStyle({ visible: viewerState.selectedGeoFeatureId !== null })}>
+  <div class={sidePanelStyle({ visible: viewerState.selectedGeoFeature !== null })}>
     <div class={sidePanelHeadingContainerStyle}>
-      <h3 class={sidePanelHeadingStyle}>{viewerState.selectedGeoFeatureId}</h3>
+      <h3 class={sidePanelHeadingStyle}>{viewerState.selectedGeoFeature?.name}</h3>
       <button class={sidePanelCloseButtonStyle} onclick={viewerState.unselectGeoFeature}>
         <X size={24} />
       </button>
@@ -162,9 +162,9 @@ const handleFilterChange: ChangeEventHandler<HTMLInputElement> = (e) => {
       </div>
     {/each}
   </div>
-  <div class={drawerStyle({ visible: viewerState.selectedGeoFeatureId !== null })}>
+  <div class={drawerStyle({ visible: viewerState.selectedGeoFeature !== null })}>
     <div class={drawerHeadingContainerStyle}>
-      <h3 class={drawerHeadingStyle}>{viewerState.selectedGeoFeatureId}</h3>
+      <h3 class={drawerHeadingStyle}>{viewerState.selectedGeoFeature?.name}</h3>
       <button class={drawerCloseButtonStyle} onclick={viewerState.unselectGeoFeature}>
         <X size={24} />
       </button>

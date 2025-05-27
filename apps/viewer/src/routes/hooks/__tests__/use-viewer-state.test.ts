@@ -17,7 +17,7 @@ describe("useViewerState", () => {
 
 		it("should unselect the geo feature", () => {
 			viewerState.showFilterPanel();
-			expect(viewerState.selectedGeoFeatureId).toBeNull();
+			expect(viewerState.selectedGeoFeature).toBeNull();
 		});
 	});
 
@@ -46,7 +46,7 @@ describe("useViewerState", () => {
 	describe("unselectGeoFeature", () => {
 		it("should unselect the geo feature", () => {
 			viewerState.unselectGeoFeature();
-			expect(viewerState.selectedGeoFeatureId).toBeNull();
+			expect(viewerState.selectedGeoFeature).toBeNull();
 		});
 	});
 });
