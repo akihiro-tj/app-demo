@@ -1,3 +1,4 @@
+import type { GeoFeature } from "@/routes/types";
 import type { Color } from "@deck.gl/core";
 import { ClipExtension } from "@deck.gl/extensions";
 import {
@@ -15,7 +16,7 @@ import {
 
 export const getMountainTileLayer = (
 	isVisible: boolean,
-	onClick: (geoFeatureId: number) => void,
+	onClick: (geoFeature: GeoFeature) => void,
 ): TileLayerType => {
 	const mountainTileSource = new PMTilesTileSource(
 		MOUNTAIN_TILE_SOURCE_URL,
@@ -27,7 +28,8 @@ export const getMountainTileLayer = (
 		getTileData: mountainTileSource.getTileData,
 		visible: isVisible,
 		onClick: (info) => {
-			onClick(info.object.properties.NE_ID);
+			const properties: GeoFeature = info.object.properties;
+			onClick(properties);
 		},
 		renderSubLayers: (props) => {
 			const bbox = props.tile.boundingBox;
