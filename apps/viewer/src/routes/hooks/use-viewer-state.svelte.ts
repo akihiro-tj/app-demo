@@ -1,10 +1,12 @@
 import type { Layer } from "@deck.gl/core";
 import { GeoFeatureCategory } from "../../constants";
 import type { GeoFeature } from "../types";
+import { getDesertTileLayer } from "./layers/desert-tile";
 import { getIslandTileLayer } from "./layers/island-tile";
 import { getLandTileLayer } from "./layers/land-tile";
 import { getMountainTileLayer } from "./layers/mountain-tile";
 import { getPeninsulaTileLayer } from "./layers/peninsula-tile";
+import { getPlateauTileLayer } from "./layers/plateau-tile";
 
 interface ViewerState {
 	isFilterPanelVisible: boolean;
@@ -35,6 +37,8 @@ export const useViewerState = (): ViewerState => {
 			label: "地形",
 			filter: {
 				[GeoFeatureCategory.MOUNTAIN]: true,
+				[GeoFeatureCategory.PLATEAU]: true,
+				[GeoFeatureCategory.DESERT]: true,
 				[GeoFeatureCategory.ISLAND]: true,
 				[GeoFeatureCategory.PENINSULA]: true,
 			},
@@ -57,6 +61,14 @@ export const useViewerState = (): ViewerState => {
 		getLandTileLayer(),
 		getMountainTileLayer(
 			flattenedFilter[GeoFeatureCategory.MOUNTAIN],
+			updateGeoFeature,
+		),
+		getPlateauTileLayer(
+			flattenedFilter[GeoFeatureCategory.PLATEAU],
+			updateGeoFeature,
+		),
+		getDesertTileLayer(
+			flattenedFilter[GeoFeatureCategory.DESERT],
 			updateGeoFeature,
 		),
 		getIslandTileLayer(
