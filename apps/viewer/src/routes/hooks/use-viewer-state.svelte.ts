@@ -1,9 +1,12 @@
 import type { Layer } from "@deck.gl/core";
 import { GeoFeatureCategory } from "../../constants";
 import type { GeoFeature } from "../types";
+import { getDesertTileLayer } from "./layers/desert-tile";
 import { getIslandTileLayer } from "./layers/island-tile";
 import { getLandTileLayer } from "./layers/land-tile";
 import { getMountainTileLayer } from "./layers/mountain-tile";
+import { getPeninsulaTileLayer } from "./layers/peninsula-tile";
+import { getPlateauTileLayer } from "./layers/plateau-tile";
 
 interface ViewerState {
 	isFilterPanelVisible: boolean;
@@ -34,7 +37,10 @@ export const useViewerState = (): ViewerState => {
 			label: "地形",
 			filter: {
 				[GeoFeatureCategory.MOUNTAIN]: true,
+				[GeoFeatureCategory.PLATEAU]: true,
+				[GeoFeatureCategory.DESERT]: true,
 				[GeoFeatureCategory.ISLAND]: true,
+				[GeoFeatureCategory.PENINSULA]: true,
 			},
 		},
 	]);
@@ -53,12 +59,24 @@ export const useViewerState = (): ViewerState => {
 
 	const layers = $derived<Layer[]>([
 		getLandTileLayer(),
+		getIslandTileLayer(
+			flattenedFilter[GeoFeatureCategory.ISLAND],
+			updateGeoFeature,
+		),
+		getPeninsulaTileLayer(
+			flattenedFilter[GeoFeatureCategory.PENINSULA],
+			updateGeoFeature,
+		),
+		getDesertTileLayer(
+			flattenedFilter[GeoFeatureCategory.DESERT],
+			updateGeoFeature,
+		),
 		getMountainTileLayer(
 			flattenedFilter[GeoFeatureCategory.MOUNTAIN],
 			updateGeoFeature,
 		),
-		getIslandTileLayer(
-			flattenedFilter[GeoFeatureCategory.ISLAND],
+		getPlateauTileLayer(
+			flattenedFilter[GeoFeatureCategory.PLATEAU],
 			updateGeoFeature,
 		),
 	]);
