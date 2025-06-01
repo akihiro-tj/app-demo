@@ -4,6 +4,7 @@ import type { GeoFeature } from "../types";
 import { getIslandTileLayer } from "./layers/island-tile";
 import { getLandTileLayer } from "./layers/land-tile";
 import { getMountainTileLayer } from "./layers/mountain-tile";
+import { getPeninsulaTileLayer } from "./layers/peninsula-tile";
 
 interface ViewerState {
 	isFilterPanelVisible: boolean;
@@ -35,6 +36,7 @@ export const useViewerState = (): ViewerState => {
 			filter: {
 				[GeoFeatureCategory.MOUNTAIN]: true,
 				[GeoFeatureCategory.ISLAND]: true,
+				[GeoFeatureCategory.PENINSULA]: true,
 			},
 		},
 	]);
@@ -59,6 +61,10 @@ export const useViewerState = (): ViewerState => {
 		),
 		getIslandTileLayer(
 			flattenedFilter[GeoFeatureCategory.ISLAND],
+			updateGeoFeature,
+		),
+		getPeninsulaTileLayer(
+			flattenedFilter[GeoFeatureCategory.PENINSULA],
 			updateGeoFeature,
 		),
 	]);

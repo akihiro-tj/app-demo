@@ -3,11 +3,13 @@ import type { MapViewState } from "@deck.gl/core";
 export enum GeoFeatureCategory {
 	MOUNTAIN = "mountain",
 	ISLAND = "island",
+	PENINSULA = "peninsula",
 }
 
 export const GEO_FEATURE_CATEGORY_NAMES: Record<GeoFeatureCategory, string> = {
 	[GeoFeatureCategory.MOUNTAIN]: "山脈",
 	[GeoFeatureCategory.ISLAND]: "島",
+	[GeoFeatureCategory.PENINSULA]: "半島",
 };
 
 export enum CursorState {
