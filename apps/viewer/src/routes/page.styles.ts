@@ -65,6 +65,10 @@ export const sidePanelCloseButtonStyle = css({
 	cursor: "pointer",
 });
 
+export const sidePanelContentStyle = css({
+	mt: "3",
+});
+
 export const drawerStyle = cva({
 	base: {
 		transitionProperty: "all",
@@ -102,6 +106,8 @@ export const drawerHeadingContainerStyle = sidePanelHeadingContainerStyle;
 export const drawerHeadingStyle = sidePanelHeadingStyle;
 
 export const drawerCloseButtonStyle = sidePanelCloseButtonStyle;
+
+export const drawerContentStyle = sidePanelContentStyle;
 
 export const filterPanelOpenButtonStyle = css({
 	position: "absolute",

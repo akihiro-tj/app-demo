@@ -16,6 +16,7 @@ import { useViewerState } from "./hooks/use-viewer-state.svelte";
 import {
 	canvasStyle,
 	drawerCloseButtonStyle,
+	drawerContentStyle,
 	drawerHeadingContainerStyle,
 	drawerHeadingStyle,
 	drawerStyle,
@@ -28,6 +29,7 @@ import {
 	filterPanelOpenButtonStyle,
 	mainColumnStyle,
 	sidePanelCloseButtonStyle,
+	sidePanelContentStyle,
 	sidePanelHeadingContainerStyle,
 	sidePanelHeadingStyle,
 	sidePanelStyle,
@@ -129,6 +131,9 @@ const handleFilterChange: ChangeEventHandler<HTMLInputElement> = (e) => {
         <X size={24} />
       </button>
     </div>
+    <div class={sidePanelContentStyle}>
+      <p>{viewerState.selectedGeoFeature?.explanation}</p>
+    </div>
   </div>
 
   <!-- SP -->
@@ -168,6 +173,9 @@ const handleFilterChange: ChangeEventHandler<HTMLInputElement> = (e) => {
       <button class={drawerCloseButtonStyle} onclick={viewerState.unselectGeoFeature}>
         <X size={24} />
       </button>
+    </div>
+    <div class={drawerContentStyle}>
+      <p>{viewerState.selectedGeoFeature?.explanation}</p>
     </div>
   </div>
 
