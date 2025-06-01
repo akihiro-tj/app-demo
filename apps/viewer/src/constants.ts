@@ -25,7 +25,7 @@ export enum CursorState {
 export const INITIAL_VIEW_STATE: MapViewState = {
 	longitude: 18.382992,
 	latitude: 45.404543,
-	zoom: 3,
+	zoom: 2,
 	minZoom: 0,
 	maxZoom: 10,
 };
