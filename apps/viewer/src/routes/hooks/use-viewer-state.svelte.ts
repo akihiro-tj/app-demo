@@ -59,24 +59,24 @@ export const useViewerState = (): ViewerState => {
 
 	const layers = $derived<Layer[]>([
 		getLandTileLayer(),
-		getMountainTileLayer(
-			flattenedFilter[GeoFeatureCategory.MOUNTAIN],
-			updateGeoFeature,
-		),
-		getPlateauTileLayer(
-			flattenedFilter[GeoFeatureCategory.PLATEAU],
-			updateGeoFeature,
-		),
-		getDesertTileLayer(
-			flattenedFilter[GeoFeatureCategory.DESERT],
-			updateGeoFeature,
-		),
 		getIslandTileLayer(
 			flattenedFilter[GeoFeatureCategory.ISLAND],
 			updateGeoFeature,
 		),
 		getPeninsulaTileLayer(
 			flattenedFilter[GeoFeatureCategory.PENINSULA],
+			updateGeoFeature,
+		),
+		getDesertTileLayer(
+			flattenedFilter[GeoFeatureCategory.DESERT],
+			updateGeoFeature,
+		),
+		getMountainTileLayer(
+			flattenedFilter[GeoFeatureCategory.MOUNTAIN],
+			updateGeoFeature,
+		),
+		getPlateauTileLayer(
+			flattenedFilter[GeoFeatureCategory.PLATEAU],
 			updateGeoFeature,
 		),
 	]);

@@ -23,8 +23,8 @@ export const DESERT_TILE_LAYER_ID = "desert-tile-layer";
 export const ISLAND_TILE_LAYER_ID = "island-tile-layer";
 export const PENINSULA_TILE_LAYER_ID = "peninsula-tile-layer";
 
-export const COLOR_MOUNTAIN: Color = hexToRgb("#3b82f6");
-export const COLOR_PLATEAU: Color = hexToRgb("#3b82f6");
-export const COLOR_DESERT: Color = hexToRgb("#3b82f6");
+export const COLOR_MOUNTAIN: Color = hexToRgb("#10b981");
+export const COLOR_PLATEAU: Color = hexToRgb("#84cc16");
+export const COLOR_DESERT: Color = hexToRgb("#f59e0b");
 export const COLOR_ISLAND: Color = hexToRgb("#3b82f6");
-export const COLOR_PENINSULA: Color = hexToRgb("#3b82f6");
+export const COLOR_PENINSULA: Color = hexToRgb("#6366f1");
