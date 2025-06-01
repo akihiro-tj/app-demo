@@ -37,7 +37,10 @@ describe("useViewerState", () => {
 				label: "地形",
 				filter: {
 					[GeoFeatureCategory.MOUNTAIN]: true,
+					[GeoFeatureCategory.PLATEAU]: true,
+					[GeoFeatureCategory.DESERT]: true,
 					[GeoFeatureCategory.ISLAND]: false,
+					[GeoFeatureCategory.PENINSULA]: true,
 				},
 			});
 		});
