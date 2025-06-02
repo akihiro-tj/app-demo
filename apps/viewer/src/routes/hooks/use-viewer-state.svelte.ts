@@ -28,7 +28,9 @@ interface FilterGroup {
 type Filter = Record<GeoFeatureCategory, boolean>;
 
 export const useViewerState = (): ViewerState => {
-	let isFilterPanelVisible = $state(window.innerWidth > 768);
+	let isFilterPanelVisible = $state(
+		typeof window !== "undefined" && window.innerWidth > 768,
+	);
 	let selectedGeoFeature = $state<GeoFeature | null>(null);
 
 	const filterGroups = $state<FilterGroup[]>([
