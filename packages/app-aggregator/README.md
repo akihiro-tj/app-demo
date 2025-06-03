@@ -1,1 +1,0 @@
-# `@world-history-map/aggregator`
