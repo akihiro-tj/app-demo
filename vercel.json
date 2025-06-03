@@ -1,8 +1,7 @@
 {
 	"$schema": "https://openapi.vercel.sh/vercel.json",
-	"framework": "sveltekit",
-	"buildCommand": "turbo run test && turbo run build",
-	"outputDirectory": ".svelte-kit",
+	"buildCommand": "turbo run test && turbo run build && aggregate",
+	"outputDirectory": "build",
 	"installCommand": "pnpm install",
 	"devCommand": "turbo run dev",
 	"git": {
