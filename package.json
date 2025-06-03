@@ -2,7 +2,7 @@
 	"name": "world-history-map",
 	"private": true,
 	"scripts": {
-		"build": "turbo run build && aggregate",
+		"build": "turbo run build && node scripts/aggregate.mjs",
 		"dev": "turbo run dev",
 		"test": "turbo run test",
 		"check": "turbo run check",
