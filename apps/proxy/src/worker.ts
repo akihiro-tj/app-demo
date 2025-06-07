@@ -13,7 +13,7 @@ app.get("*", async (c: Context, next: Next) => {
 	if (path.startsWith("/quiz") || path.startsWith("/viewer")) {
 		await next();
 	}
-	const res = await fetch(`${c.env.TOP_APP_URL}/top${path}`);
+	const res = await fetch(`${c.env.TOP_APP_URL}${path}`);
 	return res;
 });
 
