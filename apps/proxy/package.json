@@ -4,6 +4,7 @@
 	"version": "0.0.0",
 	"type": "module",
 	"scripts": {
+		"dev": "wrangler dev",
 		"check": "biome check src",
 		"check:write": "biome check --write src"
 	},
@@ -13,6 +14,7 @@
 	"devDependencies": {
 		"@cloudflare/workers-types": "^4.20240320.1",
 		"@world-history-map/biome-config": "workspace:*",
-		"@world-history-map/typescript-config": "workspace:*"
+		"@world-history-map/typescript-config": "workspace:*",
+		"wrangler": "^4.19.1"
 	}
 }

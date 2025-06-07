@@ -100,6 +100,9 @@ importers:
       '@world-history-map/typescript-config':
         specifier: workspace:*
         version: link:../../packages/typescript-config
+      wrangler:
+        specifier: ^4.19.1
+        version: 4.19.1(@cloudflare/workers-types@4.20250607.0)
 
   apps/quiz:
     dependencies:
