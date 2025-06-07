@@ -1,11 +1,9 @@
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
 	"name": "world-history-map-quiz",
-	"main": ".svelte-kit/cloudflare/_worker.js",
 	"compatibility_date": "2025-06-01",
 	"assets": {
-		"binding": "ASSETS",
-		"directory": ".svelte-kit/cloudflare"
+		"directory": "build"
 	},
 	"routes": [
 		{
