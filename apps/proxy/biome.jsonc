@@ -1,0 +1,4 @@
+{
+	"$schema": "https://biomejs.dev/schemas/1.9.3/schema.json",
+	"extends": ["./node_modules/@world-history-map/biome-config/base.jsonc"]
+}
