@@ -8,15 +8,15 @@ type Bindings = {
 
 const app = new Hono<{ Bindings: Bindings }>();
 
-app.get("/quiz/*", async (c: Context) => {
-	const path = c.req.path;
-	const response = await fetch(`${c.env.QUIZ_APP_URL}${path}`);
-	return response;
-});
-
 app.get("/top/*", async (c: Context) => {
 	const path = c.req.path;
 	const response = await fetch(`${c.env.TOP_APP_URL}${path}`);
+	return response;
+});
+
+app.get("/quiz/*", async (c: Context) => {
+	const path = c.req.path;
+	const response = await fetch(`${c.env.QUIZ_APP_URL}${path}`);
 	return response;
 });
 
