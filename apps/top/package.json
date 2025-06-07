@@ -6,11 +6,11 @@
 	"scripts": {
 		"dev": "svelte-kit sync || echo '' && vite",
 		"build": "svelte-kit sync || echo '' && vite build",
+		"preview": "http-server -p 8000 build",
 		"test": "vitest --run",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json && biome check src",
 		"check:write": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json && biome check --write src",
-		"test:ui": "vitest --ui --coverage",
-		"preview": "vite preview"
+		"test:ui": "vitest --ui --coverage"
 	},
 	"dependencies": {
 		"@fontsource-variable/inter": "^5.1.1",
@@ -32,6 +32,7 @@
 		"@world-history-map/svelte-config": "workspace:*",
 		"@world-history-map/typescript-config": "workspace:*",
 		"@world-history-map/vite-config": "workspace:*",
+		"http-server": "^14.1.1",
 		"jsdom": "^26.1.0",
 		"svelte-check": "^4.0.0",
 		"typescript": "^5.0.0",
