@@ -6,8 +6,5 @@
 	"assets": {
 		"binding": "ASSETS",
 		"directory": ".svelte-kit/cloudflare"
-	},
-	"build": {
-		"command": "turbo run build"
 	}
 }
