@@ -21,7 +21,7 @@ export async function getAllQuizContents(
 function mapQuizContentToViewModel(content: QuizContent): QuizContentViewModel {
 	return {
 		id: content.getId(),
-		path: `${appConfig.quizBasePath}/${content.getId()}`,
+		path: `${appConfig.quizBasePath}/${content.getId()}/`,
 		title: content.getTitle(),
 	};
 }
