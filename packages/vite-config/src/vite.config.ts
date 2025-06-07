@@ -6,6 +6,9 @@ export function baseConfig(): Plugin {
 		config(config) {
 			return {
 				...config,
+				server: {
+					port: 8000,
+				},
 				build: {
 					rollupOptions: {
 						external: ["@world-history-map/styled-system"],
