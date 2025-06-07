@@ -7,6 +7,7 @@
 		"test": "turbo run test",
 		"check": "turbo run check",
 		"check:write": "turbo run check:write",
+		"dev:proxy": "turbo run dev --filter=./apps/proxy",
 		"dev:quiz": "turbo run dev --filter=./apps/quiz",
 		"dev:top": "turbo run dev --filter=./apps/top",
 		"dev:viewer": "turbo run dev --filter=./apps/viewer"
