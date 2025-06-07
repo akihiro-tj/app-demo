@@ -5,7 +5,6 @@
 	"type": "module",
 	"scripts": {
 		"dev": "wrangler dev",
-		"deploy": "wrangler deploy",
 		"check": "biome check src",
 		"check:write": "biome check --write src"
 	},
