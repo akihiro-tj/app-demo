@@ -10,20 +10,20 @@ const app = new Hono<{ Bindings: Bindings }>();
 
 app.get("/top/*", async (c: Context) => {
 	const path = c.req.path;
-	const response = await fetch(`${c.env.TOP_APP_URL}${path}`);
-	return response;
+	const res = await fetch(`${c.env.TOP_APP_URL}${path}`);
+	return res;
 });
 
 app.get("/quiz/*", async (c: Context) => {
 	const path = c.req.path;
-	const response = await fetch(`${c.env.QUIZ_APP_URL}${path}`);
-	return response;
+	const res = await fetch(`${c.env.QUIZ_APP_URL}${path}`);
+	return res;
 });
 
 app.get("/viewer/*", async (c: Context) => {
 	const path = c.req.path;
-	const response = await fetch(`${c.env.VIEWER_APP_URL}${path}`);
-	return response;
+	const res = await fetch(`${c.env.VIEWER_APP_URL}${path}`);
+	return res;
 });
 
 export default app;
