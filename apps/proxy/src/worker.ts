@@ -1,4 +1,4 @@
-import { Hono, type Context } from "hono";
+import { Hono, type Context, type Next } from "hono";
 import { cache } from "hono/cache";
 
 type Bindings = {
@@ -17,13 +17,11 @@ app.get(
 	}),
 );
 
-app.get("/", async (c: Context) => {
-	const res = await fetch(c.env.TOP_APP_URL);
-	return res;
-});
-
-app.get("/top/*", async (c: Context) => {
+app.get("*", async (c: Context, next: Next) => {
 	const path = c.req.path;
+	if (path.startsWith("/quiz") || path.startsWith("/viewer")) {
+		await next();
+	}
 	const res = await fetch(`${c.env.TOP_APP_URL}${path}`);
 	return res;
 });
