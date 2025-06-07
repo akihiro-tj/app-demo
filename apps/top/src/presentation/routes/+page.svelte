@@ -42,7 +42,7 @@ const baseUrl = `${appConfig.origin}${base}`;
     <div>
       <h2 class={headingStyle}>地図を見る</h2>
       <div class={viewerLinkContainerStyle}>
-        <a class={viewerLinkStyle} href="/viewer/">
+        <a class={viewerLinkStyle} href={`${appConfig.viewerBasePath}/`}>
           <span class={viewerLinkTextStyle}>世界史地図ビューアー</span>
           <ChevronRight size={24} />
         </a>
