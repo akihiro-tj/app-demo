@@ -1,4 +1,4 @@
-import adapter from "@sveltejs/adapter-static";
+import adapter from "@sveltejs/adapter-cloudflare";
 import type { Config } from "@sveltejs/kit";
 import { vitePreprocess } from "@sveltejs/vite-plugin-svelte";
 
