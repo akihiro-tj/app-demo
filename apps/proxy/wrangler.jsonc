@@ -1,6 +1,6 @@
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
 	"name": "world-history-map-proxy",
-	"main": "src/index.ts",
+	"main": "src/worker.ts",
 	"compatibility_date": "2025-01-01"
 }
