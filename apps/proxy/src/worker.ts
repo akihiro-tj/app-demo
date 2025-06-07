@@ -1,4 +1,5 @@
 import { Hono, type Context, type Next } from "hono";
+import { cache } from "hono/cache";
 
 type Bindings = {
 	TOP_APP_URL: string;
@@ -7,6 +8,14 @@ type Bindings = {
 };
 
 const app = new Hono<{ Bindings: Bindings }>();
+
+app.get(
+	"*",
+	cache({
+		cacheName: "world-history-map",
+		cacheControl: "public, max-age=0, s-maxage=600, must-revalidate",
+	}),
+);
 
 app.get("*", async (c: Context, next: Next) => {
 	const path = c.req.path;
